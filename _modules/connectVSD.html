@@ -106,8 +106,8 @@
     <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">    generates the saml auth token from a credentials file </span>
 
-<span class="sd">    :param Path fp: (Path) file with the credentials (xml file)</span>
-<span class="sd">    :param str stsurl: (str) url to the STS authority</span>
+<span class="sd">    :param Path fp: file with the credentials (xml file)</span>
+<span class="sd">    :param str stsurl: url to the STS authority</span>
 <span class="sd">    :return: enctoken - the encoded token</span>
 <span class="sd">    :rtype: byte </span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -210,6 +210,9 @@
     <span class="k">def</span> <span class="nf">_validate_exp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        checks if the session is still valid</span>
+<span class="sd">        :return: if validation is expired or not</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        :raises:  DecodeError</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">now</span> <span class="o">=</span> <span class="n">timegm</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">utctimetuple</span><span class="p">())</span> 
 
@@ -233,8 +236,8 @@
     <span class="k">def</span> <span class="nf">_stayAlive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        checks if the token has expired, if yes, request a new token and initiates a new session</span>
-
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_validate_exp</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">auth</span> <span class="o">=</span> <span class="n">JWTAuth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getJWTtoken</span><span class="p">()</span><span class="o">.</span><span class="n">tokenValue</span><span class="p">)</span>
 
@@ -345,7 +348,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_stayAlive</span><span class="p">()</span>
 
         <span class="k">try</span><span class="p">:</span> 
+
             <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fullUrl</span><span class="p">(</span><span class="n">resource</span><span class="p">),</span> <span class="n">params</span> <span class="o">=</span> <span class="n">params</span><span class="p">)</span>
+
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_httpResponseCheck</span><span class="p">(</span><span class="n">res</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
@@ -359,9 +364,10 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        download the zipfile into the given file (fp)</span>
 
-<span class="sd">        :param resource: (str) download URL</span>
-<span class="sd">        :param fp: (Path) filepath </span>
+<span class="sd">        :param str resource: download URL</span>
+<span class="sd">        :param Path fp:  filepath </span>
 <span class="sd">        :return: None or status_code ok (200)</span>
+<span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_stayAlive</span><span class="p">()</span>
@@ -378,9 +384,10 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        download the object into a ZIP file based on the object name and the working directory</span>
 
-<span class="sd">        :param obj: object (APIObject)</span>
-<span class="sd">        :param wp: (Path) workpath, where to store the zip </span>
+<span class="sd">        :param APIObject obj: object</span>
+<span class="sd">        :param Path wp: workpath, where to store the zip </span>
 <span class="sd">        :return: None or filename</span>
+<span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">_stayAlive</span><span class="p">()</span>
@@ -399,9 +406,16 @@
 
 </div>
 <div class="viewcode-block" id="VSDConnecter.removeLinks"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.removeLinks">[docs]</a>    <span class="k">def</span> <span class="nf">removeLinks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;removes all related item from an object &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        removes all related item from an object </span>
+
+<span class="sd">        :param str resource: resouce path url</span>
+<span class="sd">        :return: True if successful or False if failed</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="k">if</span> <span class="n">obj</span><span class="o">.</span><span class="n">linkedObjectRelations</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">linkedObjectRelations</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">delRequest</span><span class="p">(</span><span class="n">link</span><span class="p">[</span><span class="s">&quot;selfUrl&quot;</span><span class="p">])</span>
@@ -412,10 +426,12 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns all items as list </span>
 
-<span class="sd">        :param resource: (str) resource path</span>
-<span class="sd">        :param itemlist: (list) of items</span>
+<span class="sd">        :param str rource: resource path</span>
+<span class="sd">        :param list itemlist: list of items</span>
 <span class="sd">        :return: list of items</span>
+<span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getRequest</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
             <span class="n">page</span> <span class="o">=</span> <span class="n">APIPagination</span><span class="p">()</span>
@@ -437,6 +453,7 @@
 <span class="sd">        :return: either None if not an ID or the object ID (int)</span>
 <span class="sd">        :raises: ValueError</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">selfURL_path</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urlsplit</span><span class="p">(</span><span class="n">selfURL</span><span class="p">)</span><span class="o">.</span><span class="n">path</span>
         <span class="k">if</span> <span class="n">PYTHON3</span><span class="p">:</span>
             <span class="n">oID</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">selfURL_path</span><span class="p">)</span><span class="o">.</span><span class="n">name</span>
@@ -453,8 +470,9 @@
 <div class="viewcode-block" id="VSDConnecter.getObject"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getObject">[docs]</a>    <span class="k">def</span> <span class="nf">getObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;retrieve an object based on the objectID</span>
 
-<span class="sd">        :param resource: (str) selfUrl of the object or the (int) object ID</span>
-<span class="sd">        :return: the object (APIObject) </span>
+<span class="sd">        :param int,str resource: (str) selfUrl of the object or the (int) object ID</span>
+<span class="sd">        :return: the object </span>
+<span class="sd">        :rtype: APIObject</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">resource</span> <span class="o">=</span> <span class="s">&#39;objects/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
@@ -470,8 +488,9 @@
 <div class="viewcode-block" id="VSDConnecter.putObject"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.putObject">[docs]</a>    <span class="k">def</span> <span class="nf">putObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;update an objects information</span>
 <span class="sd">    </span>
-<span class="sd">        :param obj: (APIObject) an API Object</span>
-<span class="sd">        :return: (APIObject) the updated object</span>
+<span class="sd">        :param APIObject obj: an API Object</span>
+<span class="sd">        :return: the updated object</span>
+<span class="sd">        :rtype: APIObject</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">putRequest</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">selfUrl</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
@@ -486,8 +505,9 @@
 <div class="viewcode-block" id="VSDConnecter.getFolder"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getFolder">[docs]</a>    <span class="k">def</span> <span class="nf">getFolder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;retrieve an folder based on the folderID</span>
 
-<span class="sd">        :param resource: (str) selfUrl of the folder or the (int) folder ID</span>
-<span class="sd">        :return: the folder (APIFolder) </span>
+<span class="sd">        :param int,str resource: (str) selfUrl of the folder or the (int) folder ID</span>
+<span class="sd">        :return: the folder </span>
+<span class="sd">        :rtype: APIFolder</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">resource</span> <span class="o">=</span> <span class="s">&#39;folders/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
@@ -505,9 +525,11 @@
 <div class="viewcode-block" id="VSDConnecter.postRequest"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.postRequest">[docs]</a>    <span class="k">def</span> <span class="nf">postRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;add data to an object</span>
 
-<span class="sd">        :param resource: (str) relative path of the resource or selfUrl</span>
-<span class="sd">        :param data: (json) data to be added to the resource</span>
-<span class="sd">        :return: the resource object (json)</span>
+<span class="sd">        :param str resource: relative path of the resource or selfUrl</span>
+<span class="sd">        :param json data: data to be added to the resource</span>
+<span class="sd">        :return: the resource object </span>
+<span class="sd">        :rtype: json</span>
+<span class="sd">        :raises: RequestException</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_stayAlive</span><span class="p">()</span>
@@ -525,9 +547,10 @@
 <div class="viewcode-block" id="VSDConnecter.putRequest"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.putRequest">[docs]</a>    <span class="k">def</span> <span class="nf">putRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; update data of an object </span>
 
-<span class="sd">        :param resource: (str) defines the relative path to the api resource</span>
-<span class="sd">        :param data: (json) data to be added to the object</span>
-<span class="sd">        :return: the updated object (json)</span>
+<span class="sd">        :param str resource: defines the relative path to the api resource</span>
+<span class="sd">        :param json data: data to be added to the object</span>
+<span class="sd">        :return: the updated object</span>
+<span class="sd">        :rtype: json</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_stayAlive</span><span class="p">()</span>
@@ -544,10 +567,12 @@
        
 </div>
 <div class="viewcode-block" id="VSDConnecter.postRequestSimple"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.postRequestSimple">[docs]</a>    <span class="k">def</span> <span class="nf">postRequestSimple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;get an empty resource </span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        post (create) a resource </span>
 
-<span class="sd">        :param resource: (str) resource path</span>
-<span class="sd">        :return: the resource object (json)</span>
+<span class="sd">        :param str resource: resource path</span>
+<span class="sd">        :return: the resource object </span>
+<span class="sd">        :rtype: json</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_stayAlive</span><span class="p">()</span>
@@ -556,6 +581,13 @@
         <span class="k">return</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="VSDConnecter.putRequestSimple"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.putRequestSimple">[docs]</a>    <span class="k">def</span> <span class="nf">putRequestSimple</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        put (update) a resource </span>
+
+<span class="sd">        :param str resource: resource path</span>
+<span class="sd">        :return: the resource object </span>
+<span class="sd">        :rtype: json</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_stayAlive</span><span class="p">()</span>
 
@@ -563,11 +595,14 @@
         <span class="k">return</span> <span class="n">req</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
 </div>
 <div class="viewcode-block" id="VSDConnecter.delRequest"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.delRequest">[docs]</a>    <span class="k">def</span> <span class="nf">delRequest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; generic delete request</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        generic delete request</span>
 
-<span class="sd">        :param resource: (str) resource path</span>
-<span class="sd">        :return: status_code (int)</span>
+<span class="sd">        :param str resource: resource path</span>
+<span class="sd">        :return: status_code</span>
+<span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">try</span><span class="p">:</span> 
             <span class="n">req</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fullUrl</span><span class="p">(</span><span class="n">resource</span><span class="p">))</span>
             <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
@@ -588,28 +623,33 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        delete an unvalidated object </span>
 
-<span class="sd">        :param obj: (APIObject) to object to delete</span>
+<span class="sd">        :param APIObject obj: the object to delete</span>
 <span class="sd">        :return: status_code</span>
+<span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">try</span><span class="p">:</span> 
             <span class="n">req</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">selfUrl</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
                 <span class="k">print</span><span class="p">(</span><span class="s">&#39;object {0} deleted&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">id</span><span class="p">))</span>
                 <span class="k">return</span> <span class="n">req</span><span class="o">.</span><span class="n">status_code</span>
             <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">req</span><span class="o">.</span><span class="n">status_code</span>
                 <span class="k">print</span><span class="p">(</span><span class="s">&#39;not deleted&#39;</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
             <span class="k">print</span><span class="p">(</span><span class="s">&#39;del request failed:&#39;</span><span class="p">,</span><span class="n">err</span><span class="p">)</span>
-            <span class="n">req</span> <span class="o">=</span> <span class="bp">None</span>
+            
 </div>
 <div class="viewcode-block" id="VSDConnecter.publishObject"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.publishObject">[docs]</a>    <span class="k">def</span> <span class="nf">publishObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        publisch an unvalidated object </span>
 
-<span class="sd">        :param obj: (APIObject) to object to publish</span>
-<span class="sd">        :return: (APIObject) returns the object</span>
+<span class="sd">        :param APIObject obj: the object to publish</span>
+<span class="sd">        :return: returns the object</span>
+<span class="sd">        :rtype: APIObject</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">try</span><span class="p">:</span> 
             <span class="n">req</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">selfUrl</span> <span class="o">+</span> <span class="s">&#39;/publish&#39;</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">req</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
@@ -619,16 +659,16 @@
 
         <span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">exceptions</span><span class="o">.</span><span class="n">RequestException</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
             <span class="k">print</span><span class="p">(</span><span class="s">&#39;publish request failed:&#39;</span><span class="p">,</span><span class="n">err</span><span class="p">)</span>
-            <span class="n">req</span> <span class="o">=</span> <span class="bp">None</span>
         
 </div>
 <div class="viewcode-block" id="VSDConnecter.searchTerm"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.searchTerm">[docs]</a>    <span class="k">def</span> <span class="nf">searchTerm</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">,</span> <span class="n">search</span> <span class="p">,</span><span class="n">mode</span> <span class="o">=</span> <span class="s">&#39;default&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; search a resource using oAuths</span>
 <span class="sd">    </span>
-<span class="sd">        :param resouce: (str) resource path</span>
-<span class="sd">        :param search: (str) term to search for </span>
-<span class="sd">        :param mode: (str) search for partial match (&#39;default&#39;) or exact match (&#39;exact&#39;)</span>
-<span class="sd">        :return: list of folder objects (json)</span>
+<span class="sd">        :param str resouce: resource path</span>
+<span class="sd">        :param str search: term to search for </span>
+<span class="sd">        :param str mode: search for partial match (&#39;default&#39;) or exact match (&#39;exact&#39;)</span>
+<span class="sd">        :return: list of folder objects</span>
+<span class="sd">        :rtype: json</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">search</span> <span class="o">=</span> <span class="n">urlparse_quote</span><span class="p">(</span><span class="n">search</span><span class="p">)</span>
@@ -646,10 +686,11 @@
         <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">        push (post) a file to the server</span>
 
-<span class="sd">        :param filename: (Path) the file to be uploaded</span>
+<span class="sd">        :param Path filename: the file to be uploaded</span>
 <span class="sd">        :return: the file object containing the related object selfUrl</span>
-<span class="sd">        :return: file object (APIObject)</span>
+<span class="sd">        :rtype: APIObject</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">try</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">filename</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mode</span> <span class="o">=</span> <span class="s">&#39;rb&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
             <span class="c">##workaround for file without file extensions</span>
@@ -673,8 +714,8 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        breaks the file into chunks of chunksize</span>
 
-<span class="sd">        :param fp: (Path) file</span>
-<span class="sd">        :param chunksize: (int) size in bytes of the chunk parts</span>
+<span class="sd">        :param Path fp: the file to chunk</span>
+<span class="sd">        :param int chunksize: size in bytes of the chunk parts</span>
 <span class="sd">        :yields: chunk</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
@@ -689,9 +730,10 @@
         <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">        upload large files in chunks of max 100 MB size</span>
 
-<span class="sd">        :param fp: (Path) file</span>
-<span class="sd">        :param chunksize: (int) size in bytes of the chunk parts, default is 4MB</span>
-<span class="sd">        :return: the generated API Object</span>
+<span class="sd">        :param Path fp: the file to upload</span>
+<span class="sd">        :param int chunksize: size in bytes of the chunk parts, default is 4MB</span>
+<span class="sd">        :return: the generated object</span>
+<span class="sd">        :rtype: API Object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">parts</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span><span class="o">/</span><span class="n">chunksize</span><span class="p">)</span>
         <span class="n">part</span> <span class="o">=</span> <span class="mi">0</span>
@@ -726,10 +768,12 @@
 
 </div>
 <div class="viewcode-block" id="VSDConnecter.getFile"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getFile">[docs]</a>    <span class="k">def</span> <span class="nf">getFile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;return a APIFile object</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return a APIFile object</span>
 <span class="sd">        </span>
-<span class="sd">        :param resource: (str) resource path</span>
-<span class="sd">        :return: api file object (APIFile) or status code</span>
+<span class="sd">        :param str resource: resource path</span>
+<span class="sd">        :return: api file object  or status code</span>
+<span class="sd">        :rtype: APIFile</span>
 <span class="sd">        &quot;&quot;&quot;</span>  
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">resource</span> <span class="o">=</span> <span class="s">&#39;files/{0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
@@ -746,10 +790,12 @@
 
 </div>
 <div class="viewcode-block" id="VSDConnecter.getObjectFiles"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getObjectFiles">[docs]</a>    <span class="k">def</span> <span class="nf">getObjectFiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;return a list of file objects contained in an object</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return a list of file objects contained in an object</span>
 
-<span class="sd">        :param obj: (APIObject) object </span>
-<span class="sd">        :return: list of files(APIFiles)</span>
+<span class="sd">        :param APIObject obj: object</span>
+<span class="sd">        :return: list of APIFiles</span>
+<span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">filelist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">of</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">files</span><span class="p">:</span>
@@ -762,9 +808,11 @@
         <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">        Extract VSDID and selfUrl of the related Object Version of the file after file upload</span>
 
-<span class="sd">        :param data: (json) file object data</span>
-<span class="sd">        :results: returns the id and the selfUrl of the Object Version</span>
+<span class="sd">        :param json data: file object data</span>
+<span class="sd">        :result: returns the id and the selfUrl of the Object Version</span>
+<span class="sd">        :rtype: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="c">#data = json.loads(data)</span>
         <span class="n">f</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;file&#39;</span><span class="p">]</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;relatedObject&#39;</span><span class="p">]</span>
@@ -775,10 +823,11 @@
 <div class="viewcode-block" id="VSDConnecter.getAllUnpublishedObjects"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getAllUnpublishedObjects">[docs]</a>    <span class="k">def</span> <span class="nf">getAllUnpublishedObjects</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span> <span class="o">=</span> <span class="s">&#39;objects/unpublished&#39;</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; retrieve the unpublished objects as list of APIObject</span>
 
-<span class="sd">        :param resource: (str) resource path (eg nextPageUrl) or default groups</span>
-<span class="sd">        :param rpp: (int) results per page</span>
-<span class="sd">        :param page: (int) page to display</span>
-<span class="sd">        :return: list of objects (APIObjects) </span>
+<span class="sd">        :param str resource: resource path (eg nextPageUrl) or default groups</span>
+<span class="sd">        :param int rpp: results per page</span>
+<span class="sd">        :param int page: page to display</span>
+<span class="sd">        :return: list of objects </span>
+<span class="sd">        :rtype: APIObjects</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">objects</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
@@ -791,8 +840,15 @@
 
 </div>
 <div class="viewcode-block" id="VSDConnecter.getLatestUnpublishedObject"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getLatestUnpublishedObject">[docs]</a>    <span class="k">def</span> <span class="nf">getLatestUnpublishedObject</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; searches the list of unpublished objects and returns the newest object  &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        searches the list of unpublished objects and returns the newest object  </span>
+
+<span class="sd">        :return: last uploaded object</span>
+<span class="sd">        :rtype: apiObject</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getRequest</span><span class="p">(</span><span class="s">&#39;objects/unpublished&#39;</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s">&#39;items&#39;</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">obj</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s">&#39;items&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;selfUrl&#39;</span><span class="p">))</span>
             <span class="k">return</span> <span class="n">obj</span>
@@ -807,44 +863,59 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        get a list of folder(s) based on a search string</span>
 
-<span class="sd">        :param search: (str) term to search for </span>
-<span class="sd">        :param mode: (str) search for partial match (&#39;default&#39;) or exact match (&#39;exact&#39;)</span>
-<span class="sd">        :return: list of folder objects (APIFolders)</span>
+<span class="sd">        :param str search: term to search for </span>
+<span class="sd">        :param str mode: search for partial match (&#39;default&#39;) or exact match (&#39;exact&#39;)</span>
+<span class="sd">        :return: list of folder objects APIFolders</span>
+<span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>   
+        
         <span class="n">search</span> <span class="o">=</span> <span class="n">urlparse_quote</span><span class="p">(</span><span class="n">search</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s">&#39;exact&#39;</span><span class="p">:</span>
+
             <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">+</span> <span class="s">&quot;folders?$filter=Name</span><span class="si">%20e</span><span class="s">q</span><span class="si">%20%</span><span class="s">27{0}%27&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">search</span><span class="p">)</span> 
+
         <span class="k">else</span><span class="p">:</span>
+
             <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">+</span> <span class="s">&quot;folders?$filter=startswith(Name,%27{0}%27)</span><span class="si">%20e</span><span class="s">q%20true&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">search</span><span class="p">)</span>
+
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_stayAlive</span><span class="p">()</span>
 
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+
             <span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
             <span class="n">res</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+
             <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">iter</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s">&#39;items&#39;</span><span class="p">]):</span>
+
                 <span class="n">f</span> <span class="o">=</span> <span class="n">APIFolder</span><span class="p">()</span>
                 <span class="n">f</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
                 <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
-
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+
                 <span class="n">folder</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="k">print</span><span class="p">(</span><span class="s">&#39;1 folder matching the search found&#39;</span><span class="p">)</span>
                 <span class="k">return</span> <span class="n">folder</span>
+
             <span class="k">else</span><span class="p">:</span>
+
                 <span class="k">print</span><span class="p">(</span><span class="s">&#39;list of {} folders matching the search found&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)))</span>
                 <span class="k">return</span> <span class="n">result</span>
         <span class="k">else</span><span class="p">:</span>
+
             <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span>
 </div>
 <div class="viewcode-block" id="VSDConnecter.getContainedFolders"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getContainedFolders">[docs]</a>    <span class="k">def</span> <span class="nf">getContainedFolders</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        return a list of folder object contained in a folder</span>
 
-<span class="sd">        :param folder: folder (APIFolder) object</span>
+<span class="sd">        :param APIFolder folder: folder object</span>
 <span class="sd">        :return folderlist: a list of folder object (APIFolder) contained in the folder</span>
+<span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">folderlist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
@@ -864,8 +935,9 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        return a list of object contained in a folder</span>
 
-<span class="sd">        :param folder: folder (APIFolder) object</span>
+<span class="sd">        :param APIFolder folder: folder object</span>
 <span class="sd">        :return objlist: a list of objects (APIFObject) contained in the folder</span>
+<span class="sd">        :rtype:  list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">objlist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
@@ -885,13 +957,17 @@
 <div class="viewcode-block" id="VSDConnecter.deleteFolderContent"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.deleteFolderContent">[docs]</a>    <span class="k">def</span> <span class="nf">deleteFolderContent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; delete all content from a folder (APIFolder)</span>
 
-<span class="sd">        :param folder: (APIFolder) a folder object</span>
-<span class="sd">        :return state: (bool) returns true if successful, else False</span>
+<span class="sd">        :param APIFolder folder: a folder object</span>
+<span class="sd">        :return state: returns true if successful, else False</span>
+<span class="sd">        :rtype: bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
 
         <span class="n">folder</span><span class="o">.</span><span class="n">containedObjects</span> <span class="o">=</span> <span class="bp">None</span>
+
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">putRequest</span><span class="p">(</span><span class="s">&#39;folders&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">folder</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">state</span> <span class="o">=</span> <span class="bp">True</span>
 
@@ -901,10 +977,11 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        get the objects and folder contained in the given folder. can be called recursive to travel and return all objects </span>
 
-<span class="sd">        :param folder: (APIFolder) the folder to be read</span>
-<span class="sd">        :param recursive: (bool) travel the folder structure recursively or not (default)</span>
-<span class="sd">        :param mode: (str) what to return: only objects (o), only folders (f) or default (d) folders and objects</span>
-<span class="sd">        :return content: (dict) of folder (APIFolder) and object objects (APIObjects)</span>
+<span class="sd">        :param APIFolder folder: the folder to be read</span>
+<span class="sd">        :param bool recursive:  travel the folder structure recursively or not (default)</span>
+<span class="sd">        :param str mode: what to return: only objects (o), only folders (f) or default (d) folders and objects</span>
+<span class="sd">        :return content: dictionary with folders (APIFolder) and object (APIObjects)</span>
+<span class="sd">        :rtype: dict</span>
 <span class="sd">        &quot;&quot;&quot;</span>
          
         <span class="n">objectmode</span> <span class="o">=</span> <span class="bp">False</span>
@@ -1000,9 +1077,10 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieve an ontology entry based on the IRI</span>
 
-<span class="sd">        :param oid: (int) Identifier of the entry</span>
-<span class="sd">        :param oType: (int) Resource type, available resources can be found using the OPTIONS on /api/ontologies). Default resouce is FMA (0)</span>
-<span class="sd">        :return: ontology term entry (json)</span>
+<span class="sd">        :param int oid: Identifier of the entry</span>
+<span class="sd">        :param int oType: Resource type, available resources can be found using the OPTIONS on /api/ontologies). Default resouce is FMA (0)</span>
+<span class="sd">        :return: ontology term entry</span>
+<span class="sd">        :rtype: json </span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_stayAlive</span><span class="p">()</span>
@@ -1016,9 +1094,10 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Retrieve an ontology item object (APIOntology)</span>
 <span class="sd">        </span>
-<span class="sd">        :param resource: (int or str) resource path to the of the ontology item</span>
-<span class="sd">        :param oType: ontology type (int)</span>
-<span class="sd">        :return onto: (APIOntology) the ontology item object</span>
+<span class="sd">        :param int,str resource: resource path to the of the ontology item</span>
+<span class="sd">        :param int oType: ontology type</span>
+<span class="sd">        :return onto: the ontology item object</span>
+<span class="sd">        :rtype: APIOntology</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_stayAlive</span><span class="p">()</span>
@@ -1038,7 +1117,13 @@
 
 </div>
 <div class="viewcode-block" id="VSDConnecter.getLicenseList"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getLicenseList">[docs]</a>    <span class="k">def</span> <span class="nf">getLicenseList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; retrieve a list of the available licenses (APILicense)&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; retrieve a list of the available licenses (APILicense)</span>
+
+<span class="sd">        </span>
+<span class="sd">        :return: list of available license objects</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getRequest</span><span class="p">(</span><span class="s">&#39;licenses&#39;</span><span class="p">)</span>
         <span class="n">licenses</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
@@ -1046,14 +1131,16 @@
                 <span class="n">lic</span> <span class="o">=</span> <span class="n">APILicense</span><span class="p">()</span>
                 <span class="n">lic</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">item</span><span class="p">)</span>
                 <span class="n">licenses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lic</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">licenses</span>
 
 </div>
 <div class="viewcode-block" id="VSDConnecter.getLicense"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getLicense">[docs]</a>    <span class="k">def</span> <span class="nf">getLicense</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; retrieve a license (APILicense)</span>
 
-<span class="sd">        :param resource: (int or str) resource path to the of the license</span>
-<span class="sd">        :return license: (APILicense) the license object</span>
+<span class="sd">        :param int,str resource: resource path to the of the license</span>
+<span class="sd">        :return license: the license object</span>
+<span class="sd">        :rtype: APILicense</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -1069,7 +1156,11 @@
             <span class="k">return</span> <span class="bp">None</span>
 </div>
 <div class="viewcode-block" id="VSDConnecter.getObjectRightList"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getObjectRightList">[docs]</a>    <span class="k">def</span> <span class="nf">getObjectRightList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; retrieve a list of the available base object rights (APIObjectRight) &quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; retrieve a list of the available base object rights (APIObjectRight) </span>
+
+<span class="sd">        :return: list of object rights</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getRequest</span><span class="p">(</span><span class="s">&#39;object_rights&#39;</span><span class="p">)</span>
         <span class="n">permission</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
@@ -1085,8 +1176,9 @@
 <div class="viewcode-block" id="VSDConnecter.getObjectRight"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getObjectRight">[docs]</a>    <span class="k">def</span> <span class="nf">getObjectRight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; retrieve a  object rights object (APIObjectRight) </span>
 <span class="sd">        </span>
-<span class="sd">        :param resource: resource to the permission id (int) or selfurl (str)</span>
-<span class="sd">        :return: perm (APIObjectRight) object</span>
+<span class="sd">        :param int,str resource: resource to the permission id (int) or selfurl (str)</span>
+<span class="sd">        :return: perm object</span>
+<span class="sd">        :rtype: APIObjectRight</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -1103,11 +1195,13 @@
 <div class="viewcode-block" id="VSDConnecter.getGroups"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getGroups">[docs]</a>    <span class="k">def</span> <span class="nf">getGroups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span> <span class="o">=</span> <span class="s">&#39;groups&#39;</span><span class="p">,</span>  <span class="n">rpp</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">page</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;get the list of groups</span>
 
-<span class="sd">        :param resource: (str) resource path (eg nextPageUrl) or default groups</span>
-<span class="sd">        :param rpp: (int) results per page</span>
-<span class="sd">        :param page: (int) page to display</span>
-<span class="sd">        :return: list of group objects (APIGroup)</span>
-<span class="sd">        :return: pagination object(APIPagination)</span>
+<span class="sd">        :param str resource: resource path (eg nextPageUrl) or default groups</span>
+<span class="sd">        :param int rpp: results per page</span>
+<span class="sd">        :param int page: page number to display</span>
+<span class="sd">        :return: list of group objects </span>
+<span class="sd">        :rtype: APIGroup</span>
+<span class="sd">        :return: pagination object</span>
+<span class="sd">        :rtype: APIPagination</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">groups</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
@@ -1119,15 +1213,18 @@
             <span class="n">group</span> <span class="o">=</span> <span class="n">APIGroup</span><span class="p">()</span>
             <span class="n">group</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">g</span><span class="p">)</span>
             <span class="n">groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">groups</span><span class="p">,</span> <span class="n">ppObj</span>
 
 </div>
 <div class="viewcode-block" id="VSDConnecter.getGroup"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getGroup">[docs]</a>    <span class="k">def</span> <span class="nf">getGroup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; retrieve a group object (APIGroup)</span>
 
-<span class="sd">        :param resource: path to the group id (int) or selfUrl (str)</span>
-<span class="sd">        :return: group (APIGroup) object</span>
+<span class="sd">        :param int,str resource: path to the group id (int) or selfUrl (str)</span>
+<span class="sd">        :return: group  object</span>
+<span class="sd">        :rtype: APIGroup</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">resource</span> <span class="o">=</span> <span class="s">&#39;groups/{0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
         
@@ -1144,8 +1241,9 @@
 <div class="viewcode-block" id="VSDConnecter.getUser"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getUser">[docs]</a>    <span class="k">def</span> <span class="nf">getUser</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; retrieve a user object (APIUser)</span>
 
-<span class="sd">        :param resource: path to the user resource id (int) or selfUrl (str)</span>
-<span class="sd">        :return: user (APIUser) object</span>
+<span class="sd">        :param int,str resource: path to the user resource id (int) or selfUrl (str)</span>
+<span class="sd">        :return: user object</span>
+<span class="sd">        :rtype: APIUser</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">resource</span> <span class="o">=</span> <span class="s">&#39;users/{0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
@@ -1163,8 +1261,9 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        get the Object Rights for a permission set</span>
 
-<span class="sd">        :param permset: (str) name of the permission set: available are private, protect, default, collaborate, full or a list of permission ids (list)</span>
-<span class="sd">        :return perms: list of object rights objects (APIObjectRight) </span>
+<span class="sd">        :param str permset: name of the permission set: available are private, protect, default, collaborate, full or a list of permission ids (list)</span>
+<span class="sd">        :return perms: list of object rights objects</span>
+<span class="sd">        :rtype: APIObjectRight </span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">permset</span> <span class="o">==</span> <span class="s">&#39;private&#39;</span><span class="p">:</span>
@@ -1190,8 +1289,9 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        get the list of attaced group rights of an object</span>
 
-<span class="sd">        :param obj: the object (APIObject)</span>
+<span class="sd">        :param APIObject obj: the object </span>
 <span class="sd">        :return rights: a list of ObjectGroupRights (APIObjectGroupRight)</span>
+<span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">rights</span> <span class="o">=</span> <span class="bp">None</span>
@@ -1210,8 +1310,9 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        get the list of attaced user rights of an object</span>
 
-<span class="sd">        :param obj: the object (APIObject)</span>
-<span class="sd">        :return rights: a list of ObjectUserRights (APIObjectUserRight)</span>
+<span class="sd">        :param APIObject obj: the object </span>
+<span class="sd">        :return: a list of ObjectUserRights (APIObjectUserRight)</span>
+<span class="sd">        :rtype: list</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">rights</span> <span class="o">=</span> <span class="bp">None</span>
@@ -1228,13 +1329,17 @@
 <div class="viewcode-block" id="VSDConnecter.postObjectRights"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.postObjectRights">[docs]</a>    <span class="k">def</span> <span class="nf">postObjectRights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">perms</span><span class="p">,</span> <span class="n">isuser</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; DEPRECATED: user postObjectGroupRights or postObjectUserRights! </span>
 <span class="sd">        translate a set of permissions and a group into the appropriate format and add it to the object</span>
-<span class="sd">        .. warning:: DEPRECATED: user postObjectGroupRights or postObjectUserRights! </span>
-<span class="sd">        :param obj: (API Object) the object you want to add the permissions to </span>
-<span class="sd">        :param group: (APIGroup or APIUser) group object or user object</span>
-<span class="sd">        :param perms: (list) list of Object Rights (APIObjectRight), use getPermissionSet to retrive the ObjectRights based on the permission sets</span>
-<span class="sd">        :param isuser: (bool) set True if the groups variable is a user. Default is False </span>
+<span class="sd">        </span>
 
-<span class="sd">        :return objRight: a group or user rights (APIObjectGroupRight/APIObjectUserRight) object</span>
+<span class="sd">        .. warning:: DEPRECATED: user postObjectGroupRights or postObjectUserRights! </span>
+
+
+<span class="sd">        :param API Object obj: () the object you want to add the permissions to </span>
+<span class="sd">        :param APIGroup/APIUser group: group object or user object</span>
+<span class="sd">        :param list perms: list of Object Rights (APIObjectRight), use getPermissionSet to retrive the ObjectRights based on the permission sets</span>
+<span class="sd">        :param bool isuser: set True if the groups variable is a user. Default is False </span>
+<span class="sd">        :return: a group or user rights object</span>
+<span class="sd">        :rtype: APIObjectGroupRight/APIObjectUserRight</span>
 <span class="sd">        &quot;&quot;&quot;</span> 
 
         <span class="c">#creat the dict of rights</span>
@@ -1262,11 +1367,11 @@
 <div class="viewcode-block" id="VSDConnecter.postObjectUserRights"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.postObjectUserRights">[docs]</a>    <span class="k">def</span> <span class="nf">postObjectUserRights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="n">perms</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; translate a set of permissions and a user into the appropriate format and add it to the object</span>
 
-<span class="sd">        :param obj: (API Object) the object you want to add the permissions to </span>
-<span class="sd">        :param group: (APIUser) user object</span>
-<span class="sd">        :param perms: (list) list of Object Rights (APIObjectRight), use getPermissionSet to retrive the ObjectRights based on the permission sets</span>
-
-<span class="sd">        :return objRight: user rights (APIObjectUserRight) object</span>
+<span class="sd">        :param APIObject obj: the object you want to add the permissions to </span>
+<span class="sd">        :param APIUser user: user object</span>
+<span class="sd">        :param list perms: list of Object Rights (APIObjectRight), use getPermissionSet to retrive the ObjectRights based on the permission sets</span>
+<span class="sd">        :return: user rights  object</span>
+<span class="sd">        :rtype: APIObjectUserRight</span>
 <span class="sd">        &quot;&quot;&quot;</span> 
 
         <span class="c">#creat the dict of rights</span>
@@ -1287,11 +1392,12 @@
 <div class="viewcode-block" id="VSDConnecter.postObjectGroupRights"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.postObjectGroupRights">[docs]</a>    <span class="k">def</span> <span class="nf">postObjectGroupRights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">perms</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; translate a set of permissions and a group into the appropriate format and add it to the object</span>
 
-<span class="sd">        :param obj: (API Object) the object you want to add the permissions to </span>
-<span class="sd">        :param group: (APIGroup) group object</span>
-<span class="sd">        :param perms: (list) list of Object Rights (APIObjectRight), use getPermissionSet to retrive the ObjectRights based on the permission sets</span>
-
-<span class="sd">        :return objRight: group rights (APIObjectGroupRight) object  &quot;&quot;&quot;</span> 
+<span class="sd">        :param APIObject obj: the object you want to add the permissions to </span>
+<span class="sd">        :param APIGroup group: group object</span>
+<span class="sd">        :param list perms: list of Object Rights (APIObjectRight), use getPermissionSet to retrive the ObjectRights based on the permission sets</span>
+<span class="sd">        :return: group rights object  </span>
+<span class="sd">        :rtype: APIObjectGroupRight</span>
+<span class="sd">        &quot;&quot;&quot;</span> 
 
         <span class="c">#creat the dict of rights</span>
         <span class="n">rights</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
@@ -1313,7 +1419,12 @@
 
 </div>
 <div class="viewcode-block" id="VSDConnecter.getModalityList"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getModalityList">[docs]</a>    <span class="k">def</span> <span class="nf">getModalityList</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; retrieve a list of modalities objects (APIModality)&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        retrieve a list of modalities objects (APIModality)</span>
+
+<span class="sd">        :return: list of available modalities</span>
+<span class="sd">        :rtype: list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">modalities</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
         <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getAllPaginated</span><span class="p">(</span><span class="s">&#39;modalities&#39;</span><span class="p">,</span> <span class="n">itemlist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">())</span>
@@ -1322,16 +1433,15 @@
                 <span class="n">modality</span> <span class="o">=</span> <span class="n">APIModality</span><span class="p">()</span>
                 <span class="n">modality</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">item</span><span class="p">)</span>
                 <span class="n">modalities</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">modality</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">modalities</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">items</span>
+        <span class="k">return</span> <span class="n">modalities</span>
 </div>
 <div class="viewcode-block" id="VSDConnecter.getModality"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.getModality">[docs]</a>    <span class="k">def</span> <span class="nf">getModality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resource</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; retrieve a modalities object (APIModality)</span>
 
 
-<span class="sd">        :param resource: (int or str) resource path to the of the modality</span>
-<span class="sd">        :return mod: (APIModality) the modality object</span>
+<span class="sd">        :param int,str resource: resource path to the of the modality</span>
+<span class="sd">        :return: the modality object</span>
+<span class="sd">        :rtype: APIModality</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">resource</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -1386,10 +1496,12 @@
 <div class="viewcode-block" id="VSDConnecter.addLink"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.addLink">[docs]</a>    <span class="k">def</span> <span class="nf">addLink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj1</span><span class="p">,</span> <span class="n">obj2</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; add an object link </span>
 
-<span class="sd">        :param obj1: (APIBasic) an link object with selfUrl </span>
-<span class="sd">        :param obj2: (APIBasic) an link object with selfUrl</span>
-<span class="sd">        :return: the created object-link (json)</span>
+<span class="sd">        :param APIBasic obj1: a linked object with selfUrl </span>
+<span class="sd">        :param APIBasic obj2: a linked object with selfUrl</span>
+<span class="sd">        :return: the created object-link </span>
+<span class="sd">        :rtype: json</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">link</span> <span class="o">=</span> <span class="n">APIObjectLink</span><span class="p">()</span>
         <span class="n">link</span><span class="o">.</span><span class="n">object1</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="s">&#39;selfUrl&#39;</span><span class="p">,</span> <span class="n">obj1</span><span class="o">.</span><span class="n">selfUrl</span><span class="p">)])</span>
         <span class="n">link</span><span class="o">.</span><span class="n">object2</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="s">&#39;selfUrl&#39;</span><span class="p">,</span> <span class="n">obj2</span><span class="o">.</span><span class="n">selfUrl</span><span class="p">)])</span>
@@ -1399,10 +1511,13 @@
 <div class="viewcode-block" id="VSDConnecter.addOntologyToObject"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.addOntologyToObject">[docs]</a>    <span class="k">def</span> <span class="nf">addOntologyToObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">ontology</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot; add an ontoly term to an object</span>
 
-<span class="sd">        :param obj: (APIBasic) object</span>
-<span class="sd">        :param ontology: (APIOntology) ontology object</span>
-<span class="sd">        :param pos: (int) position of the ontology term, default = 1</span>
-<span class="sd">        :return isset: (Bool) returns true if successfully added&quot;&quot;&quot;</span>
+<span class="sd">        :param APIBasic obj: basic object</span>
+<span class="sd">        :param APIOntology ontology: ontology object</span>
+<span class="sd">        :param int pos: position of the ontology term, default = 1</span>
+<span class="sd">        :return: returns true if successfully added</span>
+<span class="sd">        :rtype: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">isset</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
                 <span class="n">onto</span> <span class="o">=</span> <span class="n">APIObjectOntology</span><span class="p">()</span>
@@ -1423,10 +1538,11 @@
         <span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">        creates the folder with a given name (name) inside a folder (parent) if not already exists</span>
 
-<span class="sd">        :param parent: (APIFolder) the root folder</span>
-<span class="sd">        :param name: (str) name of the folder which should be created</span>
-<span class="sd">        :param check: (bool) it we should check if already exist, default = True</span>
-<span class="sd">        :return: (APIFolder) the folder object of the generated folder or the existing folder</span>
+<span class="sd">        :param APIFolder parent: the root folder</span>
+<span class="sd">        :param str name: name of the folder which should be created</span>
+<span class="sd">        :param bool check: it we should check if already exist, default = True</span>
+<span class="sd">        :return: the folder object of the generated folder or the existing folder</span>
+<span class="sd">        :rtype: APIFolder</span>
 <span class="sd">        &quot;&quot;&quot;</span>
          
         <span class="n">folder</span> <span class="o">=</span> <span class="n">APIFolder</span><span class="p">()</span>
@@ -1461,9 +1577,11 @@
 <div class="viewcode-block" id="VSDConnecter.deleteFolder"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.deleteFolder">[docs]</a>    <span class="k">def</span> <span class="nf">deleteFolder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">folder</span><span class="p">,</span> <span class="n">recursive</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;remove a folder (APIFolder)</span>
 
-<span class="sd">        :param folder: (APIFolder)</span>
-<span class="sd">        :return state: (bool) True if deleted, False if not</span>
+<span class="sd">        :param APIFolder folder: the folder object</span>
+<span class="sd">        :return: True if deleted, False if not</span>
+<span class="sd">        :rtype: bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="n">state</span> <span class="o">=</span> <span class="bp">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">deleteFolderContent</span><span class="p">(</span><span class="n">folder</span><span class="p">)</span>
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">delRequest</span><span class="p">(</span><span class="n">folder</span><span class="o">.</span><span class="n">selfUrl</span><span class="p">)</span>
@@ -1480,10 +1598,11 @@
 <span class="sd">        creates the folders based on the filepath if not already existing, </span>
 <span class="sd">        starting from the rootfolder</span>
 
-<span class="sd">        :param rootfolder: (APIFolder) the root folder</span>
-<span class="sd">        :param filepath: (Path) file path of the file</span>
-<span class="sd">        :param parents: (int) number of partent levels to create from file folder </span>
-<span class="sd">        :return: (APIFolder) the last folder in the tree</span>
+<span class="sd">        :param APIFolder rootfolder: the root folder object</span>
+<span class="sd">        :param Path filepath: filepath of the file</span>
+<span class="sd">        :param int parents: number of partent levels to create from file folder </span>
+<span class="sd">        :return: the last folder in the tree</span>
+<span class="sd">        :rtype: APIFolder</span>
 <span class="sd">        &quot;&quot;&quot;</span>
          
         <span class="n">fp</span> <span class="o">=</span> <span class="n">filepath</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
@@ -1534,10 +1653,12 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        add an object to the folder</span>
 <span class="sd">    </span>
-<span class="sd">        :param target: (APIFolder) the target folder </span>
-<span class="sd">        :param obj: (APIObject) the object to copy</span>
-<span class="sd">        :return: updated folder (APIFolder)</span>
+<span class="sd">        :param APIFolder target: the target folder </span>
+<span class="sd">        :param APIObject obj: the object to copy</span>
+<span class="sd">        :return: updated folder</span>
+<span class="sd">        :rtype: APIFolder</span>
 <span class="sd">        &quot;&quot;&quot;</span>    
+
         <span class="n">objSelfUrl</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="s">&#39;selfUrl&#39;</span><span class="p">,</span><span class="n">obj</span><span class="o">.</span><span class="n">selfUrl</span><span class="p">)])</span>
         <span class="n">objects</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">containedObjects</span>
         
@@ -1561,9 +1682,10 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        remove an object from the folder</span>
 <span class="sd">    </span>
-<span class="sd">        :param target: (APIFolder) the target folder </span>
-<span class="sd">        :param obj: (APIObject) the object to remove</span>
-<span class="sd">        :return: updated folder (APIFolder)</span>
+<span class="sd">        :param APIFolder target: the target folder </span>
+<span class="sd">        :param APIObject obj: the object to remove</span>
+<span class="sd">        :return: updated folder</span>
+<span class="sd">        :rtype: APIFolder</span>
 <span class="sd">        &quot;&quot;&quot;</span>  
 
         <span class="n">objSelfUrl</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">([(</span><span class="s">&#39;selfUrl&#39;</span><span class="p">,</span><span class="n">obj</span><span class="o">.</span><span class="n">selfUrl</span><span class="p">)])</span>
@@ -1590,7 +1712,7 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        display the object information user readable format</span>
 
-<span class="sd">        :param obj: object (APIObject)</span>
+<span class="sd">        :param APIObject obj: object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">print</span><span class="p">(</span><span class="s">&#39;---------General Information ----------&#39;</span><span class="p">)</span>
@@ -1703,7 +1825,7 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API Object</span>
 
-<span class="sd">    members:</span>
+<span class="sd">    members: oKeys are the available attributes of the class</span>
 <span class="sd">    &quot;&quot;&quot;</span> 
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;id&#39;</span><span class="p">,</span>
