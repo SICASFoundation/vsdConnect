@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>connectVSDExt &mdash; source 0.8&#34; -R 0.8 -A Michael documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.8&#34; -R 0.8 -A Michael',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="source 0.8&#34; -R 0.8 -A Michael documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for connectVSDExt</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/python</span>
+
+<span class="c"># connectVSD 0.1</span>
+<span class="c"># (c) Tobias Gass, 2015</span>
+<span class="c"># conncetVSD 0.2 python 3 @Michael Kistler 2015</span>
+<span class="c"># changed / added auth </span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">math</span>
+
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">from</span> <span class="nn">connectVSD</span> <span class="kn">import</span> <span class="n">VSDConnecter</span>
+
+
+
+
+<div class="viewcode-block" id="VSDConnecterExtension"><a class="viewcode-back" href="../connectVSDExt.html#connectVSDExt.VSDConnecterExtension">[docs]</a><span class="k">class</span> <span class="nc">VSDConnecterExtension</span><span class="p">(</span><span class="n">VSDConnecter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+        <span class="n">authtype</span> <span class="o">=</span> <span class="s">&#39;basic&#39;</span><span class="p">,</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="s">&quot;https://demo.virtualskeleton.ch/api/&quot;</span><span class="p">,</span>
+        <span class="n">username</span> <span class="o">=</span> <span class="s">&quot;demo@virtualskeleton.ch&quot;</span><span class="p">,</span> 
+        <span class="n">password</span> <span class="o">=</span> <span class="s">&quot;demo&quot;</span><span class="p">,</span> 
+        <span class="n">version</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+        <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">authtype</span><span class="p">,</span><span class="n">url</span><span class="p">,</span><span class="n">username</span><span class="p">,</span><span class="n">password</span><span class="p">,</span><span class="n">version</span><span class="p">,</span><span class="n">token</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="VSDConnecterExtension.getLinkedSegmentation"><a class="viewcode-back" href="../connectVSDExt.html#connectVSDExt.VSDConnecterExtension.getLinkedSegmentation">[docs]</a>    <span class="k">def</span> <span class="nf">getLinkedSegmentation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">objectID</span><span class="p">):</span>
+        <span class="n">result</span><span class="o">=</span><span class="bp">None</span>
+        <span class="n">obj</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">objectID</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">obj</span><span class="o">==</span><span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">None</span>
+        <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">linkedObjects</span><span class="p">:</span>
+            <span class="n">linkedObject</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getRequest</span><span class="p">(</span><span class="n">link</span><span class="p">[</span><span class="s">&#39;selfUrl&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">linkedObject</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+                <span class="n">result</span><span class="o">=</span><span class="n">linkedObject</span><span class="p">[</span><span class="s">&#39;id&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+</div>
+<div class="viewcode-block" id="VSDConnecterExtension.uploadSegmentation"><a class="viewcode-back" href="../connectVSDExt.html#connectVSDExt.VSDConnecterExtension.uploadSegmentation">[docs]</a>    <span class="k">def</span> <span class="nf">uploadSegmentation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">segmentationFilename</span><span class="p">):</span>
+       
+        <span class="c">#upload Segmentation and get ID</span>
+        <span class="n">segFile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chunkFileUpload</span><span class="p">(</span><span class="n">segmentationFilename</span><span class="p">)</span>
+ 
+        <span class="k">if</span> <span class="n">segFile</span><span class="o">.</span><span class="n">type</span><span class="o">!=</span><span class="mi">2</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&quot;Error retrieving segmentation object after upload, aborting&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">segFile</span>
+    </div>
+<div class="viewcode-block" id="VSDConnecterExtension.addOntologyRelation"><a class="viewcode-back" href="../connectVSDExt.html#connectVSDExt.VSDConnecterExtension.addOntologyRelation">[docs]</a>    <span class="k">def</span> <span class="nf">addOntologyRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ontologyRelation</span><span class="p">):</span>
+        <span class="n">oType</span><span class="o">=</span><span class="n">ontologyRelation</span><span class="p">[</span><span class="s">&#39;type&#39;</span><span class="p">]</span>
+        <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">postRequest</span><span class="p">(</span><span class="s">&#39;/object-ontologies/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">oType</span><span class="p">),</span><span class="n">ontologyRelation</span><span class="p">)</span>
+        <span class="c">#result2=self.putRequestSimple(&quot;/object-ontologies/&quot;+str(oType)+&quot;/&quot;+str(result[&quot;id&quot;]))</span>
+        <span class="k">return</span> <span class="n">result</span>
+    </div>
+<div class="viewcode-block" id="VSDConnecterExtension.setOntologyBasedOnReferenceObject"><a class="viewcode-back" href="../connectVSDExt.html#connectVSDExt.VSDConnecterExtension.setOntologyBasedOnReferenceObject">[docs]</a>    <span class="k">def</span> <span class="nf">setOntologyBasedOnReferenceObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">targetObjectID</span><span class="p">,</span> <span class="n">origObjectID</span><span class="p">):</span>
+        <span class="n">origObject</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">origObjectID</span><span class="p">)</span>
+
+        <span class="c">#add Ontology relations</span>
+        <span class="k">for</span> <span class="n">ontRel</span> <span class="ow">in</span> <span class="n">origObject</span><span class="o">.</span><span class="n">ontologyItemRelations</span><span class="p">:</span>
+           
+            <span class="n">ont</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getRequest</span><span class="p">(</span><span class="n">ontRel</span><span class="p">[</span><span class="s">&#39;selfUrl&#39;</span><span class="p">])</span>
+            <span class="n">newOntRel</span><span class="o">=</span><span class="p">{}</span>
+            <span class="n">newOntRel</span><span class="p">[</span><span class="s">&quot;object&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;selfUrl&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="o">+</span><span class="s">&#39;/objects/&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">targetObjectID</span><span class="p">)}</span>
+            <span class="n">newOntRel</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">ont</span><span class="p">[</span><span class="s">&quot;type&quot;</span><span class="p">]</span>
+            <span class="n">newOntRel</span><span class="p">[</span><span class="s">&quot;position&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">ont</span><span class="p">[</span><span class="s">&quot;position&quot;</span><span class="p">]</span>
+            <span class="n">newOntRel</span><span class="p">[</span><span class="s">&quot;ontologyItem&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">ont</span><span class="p">[</span><span class="s">&quot;ontologyItem&quot;</span><span class="p">]</span>
+       
+            <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">addOntologyRelation</span><span class="p">(</span><span class="n">newOntRel</span><span class="p">)</span>
+            <span class="k">print</span> <span class="p">(</span><span class="s">&quot;done, result:&quot;</span><span class="p">,</span><span class="n">result</span><span class="p">)</span>
+           
+       
+</div>
+<div class="viewcode-block" id="VSDConnecterExtension.setRightsBasedOnReferenceObject"><a class="viewcode-back" href="../connectVSDExt.html#connectVSDExt.VSDConnecterExtension.setRightsBasedOnReferenceObject">[docs]</a>    <span class="k">def</span> <span class="nf">setRightsBasedOnReferenceObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">objectID</span><span class="p">,</span><span class="n">referenceObjectID</span><span class="p">):</span>
+        <span class="c">#get reference object</span>
+        <span class="n">referenceObject</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getObject</span><span class="p">(</span><span class="n">referenceObjectID</span><span class="p">)</span>
+        
+        <span class="c">#set group rights</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">&quot;Setting group rights&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">referenceObject</span><span class="o">.</span><span class="n">objectGroupRights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">right</span> <span class="ow">in</span> <span class="n">referenceObject</span><span class="o">.</span><span class="n">objectGroupRights</span><span class="p">:</span>
+            <span class="c">#get object</span>
+                <span class="n">rightObject</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getRequest</span><span class="p">(</span><span class="n">right</span><span class="p">[</span><span class="s">&quot;selfUrl&quot;</span><span class="p">])</span>
+               <span class="c">#create new right with the correct objectID</span>
+                <span class="n">newRight</span><span class="o">=</span><span class="p">{}</span>
+                <span class="n">newRight</span><span class="p">[</span><span class="s">&quot;relatedRights&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">rightObject</span><span class="p">[</span><span class="s">&quot;relatedRights&quot;</span><span class="p">]</span>
+                <span class="n">newRight</span><span class="p">[</span><span class="s">&quot;relatedGroup&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">rightObject</span><span class="p">[</span><span class="s">&quot;relatedGroup&quot;</span><span class="p">]</span>
+                <span class="n">newRight</span><span class="p">[</span><span class="s">&quot;relatedObject&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;selfUrl&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="o">+</span><span class="s">&quot;/objects/&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">objectID</span><span class="p">)}</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">postRequest</span><span class="p">(</span><span class="s">&quot;/object-group-rights&quot;</span><span class="p">,</span><span class="n">newRight</span><span class="p">)</span>
+            
+        <span class="c">#set user rights</span>
+        <span class="k">print</span> <span class="p">(</span><span class="s">&quot;Setting user rights&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">referenceObject</span><span class="o">.</span><span class="n">objectUserRights</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            
+            <span class="k">for</span> <span class="n">right</span> <span class="ow">in</span> <span class="n">referenceObject</span><span class="o">.</span><span class="n">objectUserRights</span><span class="p">:</span>
+            <span class="c">#get object</span>
+                <span class="n">rightObject</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">getRequest</span><span class="p">(</span><span class="n">right</span><span class="p">[</span><span class="s">&quot;selfUrl&quot;</span><span class="p">])</span>
+            <span class="c">#create new right with the correct objectID</span>
+                <span class="n">newRight</span><span class="o">=</span><span class="p">{}</span>
+                <span class="n">newRight</span><span class="p">[</span><span class="s">&quot;relatedRights&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">rightObject</span><span class="p">[</span><span class="s">&#39;relatedRights&#39;</span><span class="p">]</span>
+                <span class="n">newRight</span><span class="p">[</span><span class="s">&quot;relatedUser&quot;</span><span class="p">]</span><span class="o">=</span><span class="n">rightObject</span><span class="p">[</span><span class="s">&#39;relatedUser&#39;</span><span class="p">]</span>
+                <span class="n">newRight</span><span class="p">[</span><span class="s">&quot;relatedObject&quot;</span><span class="p">]</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;selfUrl&quot;</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="o">+</span><span class="s">&quot;/objects&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">objectID</span><span class="p">)}</span>
+                <span class="n">result</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">postRequest</span><span class="p">(</span><span class="s">&quot;/object-user-rights&quot;</span><span class="p">,</span><span class="n">newRight</span><span class="p">)</span>
+                <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+                                       
+        </div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
