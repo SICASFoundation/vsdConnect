@@ -8,7 +8,7 @@
     
     <title>connectVSD module &mdash; source 0.8&#34; -R 0.8 -A Michael documentation</title>
     
-    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -25,13 +25,27 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="source 0.8&#34; -R 0.8 -A Michael documentation" href="index.html" />
     <link rel="next" title="connectVSDExt module" href="connectVSDExt.html" />
-    <link rel="prev" title="Welcome to source’s documentation!" href="index.html" />
-   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
-
+    <link rel="prev" title="Welcome to source’s documentation!" href="index.html" /> 
   </head>
-  <body role="document">  
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="connectVSDExt.html" title="connectVSDExt module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to source’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">source 0.8&#34; -R 0.8 -A Michael documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -40,15 +54,34 @@
             
   <div class="section" id="module-connectVSD">
 <span id="connectvsd-module"></span><h1>connectVSD module<a class="headerlink" href="#module-connectVSD" title="Permalink to this headline">¶</a></h1>
-<p>connectVSD 0.8
-python version: 3 
-&#64;author: Michael Kistler 2015</p>
-<p>changed / added auth</p>
+<div class="section" id="infos">
+<h2>INFOS<a class="headerlink" href="#infos" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>connectVSD 0.8</li>
+<li>python version: 3</li>
+<li>&#64;author: Michael Kistler 2015</li>
+</ul>
+</div>
+<div class="section" id="changes">
+<h2>CHANGES<a class="headerlink" href="#changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>changed / added JwT auth</li>
+</ul>
 <dl class="class">
 <dt id="connectVSD.APIBasic">
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIBasic</code><span class="sig-paren">(</span><em>oKeys=['selfUrl']</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIBasic"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIBasic" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>docstring for APIBasic</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIBasic.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIBasic.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIBasic.get" title="Permalink to this definition">¶</a></dt>
@@ -64,6 +97,14 @@ python version: 3
 <dt id="connectVSD.APIBasic.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIBasic.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIBasic.set" title="Permalink to this definition">¶</a></dt>
 <dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIBasic" title="connectVSD.APIBasic"><em>APIBasic</em></a>) &#8211; A APIBasic object</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -79,16 +120,29 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIFile</code><a class="reference internal" href="_modules/connectVSD.html#APIFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIBasic" title="connectVSD.APIBasic"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIBasic</span></code></a></p>
 <p>API class for files</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>createdDate</li>
+<li>downloadUrl</li>
+<li>originalFileName</li>
+<li>anonymizedFileHashCode</li>
+<li>size</li>
+<li>fileHashCode</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIFile.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIFile.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIFile.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIFile.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIFile.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIFile.oKeys">
@@ -98,7 +152,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIFile.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIFile.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIFile.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIFile" title="connectVSD.APIFile"><em>APIFile</em></a>) &#8211; A APIFile object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIFile.show">
@@ -113,16 +176,30 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIFolder</code><a class="reference internal" href="_modules/connectVSD.html#APIFolder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIFolder" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIBasic" title="connectVSD.APIBasic"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIBasic</span></code></a></p>
 <p>Folder API Object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>name</li>
+<li>level</li>
+<li>parentFolder</li>
+<li>childFolders</li>
+<li>folderGroupRights</li>
+<li>folderUserRights</li>
+<li>containedObjects</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIFolder.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIFolder.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIFolder.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIFolder.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIFolder.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIFolder.oKeys">
@@ -132,7 +209,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIFolder.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIFolder.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIFolder.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIFolder" title="connectVSD.APIFolder"><em>APIFolder</em></a>) &#8211; A APIFolder object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIFolder.show">
@@ -147,16 +233,25 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIGroup</code><a class="reference internal" href="_modules/connectVSD.html#APIGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIGroup" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIBasic" title="connectVSD.APIBasic"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIBasic</span></code></a></p>
 <p>API class for groups</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>Chief</li>
+<li>name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIGroup.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIGroup.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIGroup.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIGroup.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIGroup.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIGroup.oKeys">
@@ -166,7 +261,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIGroup.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIGroup.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIGroup.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIGroup" title="connectVSD.APIGroup"><em>APIGroup</em></a>) &#8211; A APIGroup object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIGroup.show">
@@ -181,16 +285,25 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APILicense</code><a class="reference internal" href="_modules/connectVSD.html#APILicense"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APILicense" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIBasic" title="connectVSD.APIBasic"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIBasic</span></code></a></p>
 <p>API class for licenses</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>name</li>
+<li>description</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APILicense.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APILicense.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APILicense.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APILicense.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APILicense.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APILicense.oKeys">
@@ -200,7 +313,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APILicense.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APILicense.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APILicense.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APILicense" title="connectVSD.APILicense"><em>APILicense</em></a>) &#8211; A APILicense object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APILicense.show">
@@ -215,16 +337,25 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIModality</code><a class="reference internal" href="_modules/connectVSD.html#APIModality"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIModality" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIBasic" title="connectVSD.APIBasic"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIBasic</span></code></a></p>
 <p>API class for modalities</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>name</li>
+<li>description</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIModality.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIModality.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIModality.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIModality.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIModality.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIModality.oKeys">
@@ -234,7 +365,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIModality.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIModality.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIModality.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIModality" title="connectVSD.APIModality"><em>APIModality</em></a>) &#8211; A APIModality object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIModality.show">
@@ -249,17 +389,39 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObject</code><a class="reference internal" href="_modules/connectVSD.html#APIObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObject" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIBasic" title="connectVSD.APIBasic"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIBasic</span></code></a></p>
 <p>API Object</p>
-<p>members: oKeys are the available attributes of the class</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>name</li>
+<li>type</li>
+<li>description</li>
+<li>objectGroupRights</li>
+<li>objectUserRights</li>
+<li>objectPreviews</li>
+<li>createdDate</li>
+<li>modality</li>
+<li>ontologyItems</li>
+<li>ontologyItemRelations</li>
+<li>ontologyCount</li>
+<li>license</li>
+<li>files</li>
+<li>linkedObjects</li>
+<li>linkedObjectRelations</li>
+<li>downloadUrl</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIObject.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObject.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObject.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIObject.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIObject.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIObject.oKeys">
@@ -269,7 +431,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIObject.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObject.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObject.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObject" title="connectVSD.APIObject"><em>APIObject</em></a>) &#8211; A APIObject object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIObject.show">
@@ -281,19 +452,41 @@ python version: 3
 
 <dl class="class">
 <dt id="connectVSD.APIObjectCtData">
-<em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectCtData</code><a class="reference internal" href="_modules/connectVSD.html#APIObjectCtData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectCtData" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectCtData</code><span class="sig-paren">(</span><em>Clinical Trial Data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectCtData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectCtData" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIObject" title="connectVSD.APIObject"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIObject</span></code></a></p>
-<p>docstring for APIObjectCtData</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>name</li>
+<li>type</li>
+<li>description</li>
+<li>objectGroupRights</li>
+<li>objectUserRights</li>
+<li>objectPreviews</li>
+<li>createdDate</li>
+<li>modality</li>
+<li>ontologyItems</li>
+<li>ontologyItemRelations</li>
+<li>ontologyCount</li>
+<li>license</li>
+<li>files</li>
+<li>linkedObjects</li>
+<li>linkedObjectRelations</li>
+<li>downloadUrl</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIObjectCtData.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectCtData.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectCtData.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIObjectCtData.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIObjectCtData.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIObjectCtData.oKeys">
@@ -303,7 +496,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIObjectCtData.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectCtData.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectCtData.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObjectCtData" title="connectVSD.APIObjectCtData"><em>APIObjectCtData</em></a>) &#8211; A APIObjectCtData object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIObjectCtData.show">
@@ -315,19 +517,41 @@ python version: 3
 
 <dl class="class">
 <dt id="connectVSD.APIObjectCtDef">
-<em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectCtDef</code><a class="reference internal" href="_modules/connectVSD.html#APIObjectCtDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectCtDef" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectCtDef</code><span class="sig-paren">(</span><em>Clinical Trial Definition</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectCtDef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectCtDef" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIObject" title="connectVSD.APIObject"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIObject</span></code></a></p>
-<p>docstring for APIObjectCtDef</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>name</li>
+<li>type</li>
+<li>description</li>
+<li>objectGroupRights</li>
+<li>objectUserRights</li>
+<li>objectPreviews</li>
+<li>createdDate</li>
+<li>modality</li>
+<li>ontologyItems</li>
+<li>ontologyItemRelations</li>
+<li>ontologyCount</li>
+<li>license</li>
+<li>files</li>
+<li>linkedObjects</li>
+<li>linkedObjectRelations</li>
+<li>downloadUrl</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIObjectCtDef.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectCtDef.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectCtDef.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIObjectCtDef.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIObjectCtDef.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIObjectCtDef.oKeys">
@@ -337,7 +561,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIObjectCtDef.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectCtDef.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectCtDef.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObjectCtDef" title="connectVSD.APIObjectCtDef"><em>APIObjectCtDef</em></a>) &#8211; A APIObjectCtDef object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIObjectCtDef.show">
@@ -352,16 +585,26 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectGroupRight</code><a class="reference internal" href="_modules/connectVSD.html#APIObjectGroupRight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectGroupRight" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIBasic" title="connectVSD.APIBasic"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIBasic</span></code></a></p>
 <p>API class for object group rights</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>relatedObject</li>
+<li>relatedRights</li>
+<li>relatedGroup</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIObjectGroupRight.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectGroupRight.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectGroupRight.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIObjectGroupRight.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIObjectGroupRight.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIObjectGroupRight.oKeys">
@@ -371,7 +614,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIObjectGroupRight.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectGroupRight.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectGroupRight.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObjectGroupRight" title="connectVSD.APIObjectGroupRight"><em>APIObjectGroupRight</em></a>) &#8211; A APIObjectGroupRight object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIObjectGroupRight.show">
@@ -386,16 +638,26 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectLink</code><a class="reference internal" href="_modules/connectVSD.html#APIObjectLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectLink" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIBasic" title="connectVSD.APIBasic"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIBasic</span></code></a></p>
 <p>API class for object links</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>description</li>
+<li>object1</li>
+<li>object2</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIObjectLink.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectLink.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectLink.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIObjectLink.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIObjectLink.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIObjectLink.oKeys">
@@ -405,7 +667,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIObjectLink.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectLink.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectLink.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObjectLink" title="connectVSD.APIObjectLink"><em>APIObjectLink</em></a>) &#8211; A APIObjectLink object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIObjectLink.show">
@@ -420,16 +691,27 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectOntology</code><a class="reference internal" href="_modules/connectVSD.html#APIObjectOntology"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectOntology" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIBasic" title="connectVSD.APIBasic"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIBasic</span></code></a></p>
 <p>API class for object-ontology entries</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>type</li>
+<li>object</li>
+<li>ontologyItem</li>
+<li>position</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIObjectOntology.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectOntology.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectOntology.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIObjectOntology.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIObjectOntology.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIObjectOntology.oKeys">
@@ -439,7 +721,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIObjectOntology.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectOntology.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectOntology.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObjectOntology" title="connectVSD.APIObjectOntology"><em>APIObjectOntology</em></a>) &#8211; A APIObjectOntology object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIObjectOntology.show">
@@ -451,19 +742,44 @@ python version: 3
 
 <dl class="class">
 <dt id="connectVSD.APIObjectRaw">
-<em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectRaw</code><a class="reference internal" href="_modules/connectVSD.html#APIObjectRaw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectRaw" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectRaw</code><span class="sig-paren">(</span><em>Serie</em>, <em>Raw Images</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectRaw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectRaw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIObject" title="connectVSD.APIObject"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIObject</span></code></a></p>
-<p>docstring for APIObjectRaw</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>name</li>
+<li>type</li>
+<li>description</li>
+<li>objectGroupRights</li>
+<li>objectUserRights</li>
+<li>objectPreviews</li>
+<li>createdDate</li>
+<li>modality</li>
+<li>ontologyItems</li>
+<li>ontologyItemRelations</li>
+<li>ontologyCount</li>
+<li>license</li>
+<li>files</li>
+<li>linkedObjects</li>
+<li>linkedObjectRelations</li>
+<li>downloadUrl</li>
+<li>sliceThickness</li>
+<li>spaceBetweenSlices</li>
+<li>kilovoltPeak</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIObjectRaw.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectRaw.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectRaw.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIObjectRaw.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIObjectRaw.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIObjectRaw.oKeys">
@@ -473,7 +789,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIObjectRaw.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectRaw.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectRaw.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObjectRaw" title="connectVSD.APIObjectRaw"><em>APIObjectRaw</em></a>) &#8211; a APIObjectRaw object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIObjectRaw.show">
@@ -488,16 +813,25 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectRight</code><a class="reference internal" href="_modules/connectVSD.html#APIObjectRight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectRight" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIBasic" title="connectVSD.APIBasic"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIBasic</span></code></a></p>
 <p>API class for object rights</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>name</li>
+<li>description</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIObjectRight.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectRight.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectRight.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIObjectRight.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIObjectRight.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIObjectRight.oKeys">
@@ -507,7 +841,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIObjectRight.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectRight.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectRight.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObjectRight" title="connectVSD.APIObjectRight"><em>APIObjectRight</em></a>) &#8211; A APIObjectRight object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIObjectRight.show">
@@ -519,19 +862,43 @@ python version: 3
 
 <dl class="class">
 <dt id="connectVSD.APIObjectSeg">
-<em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectSeg</code><a class="reference internal" href="_modules/connectVSD.html#APIObjectSeg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectSeg" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectSeg</code><span class="sig-paren">(</span><em>Segmentation objects</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectSeg"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectSeg" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIObject" title="connectVSD.APIObject"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIObject</span></code></a></p>
-<p>docstring for APIObjectSeg</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>name</li>
+<li>type</li>
+<li>description</li>
+<li>objectGroupRights</li>
+<li>objectUserRights</li>
+<li>objectPreviews</li>
+<li>createdDate</li>
+<li>modality</li>
+<li>ontologyItems</li>
+<li>ontologyItemRelations</li>
+<li>ontologyCount</li>
+<li>license</li>
+<li>files</li>
+<li>linkedObjects</li>
+<li>linkedObjectRelations</li>
+<li>downloadUrl</li>
+<li>SegmentationMethod</li>
+<li>SegmentationMethodDescription</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIObjectSeg.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectSeg.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectSeg.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIObjectSeg.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIObjectSeg.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIObjectSeg.oKeys">
@@ -541,7 +908,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIObjectSeg.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectSeg.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectSeg.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObjectSeg" title="connectVSD.APIObjectSeg"><em>APIObjectSeg</em></a>) &#8211; A APIObjectSeg object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIObjectSeg.show">
@@ -553,19 +929,41 @@ python version: 3
 
 <dl class="class">
 <dt id="connectVSD.APIObjectSm">
-<em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectSm</code><a class="reference internal" href="_modules/connectVSD.html#APIObjectSm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectSm" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectSm</code><span class="sig-paren">(</span><em>Statistical Models</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectSm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectSm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIObject" title="connectVSD.APIObject"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIObject</span></code></a></p>
-<p>docstring for APIObjectSm</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>name</li>
+<li>type</li>
+<li>description</li>
+<li>objectGroupRights</li>
+<li>objectUserRights</li>
+<li>objectPreviews</li>
+<li>createdDate</li>
+<li>modality</li>
+<li>ontologyItems</li>
+<li>ontologyItemRelations</li>
+<li>ontologyCount</li>
+<li>license</li>
+<li>files</li>
+<li>linkedObjects</li>
+<li>linkedObjectRelations</li>
+<li>downloadUrl</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIObjectSm.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectSm.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectSm.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIObjectSm.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIObjectSm.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIObjectSm.oKeys">
@@ -575,7 +973,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIObjectSm.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectSm.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectSm.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObjectSm" title="connectVSD.APIObjectSm"><em>APIObjectSm</em></a>) &#8211; A APIObjectSm object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIObjectSm.show">
@@ -587,19 +994,43 @@ python version: 3
 
 <dl class="class">
 <dt id="connectVSD.APIObjectSurfModel">
-<em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectSurfModel</code><a class="reference internal" href="_modules/connectVSD.html#APIObjectSurfModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectSurfModel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectSurfModel</code><span class="sig-paren">(</span><em>Surface Model</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectSurfModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectSurfModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIObject" title="connectVSD.APIObject"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIObject</span></code></a></p>
-<p>docstring for APIObjectSurfModel</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>name</li>
+<li>type</li>
+<li>description</li>
+<li>objectGroupRights</li>
+<li>objectUserRights</li>
+<li>objectPreviews</li>
+<li>createdDate</li>
+<li>modality</li>
+<li>ontologyItems</li>
+<li>ontologyItemRelations</li>
+<li>ontologyCount</li>
+<li>license</li>
+<li>files</li>
+<li>linkedObjects</li>
+<li>linkedObjectRelations</li>
+<li>downloadUrl</li>
+<li>Facet</li>
+<li>Vertex</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIObjectSurfModel.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectSurfModel.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectSurfModel.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIObjectSurfModel.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIObjectSurfModel.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIObjectSurfModel.oKeys">
@@ -609,7 +1040,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIObjectSurfModel.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectSurfModel.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectSurfModel.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObjectSurfModel" title="connectVSD.APIObjectSurfModel"><em>APIObjectSurfModel</em></a>) &#8211; A APIObjectSurfModel object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIObjectSurfModel.show">
@@ -624,16 +1064,26 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIObjectUserRight</code><a class="reference internal" href="_modules/connectVSD.html#APIObjectUserRight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectUserRight" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIBasic" title="connectVSD.APIBasic"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIBasic</span></code></a></p>
 <p>API class for object user rights</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>relatedObject</li>
+<li>relatedRights</li>
+<li>relatedUser</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIObjectUserRight.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectUserRight.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectUserRight.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIObjectUserRight.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIObjectUserRight.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIObjectUserRight.oKeys">
@@ -643,7 +1093,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIObjectUserRight.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIObjectUserRight.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIObjectUserRight.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObjectUserRight" title="connectVSD.APIObjectUserRight"><em>APIObjectUserRight</em></a>) &#8211; A APIObjectUserRight object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIObjectUserRight.show">
@@ -658,16 +1117,25 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIOntology</code><a class="reference internal" href="_modules/connectVSD.html#APIOntology"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIOntology" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIBasic" title="connectVSD.APIBasic"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIBasic</span></code></a></p>
 <p>API class for ontology entries</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>term</li>
+<li>type</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIOntology.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIOntology.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIOntology.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIOntology.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIOntology.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIOntology.oKeys">
@@ -677,7 +1145,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIOntology.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIOntology.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIOntology.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIOntology" title="connectVSD.APIOntology"><em>APIOntology</em></a>) &#8211; A APIOntology object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIOntology.show">
@@ -692,6 +1169,20 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIPagination</code><span class="sig-paren">(</span><em>oKeys=['totalCount', 'pagination', 'items', 'nextPageUrl']</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIPagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIPagination" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>API class for Pagination results</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>totalCount</li>
+<li>pagination</li>
+<li>items</li>
+<li>nextPageUrl</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIPagination.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIPagination.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIPagination.get" title="Permalink to this definition">¶</a></dt>
@@ -707,6 +1198,14 @@ python version: 3
 <dt id="connectVSD.APIPagination.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIPagination.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIPagination.set" title="Permalink to this definition">¶</a></dt>
 <dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIPagination" title="connectVSD.APIPagination"><em>APIPagination</em></a>) &#8211; A APIPagination object</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -722,6 +1221,18 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIToken</code><span class="sig-paren">(</span><em>oKeys=['tokenType', 'tokenValue']</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIToken"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIToken" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>API class to work with the tokens</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>tokenType</li>
+<li>tokenValue</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIToken.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIToken.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIToken.get" title="Permalink to this definition">¶</a></dt>
@@ -737,6 +1248,14 @@ python version: 3
 <dt id="connectVSD.APIToken.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIToken.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIToken.set" title="Permalink to this definition">¶</a></dt>
 <dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIToken" title="connectVSD.APIToken"><em>APIToken</em></a>) &#8211; A APIToken object</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
@@ -752,16 +1271,24 @@ python version: 3
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">APIUser</code><a class="reference internal" href="_modules/connectVSD.html#APIUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIUser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#connectVSD.APIBasic" title="connectVSD.APIBasic"><code class="xref py py-class docutils literal"><span class="pre">connectVSD.APIBasic</span></code></a></p>
 <p>API class for users</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Attributes:</th><td class="field-body"><ul class="first last simple">
+<li>selfUrl</li>
+<li>id</li>
+<li>username</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="connectVSD.APIUser.get">
 <code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIUser.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIUser.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>transforms the class object into a json readable dict</p>
 </dd></dl>
-
-<dl class="attribute">
-<dt id="connectVSD.APIUser.i">
-<code class="descname">i</code><em class="property"> = 'selfUrl'</em><a class="headerlink" href="#connectVSD.APIUser.i" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="connectVSD.APIUser.oKeys">
@@ -771,7 +1298,16 @@ python version: 3
 <dl class="method">
 <dt id="connectVSD.APIUser.set">
 <code class="descname">set</code><span class="sig-paren">(</span><em>obj=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#APIUser.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.APIUser.set" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>sets class variable for each key in the object to the keyname and its value</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIUser" title="connectVSD.APIUser"><em>APIUser</em></a>) &#8211; A APIUser object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
 
 <dl class="method">
 <dt id="connectVSD.APIUser.show">
@@ -799,11 +1335,6 @@ python version: 3
 <dt id="connectVSD.VSDConnecter">
 <em class="property">class </em><code class="descclassname">connectVSD.</code><code class="descname">VSDConnecter</code><span class="sig-paren">(</span><em>authtype='jwt'</em>, <em>url='https://demo.virtualskeleton.ch/api/'</em>, <em>username='demo&#64;virtualskeleton.ch'</em>, <em>password='demo'</em>, <em>version=''</em>, <em>token=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#VSDConnecter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.VSDConnecter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<dl class="attribute">
-<dt id="connectVSD.VSDConnecter.APIURL">
-<code class="descname">APIURL</code><em class="property"> = 'https://demo.virtualskeleton.ch/api/'</em><a class="headerlink" href="#connectVSD.VSDConnecter.APIURL" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
 <dl class="method">
 <dt id="connectVSD.VSDConnecter.addLink">
 <code class="descname">addLink</code><span class="sig-paren">(</span><em>obj1</em>, <em>obj2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#VSDConnecter.addLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.VSDConnecter.addLink" title="Permalink to this definition">¶</a></dt>
@@ -894,7 +1425,7 @@ python version: 3
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the generated object</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">API Object</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#connectVSD.APIObject" title="connectVSD.APIObject">APIObject</a></p>
 </td>
 </tr>
 </tbody>
@@ -1139,7 +1670,7 @@ starting from the rootfolder</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of items</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of APIPagination objects</p>
 </td>
 </tr>
 </tbody>
@@ -1184,7 +1715,7 @@ starting from the rootfolder</p>
 <tr class="field-even field"><th class="field-name" colspan="2">Return folderlist:</th></tr>
 <tr class="field-even field"><td>&nbsp;</td><td class="field-body">a list of folder object (APIFolder) contained in the folder</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of APIFolder</td>
 </tr>
 </tbody>
 </table>
@@ -1202,7 +1733,7 @@ starting from the rootfolder</p>
 </tr>
 <tr class="field-even field"><th class="field-name">Return objlist:</th><td class="field-body">a list of objects (APIFObject) contained in the folder</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of APIObject</td>
 </tr>
 </tbody>
 </table>
@@ -1261,7 +1792,7 @@ starting from the rootfolder</p>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of folder objects APIFolders</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of APIFolders</p>
 </td>
 </tr>
 </tbody>
@@ -1286,7 +1817,7 @@ starting from the rootfolder</p>
 <tr class="field-even field"><th class="field-name">Return content:</th><td class="field-body"><p class="first">dictionary with folders (APIFolder) and object (APIObjects)</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict of APIFolder and APIObject</p>
 </td>
 </tr>
 </tbody>
@@ -1402,7 +1933,7 @@ starting from the rootfolder</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available license objects</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of APILicense</td>
 </tr>
 </tbody>
 </table>
@@ -1436,7 +1967,7 @@ starting from the rootfolder</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available modalities</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of APIModality</td>
 </tr>
 </tbody>
 </table>
@@ -1488,9 +2019,9 @@ starting from the rootfolder</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObject" title="connectVSD.APIObject"><em>APIObject</em></a>) &#8211; object</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of APIFiles</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of APIFile</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of APIFile</td>
 </tr>
 </tbody>
 </table>
@@ -1506,9 +2037,9 @@ starting from the rootfolder</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObject" title="connectVSD.APIObject"><em>APIObject</em></a>) &#8211; the object</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return rights:</th><td class="field-body">a list of ObjectGroupRights (APIObjectGroupRight)</td>
+<tr class="field-even field"><th class="field-name">Return rights:</th><td class="field-body">a list of ObjectGroupRights</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of APIObjectGroupRight</td>
 </tr>
 </tbody>
 </table>
@@ -1542,7 +2073,7 @@ starting from the rootfolder</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of object rights</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of APIObjectRight</td>
 </tr>
 </tbody>
 </table>
@@ -1558,9 +2089,9 @@ starting from the rootfolder</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObject" title="connectVSD.APIObject"><em>APIObject</em></a>) &#8211; the object</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a list of ObjectUserRights (APIObjectUserRight)</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a list of ObjectUserRights</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list APIObjectUserRight</td>
 </tr>
 </tbody>
 </table>
@@ -1747,18 +2278,17 @@ starting from the rootfolder</p>
 <dl class="method">
 <dt id="connectVSD.VSDConnecter.postObjectRights">
 <code class="descname">postObjectRights</code><span class="sig-paren">(</span><em>obj</em>, <em>group</em>, <em>perms</em>, <em>isuser=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connectVSD.html#VSDConnecter.postObjectRights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connectVSD.VSDConnecter.postObjectRights" title="Permalink to this definition">¶</a></dt>
-<dd><p>DEPRECATED: user postObjectGroupRights or postObjectUserRights! 
-translate a set of permissions and a group into the appropriate format and add it to the object</p>
+<dd><p>translate a set of permissions and a group into the appropriate format and add it to the object</p>
 <div class="admonition warning">
 <p class="first admonition-title">Warning</p>
-<p class="last">DEPRECATED: user postObjectGroupRights or postObjectUserRights!</p>
+<p class="last">DEPRECATED: use postObjectGroupRights or postObjectUserRights!</p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>Object obj</strong> (<em>API</em>) &#8211; () the object you want to add the permissions to</li>
+<li><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObject" title="connectVSD.APIObject"><em>APIObject</em></a>) &#8211; () the object you want to add the permissions to</li>
 <li><strong>group</strong> (<em>APIGroup/APIUser</em>) &#8211; group object or user object</li>
 <li><strong>perms</strong> (<em>list</em>) &#8211; list of Object Rights (APIObjectRight), use getPermissionSet to retrive the ObjectRights based on the permission sets</li>
 <li><strong>isuser</strong> (<em>bool</em>) &#8211; set True if the groups variable is a user. Default is False</li>
@@ -1768,7 +2298,7 @@ translate a set of permissions and a group into the appropriate format and add i
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a group or user rights object</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">APIObjectGroupRight/APIObjectUserRight</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">APIObjectGroupRight,APIObjectUserRight</p>
 </td>
 </tr>
 </tbody>
@@ -1790,7 +2320,7 @@ translate a set of permissions and a group into the appropriate format and add i
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">user rights  object</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">user rights object</p>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="#connectVSD.APIObjectUserRight" title="connectVSD.APIObjectUserRight">APIObjectUserRight</a></p>
@@ -1871,7 +2401,7 @@ translate a set of permissions and a group into the appropriate format and add i
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObject" title="connectVSD.APIObject"><em>APIObject</em></a>) &#8211; an API Object</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="#connectVSD.APIObject" title="connectVSD.APIObject"><em>APIObject</em></a>) &#8211; an APIObject</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the updated object</td>
 </tr>
@@ -2006,7 +2536,7 @@ translate a set of permissions and a group into the appropriate format and add i
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
 <li><strong>resouce</strong> (<em>str</em>) &#8211; resource path</li>
 <li><strong>search</strong> (<em>str</em>) &#8211; term to search for</li>
-<li><strong>mode</strong> (<em>str</em>) &#8211; search for partial match (&#8216;default&#8217;) or exact match (&#8216;exact&#8217;)</li>
+<li><strong>mode</strong> (<em>str</em>) &#8211; search for partial match (default) or exact match (exact)</li>
 </ul>
 </td>
 </tr>
@@ -2079,21 +2609,29 @@ translate a set of permissions and a group into the appropriate format and add i
 </dd></dl>
 
 </div>
+</div>
 
 
           </div>
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="index.html">Documentation overview</a><ul>
-      <li>Previous: <a href="index.html" title="previous chapter">Welcome to source&#8217;s documentation!</a></li>
-      <li>Next: <a href="connectVSDExt.html" title="next chapter">connectVSDExt module</a></li>
-  </ul></li>
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">connectVSD module</a><ul>
+<li><a class="reference internal" href="#infos">INFOS</a></li>
+<li><a class="reference internal" href="#changes">CHANGES</a></li>
 </ul>
-</div>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to source&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="connectVSDExt.html"
+                        title="next chapter">connectVSDExt module</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -2118,20 +2656,27 @@ translate a set of permissions and a group into the appropriate format and add i
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2015, Author.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
-      
-      |
-      <a href="_sources/connectVSD.txt"
-          rel="nofollow">Page source</a>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="connectVSDExt.html" title="connectVSDExt module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to source’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">source 0.8&#34; -R 0.8 -A Michael documentation</a> &raquo;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
   </body>
 </html>

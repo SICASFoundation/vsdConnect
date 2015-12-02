@@ -8,7 +8,7 @@
     
     <title>connectVSD &mdash; source 0.8&#34; -R 0.8 -A Michael documentation</title>
     
-    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
@@ -24,13 +24,22 @@
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="source 0.8&#34; -R 0.8 -A Michael documentation" href="../index.html" />
-    <link rel="up" title="Module code" href="index.html" />
-   
-  
-  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9">
-
+    <link rel="up" title="Module code" href="index.html" /> 
   </head>
-  <body role="document">  
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">source 0.8&#34; -R 0.8 -A Michael documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
 
     <div class="document">
       <div class="documentwrapper">
@@ -40,12 +49,20 @@
   <h1>Source code for connectVSD</h1><div class="highlight"><pre>
 <span class="c">#!/usr/bin/python</span>
 <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">connectVSD 0.8</span>
-<span class="sd">python version: 3 </span>
-<span class="sd">@author: Michael Kistler 2015</span>
+<span class="sd">=======</span>
+<span class="sd">INFOS</span>
+<span class="sd">=======</span>
+<span class="sd">* connectVSD 0.8</span>
+<span class="sd">* python version: 3 </span>
+<span class="sd">* @author: Michael Kistler 2015</span>
 
-<span class="sd">changed / added auth </span>
+<span class="sd">========</span>
+<span class="sd">CHANGES</span>
+<span class="sd">========</span>
+<span class="sd">- changed / added JwT auth </span>
 <span class="sd">&quot;&quot;&quot;</span>
+
+
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -151,7 +168,7 @@
                
 </div>
 <div class="viewcode-block" id="VSDConnecter"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter">[docs]</a><span class="k">class</span> <span class="nc">VSDConnecter</span><span class="p">:</span>
-    <span class="n">APIURL</span><span class="o">=</span><span class="s">&#39;https://demo.virtualskeleton.ch/api/&#39;</span>
+    <span class="n">__APIURL</span><span class="o">=</span><span class="s">&#39;https://demo.virtualskeleton.ch/api/&#39;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> 
@@ -429,7 +446,7 @@
 <span class="sd">        :param str rource: resource path</span>
 <span class="sd">        :param list itemlist: list of items</span>
 <span class="sd">        :return: list of items</span>
-<span class="sd">        :rtype: list</span>
+<span class="sd">        :rtype: list of APIPagination objects</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getRequest</span><span class="p">(</span><span class="n">resource</span><span class="p">)</span>
@@ -488,7 +505,7 @@
 <div class="viewcode-block" id="VSDConnecter.putObject"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.putObject">[docs]</a>    <span class="k">def</span> <span class="nf">putObject</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;update an objects information</span>
 <span class="sd">    </span>
-<span class="sd">        :param APIObject obj: an API Object</span>
+<span class="sd">        :param APIObject obj: an APIObject</span>
 <span class="sd">        :return: the updated object</span>
 <span class="sd">        :rtype: APIObject</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -666,7 +683,7 @@
 <span class="sd">    </span>
 <span class="sd">        :param str resouce: resource path</span>
 <span class="sd">        :param str search: term to search for </span>
-<span class="sd">        :param str mode: search for partial match (&#39;default&#39;) or exact match (&#39;exact&#39;)</span>
+<span class="sd">        :param str mode: search for partial match (default) or exact match (exact)</span>
 <span class="sd">        :return: list of folder objects</span>
 <span class="sd">        :rtype: json</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -733,7 +750,7 @@
 <span class="sd">        :param Path fp: the file to upload</span>
 <span class="sd">        :param int chunksize: size in bytes of the chunk parts, default is 4MB</span>
 <span class="sd">        :return: the generated object</span>
-<span class="sd">        :rtype: API Object</span>
+<span class="sd">        :rtype: APIObject</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">parts</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">stat</span><span class="p">()</span><span class="o">.</span><span class="n">st_size</span><span class="o">/</span><span class="n">chunksize</span><span class="p">)</span>
         <span class="n">part</span> <span class="o">=</span> <span class="mi">0</span>
@@ -794,8 +811,8 @@
 <span class="sd">        return a list of file objects contained in an object</span>
 
 <span class="sd">        :param APIObject obj: object</span>
-<span class="sd">        :return: list of APIFiles</span>
-<span class="sd">        :rtype: list</span>
+<span class="sd">        :return: list of APIFile</span>
+<span class="sd">        :rtype: list of APIFile </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">filelist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">of</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">files</span><span class="p">:</span>
@@ -866,7 +883,7 @@
 <span class="sd">        :param str search: term to search for </span>
 <span class="sd">        :param str mode: search for partial match (&#39;default&#39;) or exact match (&#39;exact&#39;)</span>
 <span class="sd">        :return: list of folder objects APIFolders</span>
-<span class="sd">        :rtype: list</span>
+<span class="sd">        :rtype: list of APIFolders</span>
 <span class="sd">        &quot;&quot;&quot;</span>   
         
         <span class="n">search</span> <span class="o">=</span> <span class="n">urlparse_quote</span><span class="p">(</span><span class="n">search</span><span class="p">)</span>
@@ -915,7 +932,7 @@
 
 <span class="sd">        :param APIFolder folder: folder object</span>
 <span class="sd">        :return folderlist: a list of folder object (APIFolder) contained in the folder</span>
-<span class="sd">        :rtype: list</span>
+<span class="sd">        :rtype: list of APIFolder</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">folderlist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
@@ -937,7 +954,7 @@
 
 <span class="sd">        :param APIFolder folder: folder object</span>
 <span class="sd">        :return objlist: a list of objects (APIFObject) contained in the folder</span>
-<span class="sd">        :rtype:  list</span>
+<span class="sd">        :rtype:  list of APIObject</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">objlist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
@@ -981,7 +998,7 @@
 <span class="sd">        :param bool recursive:  travel the folder structure recursively or not (default)</span>
 <span class="sd">        :param str mode: what to return: only objects (o), only folders (f) or default (d) folders and objects</span>
 <span class="sd">        :return content: dictionary with folders (APIFolder) and object (APIObjects)</span>
-<span class="sd">        :rtype: dict</span>
+<span class="sd">        :rtype: dict of APIFolder and APIObject</span>
 <span class="sd">        &quot;&quot;&quot;</span>
          
         <span class="n">objectmode</span> <span class="o">=</span> <span class="bp">False</span>
@@ -1121,7 +1138,7 @@
 
 <span class="sd">        </span>
 <span class="sd">        :return: list of available license objects</span>
-<span class="sd">        :rtype: list</span>
+<span class="sd">        :rtype: list of APILicense</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getRequest</span><span class="p">(</span><span class="s">&#39;licenses&#39;</span><span class="p">)</span>
@@ -1159,7 +1176,7 @@
         <span class="sd">&quot;&quot;&quot; retrieve a list of the available base object rights (APIObjectRight) </span>
 
 <span class="sd">        :return: list of object rights</span>
-<span class="sd">        :rtype: list</span>
+<span class="sd">        :rtype: list of APIObjectRight</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         
         <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getRequest</span><span class="p">(</span><span class="s">&#39;object_rights&#39;</span><span class="p">)</span>
@@ -1290,8 +1307,8 @@
 <span class="sd">        get the list of attaced group rights of an object</span>
 
 <span class="sd">        :param APIObject obj: the object </span>
-<span class="sd">        :return rights: a list of ObjectGroupRights (APIObjectGroupRight)</span>
-<span class="sd">        :rtype: list</span>
+<span class="sd">        :return rights: a list of ObjectGroupRights</span>
+<span class="sd">        :rtype: list of APIObjectGroupRight</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">rights</span> <span class="o">=</span> <span class="bp">None</span>
@@ -1311,8 +1328,8 @@
 <span class="sd">        get the list of attaced user rights of an object</span>
 
 <span class="sd">        :param APIObject obj: the object </span>
-<span class="sd">        :return: a list of ObjectUserRights (APIObjectUserRight)</span>
-<span class="sd">        :rtype: list</span>
+<span class="sd">        :return: a list of ObjectUserRights</span>
+<span class="sd">        :rtype: list APIObjectUserRight</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">rights</span> <span class="o">=</span> <span class="bp">None</span>
@@ -1327,19 +1344,19 @@
         <span class="k">return</span> <span class="n">rights</span>
 </div>
 <div class="viewcode-block" id="VSDConnecter.postObjectRights"><a class="viewcode-back" href="../connectVSD.html#connectVSD.VSDConnecter.postObjectRights">[docs]</a>    <span class="k">def</span> <span class="nf">postObjectRights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="n">perms</span><span class="p">,</span> <span class="n">isuser</span> <span class="o">=</span> <span class="bp">False</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; DEPRECATED: user postObjectGroupRights or postObjectUserRights! </span>
+        <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        translate a set of permissions and a group into the appropriate format and add it to the object</span>
 <span class="sd">        </span>
 
-<span class="sd">        .. warning:: DEPRECATED: user postObjectGroupRights or postObjectUserRights! </span>
+<span class="sd">        .. warning:: DEPRECATED: use postObjectGroupRights or postObjectUserRights! </span>
 
 
-<span class="sd">        :param API Object obj: () the object you want to add the permissions to </span>
+<span class="sd">        :param APIObject obj: () the object you want to add the permissions to </span>
 <span class="sd">        :param APIGroup/APIUser group: group object or user object</span>
 <span class="sd">        :param list perms: list of Object Rights (APIObjectRight), use getPermissionSet to retrive the ObjectRights based on the permission sets</span>
 <span class="sd">        :param bool isuser: set True if the groups variable is a user. Default is False </span>
 <span class="sd">        :return: a group or user rights object</span>
-<span class="sd">        :rtype: APIObjectGroupRight/APIObjectUserRight</span>
+<span class="sd">        :rtype: APIObjectGroupRight,APIObjectUserRight</span>
 <span class="sd">        &quot;&quot;&quot;</span> 
 
         <span class="c">#creat the dict of rights</span>
@@ -1370,7 +1387,7 @@
 <span class="sd">        :param APIObject obj: the object you want to add the permissions to </span>
 <span class="sd">        :param APIUser user: user object</span>
 <span class="sd">        :param list perms: list of Object Rights (APIObjectRight), use getPermissionSet to retrive the ObjectRights based on the permission sets</span>
-<span class="sd">        :return: user rights  object</span>
+<span class="sd">        :return: user rights object</span>
 <span class="sd">        :rtype: APIObjectUserRight</span>
 <span class="sd">        &quot;&quot;&quot;</span> 
 
@@ -1423,7 +1440,7 @@
 <span class="sd">        retrieve a list of modalities objects (APIModality)</span>
 
 <span class="sd">        :return: list of available modalities</span>
-<span class="sd">        :rtype: list</span>
+<span class="sd">        :rtype: list of APIModality</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">modalities</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
@@ -1792,8 +1809,12 @@
 
         </div></div>
 <div class="viewcode-block" id="APIBasic"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIBasic">[docs]</a><span class="k">class</span> <span class="nc">APIBasic</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;docstring for APIBasic&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    APIBasic</span>
 
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
        <span class="s">&#39;selfUrl&#39;</span>
@@ -1804,7 +1825,11 @@
                 <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         
 <div class="viewcode-block" id="APIBasic.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIBasic.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; sets class variable for each key in the object to the keyname and its value&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIBasic obj: A APIBasic object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span>  <span class="n">obj</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">:</span> 
@@ -1825,8 +1850,27 @@
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API Object</span>
 
-<span class="sd">    members: oKeys are the available attributes of the class</span>
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * name  </span>
+<span class="sd">        * type</span>
+<span class="sd">        * description</span>
+<span class="sd">        * objectGroupRights</span>
+<span class="sd">        * objectUserRights</span>
+<span class="sd">        * objectPreviews</span>
+<span class="sd">        * createdDate</span>
+<span class="sd">        * modality</span>
+<span class="sd">        * ontologyItems</span>
+<span class="sd">        * ontologyItemRelations</span>
+<span class="sd">        * ontologyCount</span>
+<span class="sd">        * license</span>
+<span class="sd">        * files</span>
+<span class="sd">        * linkedObjects</span>
+<span class="sd">        * linkedObjectRelations</span>
+<span class="sd">        * downloadUrl</span>
 <span class="sd">    &quot;&quot;&quot;</span> 
+
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;id&#39;</span><span class="p">,</span>
         <span class="s">&#39;name&#39;</span><span class="p">,</span>
@@ -1847,13 +1891,18 @@
         <span class="s">&#39;downloadUrl&#39;</span>
         <span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIObject.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObject.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIObject obj: A APIObject object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIObject.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObject.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1866,20 +1915,49 @@
 
 </div></div>
 <div class="viewcode-block" id="APIObjectRaw"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectRaw">[docs]</a><span class="k">class</span> <span class="nc">APIObjectRaw</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;docstring for APIObjectRaw&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    APIObjectRaw (Serie, Raw Images)</span>
+
+<span class="sd">     :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * name  </span>
+<span class="sd">        * type</span>
+<span class="sd">        * description</span>
+<span class="sd">        * objectGroupRights</span>
+<span class="sd">        * objectUserRights</span>
+<span class="sd">        * objectPreviews</span>
+<span class="sd">        * createdDate</span>
+<span class="sd">        * modality</span>
+<span class="sd">        * ontologyItems</span>
+<span class="sd">        * ontologyItemRelations</span>
+<span class="sd">        * ontologyCount</span>
+<span class="sd">        * license</span>
+<span class="sd">        * files</span>
+<span class="sd">        * linkedObjects</span>
+<span class="sd">        * linkedObjectRelations</span>
+<span class="sd">        * downloadUrl</span>
+<span class="sd">        * sliceThickness</span>
+<span class="sd">        * spaceBetweenSlices</span>
+<span class="sd">        * kilovoltPeak</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;sliceThickness&#39;</span><span class="p">,</span>
         <span class="s">&#39;spaceBetweenSlices&#39;</span><span class="p">,</span>
         <span class="s">&#39;kilovoltPeak&#39;</span>
         <span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIObject</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIObject</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIObjectRaw.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectRaw.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIObjectRaw obj: a APIObjectRaw object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIObjectRaw.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectRaw.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1891,20 +1969,50 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </div></div>
 <div class="viewcode-block" id="APIObjectSeg"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectSeg">[docs]</a><span class="k">class</span> <span class="nc">APIObjectSeg</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;docstring for APIObjectSeg&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    APIObjectSeg (Segmentation objects)</span>
+<span class="sd">    </span>
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * name  </span>
+<span class="sd">        * type</span>
+<span class="sd">        * description</span>
+<span class="sd">        * objectGroupRights</span>
+<span class="sd">        * objectUserRights</span>
+<span class="sd">        * objectPreviews</span>
+<span class="sd">        * createdDate</span>
+<span class="sd">        * modality</span>
+<span class="sd">        * ontologyItems</span>
+<span class="sd">        * ontologyItemRelations</span>
+<span class="sd">        * ontologyCount</span>
+<span class="sd">        * license</span>
+<span class="sd">        * files</span>
+<span class="sd">        * linkedObjects</span>
+<span class="sd">        * linkedObjectRelations</span>
+<span class="sd">        * downloadUrl</span>
+<span class="sd">        * SegmentationMethod</span>
+<span class="sd">        * SegmentationMethodDescription</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;SegmentationMethod&#39;</span><span class="p">,</span>
         <span class="s">&#39;SegmentationMethodDescription&#39;</span>
         <span class="p">])</span>
     
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIObject</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIObject</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIObjectSeg.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectSeg.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIObjectSeg obj: A APIObjectSeg object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIObjectSeg.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectSeg.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1917,16 +2025,44 @@
 
 </div></div>
 <div class="viewcode-block" id="APIObjectSm"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectSm">[docs]</a><span class="k">class</span> <span class="nc">APIObjectSm</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;docstring for APIObjectSm&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    APIObjectSm (Statistical Models)</span>
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * name  </span>
+<span class="sd">        * type</span>
+<span class="sd">        * description</span>
+<span class="sd">        * objectGroupRights</span>
+<span class="sd">        * objectUserRights</span>
+<span class="sd">        * objectPreviews</span>
+<span class="sd">        * createdDate</span>
+<span class="sd">        * modality</span>
+<span class="sd">        * ontologyItems</span>
+<span class="sd">        * ontologyItemRelations</span>
+<span class="sd">        * ontologyCount</span>
+<span class="sd">        * license</span>
+<span class="sd">        * files</span>
+<span class="sd">        * linkedObjects</span>
+<span class="sd">        * linkedObjectRelations</span>
+<span class="sd">        * downloadUrl</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIObject</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIObject</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIObjectSm.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectSm.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIObjectSm obj: A APIObjectSm object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIObjectSm.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectSm.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1938,16 +2074,44 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </div></div>
 <div class="viewcode-block" id="APIObjectCtDef"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectCtDef">[docs]</a><span class="k">class</span> <span class="nc">APIObjectCtDef</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;docstring for APIObjectCtDef&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    APIObjectCtDef (Clinical Trial Definition)</span>
+<span class="sd">    </span>
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * name  </span>
+<span class="sd">        * type</span>
+<span class="sd">        * description</span>
+<span class="sd">        * objectGroupRights</span>
+<span class="sd">        * objectUserRights</span>
+<span class="sd">        * objectPreviews</span>
+<span class="sd">        * createdDate</span>
+<span class="sd">        * modality</span>
+<span class="sd">        * ontologyItems</span>
+<span class="sd">        * ontologyItemRelations</span>
+<span class="sd">        * ontologyCount</span>
+<span class="sd">        * license</span>
+<span class="sd">        * files</span>
+<span class="sd">        * linkedObjects</span>
+<span class="sd">        * linkedObjectRelations</span>
+<span class="sd">        * downloadUrl</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIObject</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIObject</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIObjectCtDef.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectCtDef.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIObjectCtDef obj: A APIObjectCtDef object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIObjectCtDef.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectCtDef.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1959,16 +2123,45 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </div></div>
 <div class="viewcode-block" id="APIObjectCtData"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectCtData">[docs]</a><span class="k">class</span> <span class="nc">APIObjectCtData</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;docstring for APIObjectCtData&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    APIObjectCtData (Clinical Trial Data)</span>
+
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * name  </span>
+<span class="sd">        * type</span>
+<span class="sd">        * description</span>
+<span class="sd">        * objectGroupRights</span>
+<span class="sd">        * objectUserRights</span>
+<span class="sd">        * objectPreviews</span>
+<span class="sd">        * createdDate</span>
+<span class="sd">        * modality</span>
+<span class="sd">        * ontologyItems</span>
+<span class="sd">        * ontologyItemRelations</span>
+<span class="sd">        * ontologyCount</span>
+<span class="sd">        * license</span>
+<span class="sd">        * files</span>
+<span class="sd">        * linkedObjects</span>
+<span class="sd">        * linkedObjectRelations</span>
+<span class="sd">        * downloadUrl</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIObject</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIObject</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIObjectCtData.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectCtData.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIObjectCtData obj: A APIObjectCtData object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIObjectCtData.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectCtData.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1981,20 +2174,51 @@
 
 </div></div>
 <div class="viewcode-block" id="APIObjectSurfModel"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectSurfModel">[docs]</a><span class="k">class</span> <span class="nc">APIObjectSurfModel</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;docstring for APIObjectSurfModel&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    APIObjectSurfModel (Surface Model)</span>
+
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * name  </span>
+<span class="sd">        * type</span>
+<span class="sd">        * description</span>
+<span class="sd">        * objectGroupRights</span>
+<span class="sd">        * objectUserRights</span>
+<span class="sd">        * objectPreviews</span>
+<span class="sd">        * createdDate</span>
+<span class="sd">        * modality</span>
+<span class="sd">        * ontologyItems</span>
+<span class="sd">        * ontologyItemRelations</span>
+<span class="sd">        * ontologyCount</span>
+<span class="sd">        * license</span>
+<span class="sd">        * files</span>
+<span class="sd">        * linkedObjects</span>
+<span class="sd">        * linkedObjectRelations</span>
+<span class="sd">        * downloadUrl</span>
+<span class="sd">        * Facet</span>
+<span class="sd">        * Vertex</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;Facet&#39;</span><span class="p">,</span>
         <span class="s">&#39;Vertex&#39;</span>
         <span class="p">])</span>
     
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIObject</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIObject</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIObjectSurfModel.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectSurfModel.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIObjectSurfModel obj: A APIObjectSurfModel object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObject</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIObjectSurfModel.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectSurfModel.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2009,6 +2233,17 @@
 <div class="viewcode-block" id="APIFolder"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIFolder">[docs]</a><span class="k">class</span> <span class="nc">APIFolder</span><span class="p">(</span><span class="n">APIBasic</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Folder API Object</span>
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * name  </span>
+<span class="sd">        * level</span>
+<span class="sd">        * parentFolder</span>
+<span class="sd">        * childFolders</span>
+<span class="sd">        * folderGroupRights</span>
+<span class="sd">        * folderUserRights</span>
+<span class="sd">        * containedObjects</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;id&#39;</span><span class="p">,</span>
@@ -2021,13 +2256,18 @@
         <span class="s">&#39;containedObjects&#39;</span>
         <span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIFolder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIFolder.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIFolder.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIFolder obj: A APIFolder object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIFolder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIFolder.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIFolder.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2041,6 +2281,13 @@
 <div class="viewcode-block" id="APIOntology"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIOntology">[docs]</a><span class="k">class</span> <span class="nc">APIOntology</span><span class="p">(</span><span class="n">APIBasic</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API class for ontology entries</span>
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * term</span>
+<span class="sd">        * type</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;id&#39;</span><span class="p">,</span>
@@ -2048,13 +2295,18 @@
         <span class="s">&#39;type&#39;</span><span class="p">,</span>
         <span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIOntology</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIOntology.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIOntology.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIOntology obj: A APIOntology object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIOntology</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIOntology.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIOntology.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2068,6 +2320,16 @@
 <div class="viewcode-block" id="APIObjectOntology"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectOntology">[docs]</a><span class="k">class</span> <span class="nc">APIObjectOntology</span><span class="p">(</span><span class="n">APIBasic</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API class for object-ontology entries</span>
+
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * type</span>
+<span class="sd">        * object</span>
+<span class="sd">        * ontologyItem</span>
+<span class="sd">        * position</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;id&#39;</span><span class="p">,</span>
@@ -2077,13 +2339,18 @@
         <span class="s">&#39;position&#39;</span>
         <span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObjectOntology</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIObjectOntology.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectOntology.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIObjectOntology obj: A APIObjectOntology object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObjectOntology</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIObjectOntology.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectOntology.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2097,6 +2364,17 @@
 <div class="viewcode-block" id="APIFile"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIFile">[docs]</a><span class="k">class</span> <span class="nc">APIFile</span><span class="p">(</span><span class="n">APIBasic</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API class for files</span>
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * createdDate</span>
+<span class="sd">        * downloadUrl</span>
+<span class="sd">        * originalFileName</span>
+<span class="sd">        * anonymizedFileHashCode</span>
+<span class="sd">        * size</span>
+<span class="sd">        * fileHashCode</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;id&#39;</span><span class="p">,</span>
@@ -2108,13 +2386,18 @@
         <span class="s">&#39;fileHashCode&#39;</span>
         <span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIFile</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIFile.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIFile.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIFile obj: A APIFile object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIFile</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIFile.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIFile.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2128,6 +2411,13 @@
 <div class="viewcode-block" id="APILicense"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APILicense">[docs]</a><span class="k">class</span> <span class="nc">APILicense</span><span class="p">(</span><span class="n">APIBasic</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API class for licenses</span>
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * name  </span>
+<span class="sd">        * description</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;id&#39;</span><span class="p">,</span>
@@ -2135,13 +2425,18 @@
         <span class="s">&#39;name&#39;</span><span class="p">,</span>
         <span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APILicense</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APILicense.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APILicense.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APILicense obj: A APILicense object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APILicense</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APILicense.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APILicense.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2155,6 +2450,13 @@
 <div class="viewcode-block" id="APIObjectRight"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectRight">[docs]</a><span class="k">class</span> <span class="nc">APIObjectRight</span><span class="p">(</span><span class="n">APIBasic</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API class for object rights</span>
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * name  </span>
+<span class="sd">        * description</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;id&#39;</span><span class="p">,</span>
@@ -2162,13 +2464,18 @@
         <span class="s">&#39;name&#39;</span><span class="p">,</span>
         <span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObjectRight</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIObjectRight.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectRight.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIObjectRight obj: A APIObjectRight object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObjectRight</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIObjectRight.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectRight.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2182,6 +2489,14 @@
 <div class="viewcode-block" id="APIObjectLink"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectLink">[docs]</a><span class="k">class</span> <span class="nc">APIObjectLink</span><span class="p">(</span><span class="n">APIBasic</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API class for object links</span>
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * description</span>
+<span class="sd">        * object1</span>
+<span class="sd">        * object2</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;id&#39;</span><span class="p">,</span>
@@ -2190,13 +2505,18 @@
         <span class="s">&#39;object2&#39;</span><span class="p">,</span>
         <span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObjectLink</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIObjectLink.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectLink.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIObjectLink obj: A APIObjectLink object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObjectLink</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIObjectLink.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectLink.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2210,6 +2530,13 @@
 <div class="viewcode-block" id="APIModality"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIModality">[docs]</a><span class="k">class</span> <span class="nc">APIModality</span><span class="p">(</span><span class="n">APIBasic</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API class for modalities</span>
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * name  </span>
+<span class="sd">        * description</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;id&#39;</span><span class="p">,</span>
@@ -2217,13 +2544,18 @@
         <span class="s">&#39;name&#39;</span>
         <span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIModality</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIModality.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIModality.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIModality obj: A APIModality object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIModality</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIModality.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIModality.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2237,6 +2569,14 @@
 <div class="viewcode-block" id="APIObjectGroupRight"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectGroupRight">[docs]</a><span class="k">class</span> <span class="nc">APIObjectGroupRight</span><span class="p">(</span><span class="n">APIBasic</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API class for object group rights</span>
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * relatedObject</span>
+<span class="sd">        * relatedRights</span>
+<span class="sd">        * relatedGroup</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;id&#39;</span><span class="p">,</span>
@@ -2245,13 +2585,18 @@
         <span class="s">&#39;relatedGroup&#39;</span>
         <span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObjectGroupRight</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIObjectGroupRight.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectGroupRight.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIObjectGroupRight obj: A APIObjectGroupRight object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObjectGroupRight</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIObjectGroupRight.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectGroupRight.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2265,6 +2610,15 @@
 <div class="viewcode-block" id="APIObjectUserRight"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectUserRight">[docs]</a><span class="k">class</span> <span class="nc">APIObjectUserRight</span><span class="p">(</span><span class="n">APIBasic</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API class for object user rights</span>
+
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * relatedObject</span>
+<span class="sd">        * relatedRights</span>
+<span class="sd">        * relatedUser</span>
+<span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;id&#39;</span><span class="p">,</span>
@@ -2273,13 +2627,18 @@
         <span class="s">&#39;relatedUser&#39;</span>
         <span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObjectUserRight</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIObjectUserRight.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectUserRight.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIObjectUserRight obj: A APIObjectUserRight object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIObjectUserRight</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIObjectUserRight.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIObjectUserRight.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2293,6 +2652,14 @@
 <div class="viewcode-block" id="APIGroup"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIGroup">[docs]</a><span class="k">class</span> <span class="nc">APIGroup</span><span class="p">(</span><span class="n">APIBasic</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API class for groups</span>
+
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * Chief</span>
+<span class="sd">        * name</span>
+<span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;id&#39;</span><span class="p">,</span>
@@ -2300,13 +2667,18 @@
         <span class="s">&#39;name&#39;</span>
         <span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIGroup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIGroup.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIGroup.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIGroup obj: A APIGroup object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIGroup</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIGroup.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIGroup.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2320,19 +2692,30 @@
 <div class="viewcode-block" id="APIUser"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIUser">[docs]</a><span class="k">class</span> <span class="nc">APIUser</span><span class="p">(</span><span class="n">APIBasic</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API class for users</span>
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * selfUrl</span>
+<span class="sd">        * id</span>
+<span class="sd">        * username</span>
+<span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;id&#39;</span><span class="p">,</span>
         <span class="s">&#39;username&#39;</span>
         <span class="p">])</span>
 
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
-        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">__i</span> <span class="ow">in</span> <span class="n">APIBasic</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
+        <span class="n">oKeys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">__i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIUser</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">)</span> 
 
 <div class="viewcode-block" id="APIUser.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIUser.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIUser obj: A APIUser object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">APIUser</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">)</span>
 </div>
 <div class="viewcode-block" id="APIUser.get"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIUser.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2346,6 +2729,14 @@
 <div class="viewcode-block" id="APIPagination"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIPagination">[docs]</a><span class="k">class</span> <span class="nc">APIPagination</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API class for Pagination results</span>
+
+
+<span class="sd">    :attributes: </span>
+<span class="sd">        * totalCount</span>
+<span class="sd">        * pagination</span>
+<span class="sd">        * items</span>
+<span class="sd">        * nextPageUrl</span>
+<span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;totalCount&#39;</span><span class="p">,</span>
@@ -2359,7 +2750,11 @@
                 <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         
 <div class="viewcode-block" id="APIPagination.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIPagination.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; sets class variable for each key in the object to the keyname and its value&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIPagination obj: A APIPagination object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span>  <span class="n">obj</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">:</span> 
@@ -2379,6 +2774,11 @@
 <div class="viewcode-block" id="APIToken"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIToken">[docs]</a><span class="k">class</span> <span class="nc">APIToken</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    API class to work with the tokens</span>
+
+<span class="sd">    :attributes:</span>
+<span class="sd">        * tokenType</span>
+<span class="sd">        * tokenValue</span>
+<span class="sd">        </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">oKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">([</span>
         <span class="s">&#39;tokenType&#39;</span><span class="p">,</span>
@@ -2391,7 +2791,11 @@
 
         
 <div class="viewcode-block" id="APIToken.set"><a class="viewcode-back" href="../connectVSD.html#connectVSD.APIToken.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot; sets class variable for each key in the object to the keyname and its value&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">        sets class variable for each key in the object to the keyname and its value</span>
+
+<span class="sd">        :param APIToken obj: A APIToken object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span>  <span class="n">obj</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">oKeys</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">:</span> 
@@ -2413,15 +2817,7 @@
         </div>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper"><div class="relations">
-<h3>Related Topics</h3>
-<ul>
-  <li><a href="../index.html">Documentation overview</a><ul>
-  <li><a href="index.html">Module code</a><ul>
-  </ul></li>
-  </ul></li>
-</ul>
-</div>
+        <div class="sphinxsidebarwrapper">
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -2439,17 +2835,22 @@
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="footer">
-      &copy;2015, Author.
-      
-      |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.3.1</a>
-      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.6</a>
-      
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">source 0.8&#34; -R 0.8 -A Michael documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
     </div>
-
-    
-
-    
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
   </body>
 </html>
