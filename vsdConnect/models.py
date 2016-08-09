@@ -158,7 +158,7 @@ class APIBase(models.Base):
 
 
 
-    def get(self):
+    def get_json(self):
         """
         get the object as json readable structure (dict)
 
@@ -166,20 +166,6 @@ class APIBase(models.Base):
         :rtype: json
         """
         return json.dumps(self.to_struct())
-
-
-    def set(self, data):
-        """
-        set the object content 
-
-        :param json data: the data for the object in json format
-        :return: json 
-        :rtype: json
-
-        """
-        # takes existing fields and sets its value from the input data
-        for name, field in self.iterate_over_fields():
-            field.__set__(self, data[name])
 
   
     def show(self):
@@ -309,7 +295,7 @@ class Folder(APIBaseID):
         :return: the folder 
         :rtype: Folder
         """
-        res = apisession._get(self.selfUrl)
+        res = apisession.getRequest(self.selfUrl)
         return Folder(**res)
 
     def get_partent(self, apisession):
@@ -534,51 +520,40 @@ class Folder(APIBaseID):
   
         if create:
             res = apisession.postRequest('folders', self.to_struct())
-            print("folder created:" + self.name)
+            print("folder:" + self.name)
             return Folder(**res)
 
-    def create_folders(self, apisession, filepath, parents):
-    #def createFolderStructure(self, rootfolder, filepath, parents):
+    def create_folders(self, apisession, filepath, rootpath):
         """
         creates the folders based on the filepath if not already existing,
         starting from the rootfolder
 
         :param connectVSD apisession: the API session
-        :param Path filepath: filepath of the file
-        :param int parents: number of partent levels to create from folder in which the file is located
+        :param Path filepath: filepath of the file or the directory
+        :param Path rootpath: rootpath of the file or the directory
         :return: the last folder in the tree
         :rtype: Folder
         """
 
-        fp = filepath.resolve()
-        folders = list(fp.parts)
-        folders.reverse()
+        folders = filepath.relative_to(rootpath).parts
 
-        ##remove file from list
-        if fp.is_file():
-            folders.remove(folders[0])
+        if filepath.is_file():
+
+            folders.remove(folders[-1])
+
+        fparent = self
     
-        if parents > 0 and parents <= len(folders):
-            for i in range(parents, len(folders)):
-               folders.remove(folders[-1])
-            folders.reverse()
-
-            fparent = self
-        
-            if fparent:
-                # iterate over file path and create the directory
-                for fname in folders:     
-                    f = Folder(
-                            name=fname,
-                            parentFolder=APIBase(selfUrl=fparent.selfUrl)
-                        )
-                    fparent = f.create(apisession)
-                return fparent
-            else:
-                print('Root folder does not exist', rootfolder)
-                return None
+        if fparent:
+            # iterate over file path and create the directory
+            for fname in folders:     
+                f = Folder(
+                        name=fname,
+                        parentFolder=APIBase(selfUrl=fparent.selfUrl)
+                    )
+                fparent = f.create(apisession)
+            return fparent
         else:
-            print("file has no parent folder")
+            print('Root folder does not exist', rootfolder)
             return None
 
 
