@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from vsdConnect import connectVSD
+from vsdConnect import connect
 import sys
 import argparse
 
@@ -22,8 +22,8 @@ if (args.targetProject=="" and args.sourceFolderID=="" and args.sourceFolderName
     print "Arguments incomplete, need either ID or name of VSD folder"
     sys.exit()
 
-#con=connectVSD.VSDConnecter("username","password")
-#con=connectVSD.VSDConnecter()
+con=connect.VSDConnecter("username","password")
+#con=connect.VSDConnecter()
 
 
 

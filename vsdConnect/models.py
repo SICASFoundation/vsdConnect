@@ -40,7 +40,7 @@ class ListValidator(object):
 
     def validate(self, value):
         """Validate value."""
-       
+
         if value not in self.itemlist:
             raise errors.ValidationError(
                 "'{value}' is not accepted, acceptable values are: ('{itemlist}').".format(
@@ -60,7 +60,10 @@ class ListValidator(object):
 class URLField(fields.StringField):
     pass #add url-specific fields?
 
-
+#see http://python3porting.com/differences.html#long
+import sys
+if sys.version_info < (3,):
+    fields.IntField.types = (int, long,)
 
 ##########################################
 # Attributes Data
@@ -73,10 +76,10 @@ class PaginationParameter(models.Base):
     use 10000 for unlimited usage of eg dicom series (local only, not working on API)
 
     """
-    
+
     rpp = fields.IntField(
         required=True,
-        validators=ListValidator([10, 25, 50, 100, 250, 500, 10000]) 
+        validators=ListValidator([10, 25, 50, 100, 250, 500, 10000])
         )
 
     page = fields.IntField(
@@ -117,7 +120,7 @@ class HttpRequestMessage(models.Base):
     Http request view model
     """
     version = fields.EmbeddedField(APIVersion)
-    content = fields.EmbeddedField(HttpContent) 
+    content = fields.EmbeddedField(HttpContent)
     method = fields.EmbeddedField(HttpMethod)
     requestUri = URLField()
     headers = fields.StringField()
@@ -128,7 +131,7 @@ class HttpResponseMessage(models.Base):
     http response message view model
     """
     version = fields.EmbeddedField(APIVersion)
-    content = fields.EmbeddedField(HttpContent) 
+    content = fields.EmbeddedField(HttpContent)
     statusCode = fields.IntField()
     reasonPhrase = fields.StringField()
     headers = fields.StringField()
@@ -162,7 +165,7 @@ class APIBase(models.Base):
         """
         get the object as json readable structure (dict)
 
-        :return: json 
+        :return: json
         :rtype: json
         """
         return json.dumps(self.to_struct())
@@ -176,7 +179,7 @@ class APIBase(models.Base):
         print(json.dumps(self.to_struct(), sort_keys = True, indent = 4))
 
 
-    
+
     def save(self, fp = 'object.json'):
         """
         save the object as json to the given filepath
@@ -194,11 +197,11 @@ class APIBase(models.Base):
             fp.touch()
         else:
             fp.touch()
-            
+
 
         with fp.open('w') as outfile:
             json.dump(self.to_struct(), outfile, indent = 4)
-            
+
         return fp
 
 
@@ -246,7 +249,7 @@ class Pagination(models.Base):
     def firstUrlInPage(self):
         """
         get the selfurl of the first item in the paginated list
-        
+
         :return: selfUrl
         :rtype: string
 
@@ -269,7 +272,7 @@ class File(APIBaseID):
     downloadUrl = URLField()
     originalFileName = fields.StringField()
     anonymizedFileHashCode = fields.StringField()
-    size = fields.IntField()
+    size = fields.IntField()  #in Python 2 it needs the patch for long type
     fileHashCode = fields.StringField()
     objects = fields.EmbeddedField(Pagination) #ObjectPagination
 
@@ -292,13 +295,13 @@ class Folder(APIBaseID):
         get the folder object from the API
 
         :param connectVSD apisession: the API session
-        :return: the folder 
+        :return: the folder
         :rtype: Folder
         """
         res = apisession.getRequest(self.selfUrl)
         return Folder(**res)
 
-    def get_partent(self, apisession):
+    def get_parent(self, apisession):
         """
         return the parent Folder
 
@@ -323,7 +326,7 @@ class Folder(APIBaseID):
 
             for item in self.containedObjects:
                 itemlist.append(APIObject(selfUrl=item.selfUrl).get(apisession))
-                
+
             return itemlist
         else:
             print('the folder does not have any contained objects')
@@ -356,7 +359,7 @@ class Folder(APIBaseID):
             for nextDir in dirs:
                 x = Folder(selfUrl=nextDir.selfUrl).get(apisession)
                 yield x
-                
+
 
     def get_content(self, apisession, recursive=False, mode='b'):
         """
@@ -420,35 +423,35 @@ class Folder(APIBaseID):
 
     def delete(self, apisession, _root=None):
         """
-        get the objects and folder contained in the given folder. 
+        get the objects and folder contained in the given folder.
 
         :param connectVSD apisession: the API session
         :param Folder root: the folder to delete, has to be None by default, only set internally
-        :return: status of deletion 
+        :return: status of deletion
         :rtype: bool
         """
         state = False
-        
-        ## set folder to delete 
+
+        ## set folder to delete
         if not _root:
             _root = self
-                   
+
         # Delete objects
         if self.containedObjects:
             self = self.delete_objects(apisession)
 
         # Delete folder if empty
         if not self.childFolders and not self.containedObjects:
-                        
+
             res = apisession.delRequest(self.selfUrl)
 
-            if res == 204 or res == 200:    
+            if res == 204 or res == 200:
                 state = True
             else:
                 state = False
-                
-            # return state if root folder is deleted/failed   
-            if self.selfUrl == _root.selfUrl:       
+
+            # return state if root folder is deleted/failed
+            if self.selfUrl == _root.selfUrl:
                 return state
             # run delete on parent folder
             else:
@@ -466,10 +469,10 @@ class Folder(APIBaseID):
         delete the containted objects of a folder
 
         :param connectVSD apisession: the API session
-        :return: updated folder 
+        :return: updated folder
         :rtype: Folder
         """
-        
+
         if self.containedObjects:
             self.containedObjects = list()
             res = apisession.putRequest('folders', data=self.to_struct())
@@ -485,7 +488,7 @@ class Folder(APIBaseID):
             folders = list()
             for item in foldergen:
                 item.delete(apisession)
-        
+
             self = self.get(apisession)
 
         if not self.childFolders and not self.containedObjects:
@@ -503,12 +506,12 @@ class Folder(APIBaseID):
         """
         # check exists
         parent = self.get_partent(apisession)
-        
+
         create = True
 
         if parent.childFolders:
             children = parent.get_child_folders(apisession)
-            
+
             child_d = dict()
             for child in children:
                 child_d[child.name]=child
@@ -517,7 +520,7 @@ class Folder(APIBaseID):
                 print("folder exists, not created")
                 create = False
                 return child_d[self.name]
-  
+
         if create:
             res = apisession.postRequest('folders', self.to_struct())
             print("folder:" + self.name)
@@ -542,10 +545,10 @@ class Folder(APIBaseID):
             folders.remove(folders[-1])
 
         fparent = self
-    
+
         if fparent:
             # iterate over file path and create the directory
-            for fname in folders:     
+            for fname in folders:
                 f = Folder(
                         name=fname,
                         parentFolder=APIBase(selfUrl=fparent.selfUrl)
@@ -586,7 +589,7 @@ class FolderRightPagination(Pagination):
 
 class FolderRightSet(APIBaseID):
     """
-    folder rights set 
+    folder rights set
     """
     name = fields.StringField()
     folderRights = fields.ListField(APIBase)
@@ -638,7 +641,7 @@ class FolderUserRightPagination(Pagination):
 
 class Group(APIBaseID):
     """
-    class for groups 
+    class for groups
     """
     name = fields.StringField()
     chief = fields.EmbeddedField(APIBase)
@@ -764,7 +767,7 @@ class ObjectRightPagination(Pagination):
 
 class ObjectRightSet(APIBaseID):
     """
-    object rights set 
+    object rights set
     """
     name = fields.StringField()
     objectRights = fields.ListField(APIBase)
@@ -816,7 +819,7 @@ class ObjectType(APIBase):
     for semantic triple storage
     """
     name = fields.StringField()
-    displayName = fields.StringField()   
+    displayName = fields.StringField()
     displayNameShort = fields.StringField()
 
 
@@ -846,16 +849,24 @@ class APIObject(APIBaseID):
     groupRights = fields.ListField(ObjectGroupRight)
 
 
+    @classmethod
     def _create(self, response=None, **kwargs):
-        
+        """
+        Constructor that performs downcasting according to the type.
+        The input can either be a dictionary or a sequence of field
+        :param response: dictionary (typically json response)
+        :param kwargs: named arguments (used if response is none). Typically used in iterateAllPaginated
+        :return: instance of object
+        """
+
         if response is None:
             response = kwargs
         objType = self._get_object_type(response)
-    
-        return objType
 
+        return objType(**response)
 
-    def _get_object_type(self, response):
+    @classmethod
+    def _get_object_type(cls, response):
         """
         create an APIObject depending on the type
 
@@ -864,13 +875,14 @@ class APIObject(APIBaseID):
         :rtype: APIObject
         """
 
-        obj = APIObject(**response)  
+        obj = APIObject(**response)
         otype = obj.type.name + 'Object'
         if not globals()[otype]:
             print("Unknown type %s" % otype)
+            return cls
 
-        return globals()[otype](**response) #eval() works, but security issues
-        
+        return globals()[otype] #eval() works, but security issues
+
 
     def get(self, apisession):
         """
@@ -878,7 +890,7 @@ class APIObject(APIBaseID):
         :param connectVSD apisession: the connection to the API
         """
         return self._create(apisession._get(self.selfUrl))
-      
+
         #self = apisession.createObject(apisession._get(self.selfUrl))
 
     def update(self, apisession):
@@ -894,12 +906,12 @@ class APIObject(APIBaseID):
         if res:
             self = apisession.createObject(res)
         else:
-            print('failed to update the object')  
+            print('failed to update the object')
 
     def publish(self, apisession):
         """
         publish the object
-        
+
         :param connectVSD apisession: the connection to the API
         """
         return apisession._put(self.selfUrl + '/publish')
@@ -932,7 +944,7 @@ class APIObject(APIBaseID):
         """
 
         return apisession._delete(self.selfUrl)
-   
+
     def  add_object_rights(self, apisession):
         """
         the permission defined in userRights or groupRights are pushed to the Database
@@ -1012,7 +1024,7 @@ class SegmentationImageData(models.Base):
 
     """
     methodDescription = fields.StringField()
-    segmentationMethod = fields.EmbeddedField(APIBase) 
+    segmentationMethod = fields.EmbeddedField(APIBase)
     #{u'displayName': u'Manual', u'id': 3, u'selfUrl': u'https://www.virtualskeleton.ch/api/segmentation_methods/3', u'name': u'Manual'})
 
 class SegmentationImageObject(APIObject):
@@ -1064,12 +1076,12 @@ class SubjectObject(APIObject):
 
 class ClinicalStudyDataObject(APIObject):
     """
-    API class for clinical trial data view model 
+    API class for clinical trial data view model
     """
     subject = fields.EmbeddedField(SubjectData)
     clinicalStudyDefinition = fields.EmbeddedField(APIBase)
 
-class ClincalStudyDefinitionData(models.Base):
+class ClinicalStudyDefinitionData(models.Base):
     """
     attributes for clinical study definition
     """
@@ -1084,7 +1096,7 @@ class ClinicalStudyDefinitionObject(APIObject):
     """
     API class for clinical trail definition view model
     """
-    clincalStudyDefinition = fields.EmbeddedField(ClincalStudyDefinitionData)
+    clinicalStudyDefinition = fields.EmbeddedField(ClinicalStudyDefinitionData)
 
 
 class GenomicPlatformObject(APIObject):
@@ -1107,7 +1119,7 @@ class GenomicSampleObject(APIObject):
 
 class StudyObject(APIObject):
     """
-    API class for study 
+    API class for study
     """
     pass
 
@@ -1168,7 +1180,7 @@ class DynamicSearchLogicalOperator(models.Base):
 
 class DynamicSearchComparisonOperator(models.Base):
     """
-    docstring 
+    docstring
     """
 
     name = fields.StringField()
@@ -1196,7 +1208,7 @@ class DynamicSearchSourceType(models.Base):
 
 class DynamicSearchOptions(models.Base):
     """ for DynamicSearchOptions"""
-    
+
     logicalOperators = fields.ListField(DynamicSearchLogicalOperator)
     sourceTypes = fields.ListField(DynamicSearchSourceType)
 
@@ -1253,4 +1265,3 @@ resourceTypes = {
     'objects': APIObject,
     'object-links' : ObjectLinks
 }
-

@@ -6,7 +6,7 @@ INFOS
 
 - connect 0.8.1
 - python version: 3.5
-- @author: Michael Kistler 2015, Livia B 2016
+- @author: Michael Kistler 2015, Livia Barazzetti 2016
 
 ========
 CHANGES
@@ -26,15 +26,17 @@ import hashlib
 from datetime import datetime
 from calendar import timegm
 import base64
+import shutil
 
 import urllib
 import jwt
 
 try: 
     from urllib.parse import urlparse
+    from urllib.parse import urlsplit
     from urllib.parse import quote as urlparse_quote
 except ImportError:
-    from urlparse import urlparse
+    from urlparse import urlparse, urlsplit
     from urllib import quote as urlparse_quote
 
 import json
@@ -52,7 +54,7 @@ try:
 except:
     import xml.etree.ElementTree as ET
 
-import models as vsdModels
+import vsdConnect.models as vsdModels
 import logging
 
 logger = logging.getLogger(__name__)
@@ -273,60 +275,27 @@ class VSDConnecter(object):
     def _put(self, resource, *args, **kwargs):  # reimplements VSDConnect.putRequest
         return self._requestsAttempts(self.s.put, resource, *args, **kwargs).json()
 
-    def _delete(self, resource, *args, **kwargs):  # reimplements VSDConnect.postRequest
+    def _delete(self, resource, *args, **kwargs):
         return self._requestsAttempts(self.s.delete, resource, *args, **kwargs)#.json()
 
-    def _post(self, resource, *args, **kwargs):
+    def _post(self, resource, *args, **kwargs): # reimplements VSDConnect.postRequest
         # should I avoid multiplt attempts? not idempotent, no multiple  attempts
         return self._requestsAttempts(self.s.post, resource, *args, **kwargs).json()
 
-    def _options(self, resource, *args, **kwargs):  # reimplements VSDConnect.getRequest
+    def _options(self, resource, *args, **kwargs):
         return self._requestsAttempts(self.s.options, resource, *args, **kwargs).json()
 
     #################################################
     # api objects handling
     ################################################
 
-
-    def getObjectType(self, response):
-        """
-        create an APIObject depending on the type
-
-        :param json response: object data
-        :return: object
-        :rtype: APIObject
-        """
-
-        apiObject = vsdModels.APIObject(**response)
-        objectType = apiObject.type.name + 'Object'  # 'RawImageObject class '
-        if objectType not in dir(vsdModels):
-            logger.warning("Unknown type %s" % objectType)
-            return vsdModels.APIObject
-        obj = getattr(vsdModels, objectType)
-        return obj
-
-    def createObject(self, response=None, **kwargs):
-        """
-        please describe the purpose here
-
-        convert  fields to response dict
-        how to use it?, cant we use: json.dumps(self.to_struct()) 
-        
-        :param bool response: ???
-        :param **kwargs: ???
-        """
-
-        if response is None:
-            response = kwargs
-        objType = self.getObjectType(response)
-        return objType(**response)
-
     def parseUrl(self, resource, type):
         """
-        check if the resource is  int (ID) or the selfURL
+        get the full url given the resource, making sure it's the provided type
 
-        :param str resource: url to the resource
+        :param str resource: url to the resource (can parse id or full url)
         :param str type: type of the api resource (folders, objects etc)
+        :rtype  str  fullUrl for the resource
         """
         try:
             rId = int(resource)
@@ -461,12 +430,12 @@ class VSDConnecter(object):
 
     def iteratePageItems(self, page, func=dict):
         """
-        returns all items as list
+        generator that returns all items
 
-        :param str resource: resource path
+        :param Pagination: Pagination object
         :param func: function for converting resource
         :return: iterator of items
-        :rtype: list of dict or model object
+        :rtype: iterator  of dict or model object (depending on func)
         """
 
         for item in page.items:
@@ -495,17 +464,18 @@ class VSDConnecter(object):
 
     def getObjects(self, idList=None):
         """
-        please describe what you are doing
+        retrieves list of objects (restricting to idList if provided)
 
-        :param ??? idList: ???
+        :param : idList: list of Ids. If not specified, all objects are returned.
+        If it is "published" or "unpublished", all the published and unpublished objects are returned, respectively
         :return:
-        :rtype: 
+        :rtype: list of Objects (or derived classes as appropriate)
         """
 
         if idList is None:
             idList = ''
         if idList in ['', 'published', 'unpublished']:
-            return self.iterateAllPaginated('objects/%s' % idList, func=self.createObject)
+            return self.iterateAllPaginated('objects/%s' % idList, func=vsdModels.APIObject._create)
 
         items = []
         for curId in idList:
@@ -521,7 +491,7 @@ class VSDConnecter(object):
         :raises: ValueError
         """
 
-        selfURL_path = urllib.parse.urlsplit(selfURL).path
+        selfURL_path = urlsplit(selfURL).path
         oID = Path(selfURL_path).name
         try:
             r = int(oID)
@@ -532,39 +502,41 @@ class VSDConnecter(object):
 
     def getResourceTypeAndId(self, url):
         """
-        please describe what you are doing
-
+        Parse a selfUrl and get the resource type and id
+        >> conn.getResourceTypeAndId("https://demo.virtualskeleton.ch/api/objects/1")
+        ['objects', '1']
         :param:
-        :return:
+        :return: (str, str)
         :rtype: 
         """
         return url.rsplit('/', 2)[-2:]
 
     def _instantiateResource(self, res):
         """
-        please describe what you are doing
-
-        :param:
-        :return:
-        :rtype: 
+        Dynamically instantiate the appropriate object from a json response
+        :param res: json response
+        :return: object from vsdModels
         """
+
+
         try:
             pagination = vsdModels.Pagination(**res)
             pagination.validate() #will fail if it doesno't have totalCount
             return pagination
         except:
-            resourcetype, id = self.getResourceTypeAndId(res['selfUrl'])
+            resourcetype, oid = self.getResourceTypeAndId(res['selfUrl'])
             if resourcetype == 'objects':
-                return self.createObject(res)
+                return vsdModels.APIObject._create(res)
+            #e.g FolderLinks
             model = vsdModels.resourceTypes[resourcetype](**res)
             return model
 
     def getResource(self, url):
         """
-        please describe what you are doing
+        Dynamically instantiate the appropriate object from a selfUrl
 
-        :param:
-        :return:
+        :param: str url
+        :return: object from vsdModels
         :rtype: 
         """
 
@@ -578,12 +550,12 @@ class VSDConnecter(object):
 
         :param int,str resource: (str) selfUrl of the object or the (int) object ID
         :return: the object
-        :rtype: APIObject
+        :rtype: APIObject (or derived class)
         """
         resource = self.parseUrl(resource, 'objects')
 
         res = self.getRequest(resource)
-        obj = self.createObject(res)
+        obj = vsdModels.APIObject._create(res)
         return obj
 
     def getFolder(self, resource):
@@ -615,31 +587,34 @@ class VSDConnecter(object):
 
         return filehash
 
-    def walkFolder(self, folderUrl, topdown=True):
+    def walkFolder(self, folder, topdown=True):
         """
-        please describe here
-
-        :param:
-        :return:
-        :rtype:
+        Generate the folder object and the file names in a directory tree by walking the tree either top-down or bottom-up.
+        For each directory in the tree rooted at directory top (including top itself), it yields a 3-tuple
+        (folderObject, dirnames, containedOnbjects).
+        compare to os.walk
+        :param folder: selfUrl of the top folder (or folder object)
+        :return: (folderObject, dirnames, containedOnbjects)
+        :rtype: (vsdmodels.Folder, list(vsdmodels.APIBasic), list(vsdmodels.APIBasic))
         """
-
-        # similar to os.walk
-        folderObject = self.getFolder(folderUrl)
+        if isinstance(folder, basestring):
+            folderObject = self.getFolder(folder)
+        else:
+            folderObject = folder
         dirs = folderObject.childFolders
-        nondirs = folderObject.containedObjects
+        containedObjects = folderObject.containedObjects
         if dirs is None:
             dirs = []
-        if nondirs is None:
-            nondirs = []
+        if containedObjects is None:
+            containedObjects = []
         if topdown:
-            yield folderObject, dirs, nondirs
+            yield folderObject, dirs, containedObjects
 
         for nextDir in dirs:
             for x in self.walkFolder(nextDir.selfUrl):
                 yield x
         if not topdown:
-            yield folderObject, dirs, nondirs
+            yield folderObject, dirs, containedObjects
 
     def checkFileInObject(self, obj, fp):
         """
@@ -688,6 +663,7 @@ class VSDConnecter(object):
             url = self.fullUrl(resource) + '?$filter=startswith(Term,%27{0}%27)%20eq%20true'.format(search)
 
         req = self.getRequest(url)
+        return req
         #return req.json()
     
 
@@ -718,7 +694,6 @@ class VSDConnecter(object):
         fileurl = 'objects/{0}/files'.format(obj.id)
 
         fl = self.iterateAllPaginated(fileurl)
-        #fl = self.getAllPaginated(fileurl) 
 
         for f in fl:
             res = self.getFile(f['selfUrl'])
@@ -780,7 +755,7 @@ class VSDConnecter(object):
 
         :param str search: term to search for
         :param str mode: search for partial match ('default') or exact match ('exact')
-        :param bool squeeze: ???? what is squeeze
+        :param bool squeeze: if True, if there is only one result return the result and not a list
         :return: list of folder objects APIFolders
         :rtype: list of APIFolders
         """
@@ -795,7 +770,7 @@ class VSDConnecter(object):
 
             url = self.url + "folders?$filter=startswith(Name,%27{0}%27)%20eq%20true".format(search)
 
-        result = list(self.iterateAllPaginated(url, vsdModels.APIFolder))
+        result = list(self.iterateAllPaginated(url, vsdModels.Folder))
 
         if len(result) == 1 and squeeze:
             folder = result[0]
@@ -858,11 +833,8 @@ class VSDConnecter(object):
         """
 
         modalities = list()
-        items = self.iterateAllPaginated('modalities')
-        if items:
-            for item in items:
-                modality = vsdModels.Modality(**item)
-                modalities.append(modality)
+        modalities = list(self.iterateAllPaginated('modalities'), 
+                          vsdModels.Modality)
         return modalities
 
     def getModality(self, resource):
@@ -954,10 +926,10 @@ class VSDConnecter(object):
         else:
             url = self.url + "ontologies/{0}?$filter=startswith(Term,%27{1}%27)%20eq%20true".format(oType, search)
 
-        res = self.getAllPaginated(url)
+        res = list(self.getAllPaginated(url))
         
         itemlist = list()
-        
+
         if len(res) > 0:
             for item in res:
                 itemlist.append(vsdModels.OntologyItem(**item))
@@ -977,7 +949,7 @@ class VSDConnecter(object):
 
         url = "ontologies/{0}/{1}".format(oType, oid)
         req = self.getRequest(url)
-        return req.json()
+        return req
 
     def getOntologyItem(self, resource, oType=0):
         """
@@ -1239,7 +1211,7 @@ class VSDConnecter(object):
         """
 
         try:
-            req = self.s.delete(self.fullUrl(resource))
+            req = self._delete(self.fullUrl(resource))
             if req.status_code == requests.codes.ok:
                 print('resource {0} deleted, 200'.format(self.fullUrl(resource)))
                 return req.status_code
@@ -1266,13 +1238,14 @@ class VSDConnecter(object):
         """
 
         try:
-            req = self.s.delete(obj.selfUrl)
+            req = self._delete(obj.selfUrl)
             if req.status_code == requests.codes.ok:
                 print('object {0} deleted'.format(obj.id))
                 return req.status_code
             else:
-                return req.status_code
                 print('not deleted', req.status_code)
+                return req.status_code
+
 
         except requests.exceptions.RequestException as err:
             print('del request failed:', err)
@@ -1408,7 +1381,7 @@ class VSDConnecter(object):
         res = self.putRequest(obj.selfUrl, data=obj.to_struct())
 
         if res:
-            obj = self.createObject(res)
+            obj = vsdModels.APIObject._create(res)
             return obj
         else:
             return res

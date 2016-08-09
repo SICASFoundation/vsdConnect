@@ -14,13 +14,13 @@ CHANGES
 
 """
 
-from vsdConnect import connectVSD
+from vsdConnect import connect
 import os
 from pathlib import Path, PurePath, WindowsPath
 
 
 ## connect using credentials
-api=connectVSD.VSDConnecter(url='https://demo.virtualskeleton.ch/api/', username= "demo@virtualskeleton.ch", password = "demo")
+api=connect.VSDConnecter(url='https://demo.virtualskeleton.ch/api/', username= "demo@virtualskeleton.ch", password = "demo")
 
 ## specify the local file
 fp = Path('D:' + os.sep, 'hash','vsd_file_926373_20160226_120352.stl')
