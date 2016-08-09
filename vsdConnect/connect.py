@@ -136,7 +136,7 @@ class VSDConnecter(object):
         self.s = requests.Session()
         self.s.verify = False
         self.authtype = authtype
-        self.maxAttempts = 3
+        self.maxAttempts = 5
         self.maxAttempts401 = 2
 
         if version:
@@ -1316,7 +1316,7 @@ class VSDConnecter(object):
             files = {'file': (str(fp.name), chunk)}
             res = self._post(self.fullUrl('/chunked_upload?chunk={0}').format(part), files=files)
 
-        print('finish, uploaded part {0} of {1} '.format(part, parts))
+            print('finish, uploaded part {0} of {1} '.format(part, parts))
         res = self._post(self.fullUrl('chunked_upload/commit?filename={0}'.format(fp.name)))
         return self.getFile(res['file']['selfUrl']), self.getObject(res['relatedObject']['selfUrl'])
 
