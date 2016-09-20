@@ -505,7 +505,7 @@ class Folder(APIBaseID):
         :rtype: Folder
         """
         # check exists
-        parent = self.get_partent(apisession)
+        parent = self.get_parent(apisession)
 
         create = True
 
@@ -559,6 +559,33 @@ class Folder(APIBaseID):
             print('Root folder does not exist', rootfolder)
             return None
 
+
+    def put(self,apisession):
+        """
+        put (update) the folder 
+
+        :param connectVSD apisession: the API session
+        :return: the folder with the updated location
+        :rytpe: Folder
+        """
+        res = apisession.putRequest('folders', self.to_struct())
+        print("folder:" + self.name)
+        return Folder(**res)
+
+    def move(self,target,apisession):
+        """ move the folder to a new location
+
+        :param Folder target: the target dir to move the folder
+        :param connectVSD apisession: the API session
+        :return: the folder with the updated location
+        :rytpe: Folder
+        """
+
+        self.parentFolder = APIBase(selfUrl=target.selfUrl)
+        res = apisession.putRequest('folders', self.to_struct())
+        print("folder:" + self.name)
+        return Folder(**res)
+        
 
 class FolderPagination(Pagination):
     """
@@ -904,7 +931,8 @@ class APIObject(APIBaseID):
         res = apisession.putRequest(self.selfUrl, data=self.to_struct())
 
         if res:
-            self = apisession.createObject(res)
+            self = APIObject(**res).get(apisession)
+            #self = apisession.createObject(res)
         else:
             print('failed to update the object')
 
@@ -985,6 +1013,18 @@ class APIObject(APIBaseID):
                 ),
                 data=ana.to_struct())
 
+    def remove_links(self, apisession):
+        """ TODO remove all link to related objects
+
+        :param connectVSD apisession: the connection to the API
+        """
+
+        if self.linkedObjectRelations:
+            #for link in self.iteratePageItems(self.linkedObjectRelations, ObjectLink):
+            #    self.delRequest(link.selfUrl)
+            pass
+        else:
+            print('nothing to delete, no links available')
 
 class ObjectPagination(Pagination):
     """

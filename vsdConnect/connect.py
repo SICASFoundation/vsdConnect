@@ -54,7 +54,8 @@ try:
 except:
     import xml.etree.ElementTree as ET
 
-import vsdConnect.models as vsdModels
+#import vsdConnect.models as vsdModels
+import models as vsdModels
 import logging
 
 logger = logging.getLogger(__name__)
@@ -138,8 +139,8 @@ class VSDConnecter(object):
         self.s = requests.Session()
         self.s.verify = False
         self.authtype = authtype
-        self.maxAttempts = 5
-        self.maxAttempts401 = 2
+        self.maxAttempts = 10
+        self.maxAttempts401 = 10
 
         if version:
             self.version = str(version) + '/'
