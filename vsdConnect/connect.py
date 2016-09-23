@@ -1195,7 +1195,6 @@ class VSDConnecter(object):
         obj = self.getObject(resource)
         if obj.linkedObjectRelations:
             for link in self.iteratePageItems(obj.linkedObjectRelations, vsdModels.ObjectLink):
-                print(link)
                 self.delRequest(link.selfUrl)
         else:
             print('nothing to delete, no links available')

@@ -569,7 +569,6 @@ class Folder(APIBaseID):
         :rytpe: Folder
         """
         res = apisession.putRequest('folders', self.to_struct())
-        print("folder:" + self.name)
         return Folder(**res)
 
     def move(self,target,apisession):
@@ -581,9 +580,9 @@ class Folder(APIBaseID):
         :rytpe: Folder
         """
 
+        #target.childFolders = target.childFolders.append(APIBase(selfUrl=self.selfUrl))
         self.parentFolder = APIBase(selfUrl=target.selfUrl)
         res = apisession.putRequest('folders', self.to_struct())
-        print("folder:" + self.name)
         return Folder(**res)
         
 
