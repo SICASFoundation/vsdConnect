@@ -1,0 +1,7 @@
+vsdConnect.models module
+========================
+
+.. automodule:: vsdConnect.models
+    :members:
+    :undoc-members:
+    :show-inheritance:

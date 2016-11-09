@@ -1,0 +1,1044 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>models &mdash; VSDConnect 0.8.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="VSDConnect 0.8.1 documentation" href="../index.html"/>
+        <link rel="up" title="Module code" href="index.html"/> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> VSDConnect
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../connect.html">vsdConnect.connect module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../models.html">vsdConnect.models module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">VSDConnect</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      
+    <li>models</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for models</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">=======</span>
+<span class="sd">INFOS</span>
+<span class="sd">=======</span>
+<span class="sd">* python version: 3.5</span>
+<span class="sd">* connectVSD 0.8.1</span>
+<span class="sd">* module: models</span>
+<span class="sd">* @author: Michael Kistler 2016, Livia B.</span>
+
+<span class="sd">========</span>
+<span class="sd">CHANGES</span>
+<span class="sd">========</span>
+<span class="sd">* implemented objects as jsonmodels</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">jsonmodels</span> <span class="k">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">fields</span><span class="p">,</span> <span class="n">errors</span><span class="p">,</span> <span class="n">validators</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="k">import</span> <span class="n">Path</span><span class="p">,</span> <span class="n">PurePath</span><span class="p">,</span> <span class="n">WindowsPath</span>
+
+
+<span class="c1">################################################</span>
+<span class="c1">#Custom validators</span>
+<span class="c1">################################################</span>
+
+<div class="viewcode-block" id="ListValidator"><a class="viewcode-back" href="../models.html#models.ListValidator">[docs]</a><span class="k">class</span> <span class="nc">ListValidator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Validator for a list.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">itemlist</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Init.</span>
+
+<span class="sd">        :param items: list of items to check against.</span>
+<span class="sd">        :param bool exclusive: If `True`, then validated value must be strongly</span>
+<span class="sd">            bigger than given threshold.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">itemlist</span> <span class="o">=</span> <span class="n">itemlist</span>
+
+<div class="viewcode-block" id="ListValidator.validate"><a class="viewcode-back" href="../models.html#models.ListValidator.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Validate value.&quot;&quot;&quot;</span>
+       
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">itemlist</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">errors</span><span class="o">.</span><span class="n">ValidationError</span><span class="p">(</span>
+                <span class="s2">&quot;&#39;</span><span class="si">{value}</span><span class="s2">&#39; is not accepted, acceptable values are: (&#39;</span><span class="si">{itemlist}</span><span class="s2">&#39;).&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">,</span> <span class="n">itemlist</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">itemlist</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="ListValidator.modify_schema"><a class="viewcode-back" href="../models.html#models.ListValidator.modify_schema">[docs]</a>    <span class="k">def</span> <span class="nf">modify_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field_schema</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Modify field schema.&quot;&quot;&quot;</span>
+        <span class="n">field_schema</span><span class="p">[</span><span class="s1">&#39;itemlist&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">itemlist</span></div></div>
+
+
+
+<span class="c1">################################################</span>
+<span class="c1">#Models parameters</span>
+<span class="c1">################################################</span>
+
+<div class="viewcode-block" id="URLField"><a class="viewcode-back" href="../models.html#models.URLField">[docs]</a><span class="k">class</span> <span class="nc">URLField</span><span class="p">(</span><span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">):</span>
+    <span class="k">pass</span> <span class="c1">#add url-specific fields?</span></div>
+
+
+
+<span class="c1">##########################################</span>
+<span class="c1"># Attributes Data</span>
+<span class="c1">##########################################</span>
+
+<div class="viewcode-block" id="PaginationParameter"><a class="viewcode-back" href="../models.html#models.PaginationParameter">[docs]</a><span class="k">class</span> <span class="nc">PaginationParameter</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    pagination parameters</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">rpp</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">validators</span><span class="o">=</span><span class="n">ListValidator</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">500</span><span class="p">])</span>
+        <span class="p">)</span>
+
+    <span class="n">page</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">validators</span><span class="o">=</span><span class="n">validators</span><span class="o">.</span><span class="n">Min</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="p">)</span></div>
+
+
+<span class="c1">################################################</span>
+<span class="c1">#View Models</span>
+<span class="c1">################################################</span>
+
+<div class="viewcode-block" id="APIVersion"><a class="viewcode-back" href="../models.html#models.APIVersion">[docs]</a><span class="k">class</span> <span class="nc">APIVersion</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    the api version view model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">major</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="n">minor</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="n">build</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="n">revision</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="n">majorRevision</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="n">minorRevision</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HttpContent"><a class="viewcode-back" href="../models.html#models.HttpContent">[docs]</a><span class="k">class</span> <span class="nc">HttpContent</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    header content</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HttpMethod"><a class="viewcode-back" href="../models.html#models.HttpMethod">[docs]</a><span class="k">class</span> <span class="nc">HttpMethod</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    http request method</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">method</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HttpRequestMessage"><a class="viewcode-back" href="../models.html#models.HttpRequestMessage">[docs]</a><span class="k">class</span> <span class="nc">HttpRequestMessage</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Http request view model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIVersion</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">HttpContent</span><span class="p">)</span> 
+    <span class="n">method</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">HttpMethod</span><span class="p">)</span>
+    <span class="n">requestUri</span> <span class="o">=</span> <span class="n">URLField</span><span class="p">()</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">proertiews</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HttpResponseMessage"><a class="viewcode-back" href="../models.html#models.HttpResponseMessage">[docs]</a><span class="k">class</span> <span class="nc">HttpResponseMessage</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    http response message view model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIVersion</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">HttpContent</span><span class="p">)</span> 
+    <span class="n">statusCode</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="n">reasonPhrase</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">headers</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">requestMessage</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">HttpRequestMessage</span><span class="p">)</span>
+    <span class="n">isSuccessStatusCode</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">BoolField</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Token"><a class="viewcode-back" href="../models.html#models.Token">[docs]</a><span class="k">class</span>  <span class="nc">Token</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class to work with the tokens</span>
+<span class="sd">    Supported token: JWT</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">tokenType</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">tokenValue</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="APIBase"><a class="viewcode-back" href="../models.html#models.APIBase">[docs]</a><span class="k">class</span> <span class="nc">APIBase</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Basic for all classes with selfUrl</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">selfUrl</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{name}</span><span class="s1"> </span><span class="si">{url}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selfUrl</span><span class="p">)</span>
+
+
+
+<div class="viewcode-block" id="APIBase.get"><a class="viewcode-back" href="../models.html#models.APIBase.get">[docs]</a>    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get the object as json readable structure (dict)</span>
+
+<span class="sd">        :return: json </span>
+<span class="sd">        :rtype: json</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_struct</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="APIBase.set"><a class="viewcode-back" href="../models.html#models.APIBase.set">[docs]</a>    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        set the object content </span>
+
+<span class="sd">        :param json data: the data for the object in json format</span>
+<span class="sd">        :return: json </span>
+<span class="sd">        :rtype: json</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># takes existing fields and sets its value from the input data</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">field</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iterate_over_fields</span><span class="p">():</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;name: </span><span class="si">{0}</span><span class="s1"> - value: </span><span class="si">{1}</span><span class="s1"> - type: </span><span class="si">{2}</span><span class="s1">&#39;</span><span class="o">.</span> <span class="nb">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="nb">type</span><span class="p">(</span><span class="n">field</span><span class="p">)))</span>
+            <span class="n">field</span><span class="o">.</span><span class="n">__set__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">name</span><span class="p">])</span></div>
+
+  
+<div class="viewcode-block" id="APIBase.show"><a class="viewcode-back" href="../models.html#models.APIBase.show">[docs]</a>    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        show the object as json readable structure (dict), nicely formated</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_struct</span><span class="p">(),</span> <span class="n">sort_keys</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">4</span><span class="p">))</span></div>
+
+
+    
+<div class="viewcode-block" id="APIBase.save"><a class="viewcode-back" href="../models.html#models.APIBase.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fp</span> <span class="o">=</span> <span class="s1">&#39;object.json&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        save the object as json to the given filepath</span>
+
+<span class="sd">        :params Path fp: the filepath to the file</span>
+<span class="sd">        :return: the path to the stored file</span>
+<span class="sd">        :rtype: Path</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">fp</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fp</span><span class="o">.</span><span class="n">touch</span><span class="p">()</span>
+            
+
+        <span class="k">with</span> <span class="n">fp</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+            <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_struct</span><span class="p">(),</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">indent</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">fp</span></div></div>
+
+
+<div class="viewcode-block" id="APIBaseID"><a class="viewcode-back" href="../models.html#models.APIBaseID">[docs]</a><span class="k">class</span> <span class="nc">APIBaseID</span><span class="p">(</span><span class="n">APIBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    id and selfUrl</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="si">{name}</span><span class="s1"> </span><span class="si">{url}</span><span class="s1"> </span><span class="si">{selfname}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="n">selfname</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="APIBaseExt"><a class="viewcode-back" href="../models.html#models.APIBaseExt">[docs]</a><span class="k">class</span> <span class="nc">APIBaseExt</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    id, name, display name and selfUrl</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">displayName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="APIBaseN3"><a class="viewcode-back" href="../models.html#models.APIBaseN3">[docs]</a><span class="k">class</span> <span class="nc">APIBaseN3</span><span class="p">(</span><span class="n">APIBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    for semantic triple storage</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">subject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBaseExt</span><span class="p">)</span> <span class="c1"># will be most likely a APIBaseExt</span>
+    <span class="n">predicate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBaseExt</span><span class="p">)</span> <span class="c1"># will be most likely a APIBaseExt</span>
+    <span class="nb">object</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBaseExt</span><span class="p">)</span> <span class="c1"># will be most likely a APIBaseExt</span></div>
+
+
+<div class="viewcode-block" id="Preview"><a class="viewcode-back" href="../models.html#models.Preview">[docs]</a><span class="k">class</span> <span class="nc">Preview</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="n">imageUrl</span> <span class="o">=</span> <span class="n">URLField</span><span class="p">()</span>
+    <span class="n">thumbnailUrl</span> <span class="o">=</span> <span class="n">URLField</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Pagination"><a class="viewcode-back" href="../models.html#models.Pagination">[docs]</a><span class="k">class</span> <span class="nc">Pagination</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for Pagination results</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">totalCount</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">pagination</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">PaginationParameter</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span> <span class="c1">#generic dict in order to retain all the keys</span>
+    <span class="n">nextPageUrl</span> <span class="o">=</span> <span class="n">URLField</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Pagination.firstUrlInPage"><a class="viewcode-back" href="../models.html#models.Pagination.firstUrlInPage">[docs]</a>    <span class="k">def</span> <span class="nf">firstUrlInPage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        get the selfurl of the first item in the paginated list</span>
+<span class="sd">        </span>
+<span class="sd">        :return: selfUrl</span>
+<span class="sd">        :rtype: string</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">firstItem</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">firstItem</span><span class="o">.</span><span class="n">selfUrl</span></div></div>
+
+
+
+
+<span class="c1">################################################</span>
+<span class="c1">#FILES</span>
+<span class="c1">################################################</span>
+
+<div class="viewcode-block" id="File"><a class="viewcode-back" href="../models.html#models.File">[docs]</a><span class="k">class</span> <span class="nc">File</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="n">createdDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">downloadUrl</span> <span class="o">=</span> <span class="n">URLField</span><span class="p">()</span>
+    <span class="n">originalFileName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">anonymizedFileHashCode</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="n">fileHashCode</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">objects</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">Pagination</span><span class="p">)</span> <span class="c1">#ObjectPagination</span></div>
+
+
+
+<span class="c1">################################################</span>
+<span class="c1">#FOLDER</span>
+<span class="c1">################################################</span>
+<div class="viewcode-block" id="Folder"><a class="viewcode-back" href="../models.html#models.Folder">[docs]</a><span class="k">class</span> <span class="nc">Folder</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">level</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="n">parentFolder</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">childFolders</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span><span class="c1">#fields.ListField([ &#39;Folder&#39;])</span>
+    <span class="n">folderGroupRights</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">folderUserRights</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">containedObjects</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FolderPagination"><a class="viewcode-back" href="../models.html#models.FolderPagination">[docs]</a><span class="k">class</span> <span class="nc">FolderPagination</span><span class="p">(</span><span class="n">Pagination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for Pagination results containing folders</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">Folder</span><span class="p">)</span></div>
+
+
+
+<span class="c1">################################################</span>
+<span class="c1">#FOLDER RIGHTS</span>
+<span class="c1">################################################</span>
+
+<div class="viewcode-block" id="FolderRight"><a class="viewcode-back" href="../models.html#models.FolderRight">[docs]</a><span class="k">class</span> <span class="nc">FolderRight</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    represents a folder right</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">rightValue</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="FolderRightPagination"><a class="viewcode-back" href="../models.html#models.FolderRightPagination">[docs]</a><span class="k">class</span> <span class="nc">FolderRightPagination</span><span class="p">(</span><span class="n">Pagination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for pagination result containing folder rights</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">FolderRight</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FolderRightSet"><a class="viewcode-back" href="../models.html#models.FolderRightSet">[docs]</a><span class="k">class</span> <span class="nc">FolderRightSet</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    folder rights set </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">folderRights</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FolderRightSetPagination"><a class="viewcode-back" href="../models.html#models.FolderRightSetPagination">[docs]</a><span class="k">class</span> <span class="nc">FolderRightSetPagination</span><span class="p">(</span><span class="n">Pagination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for pagination result containing folder rights</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">FolderRightSet</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FolderGroupRight"><a class="viewcode-back" href="../models.html#models.FolderGroupRight">[docs]</a><span class="k">class</span> <span class="nc">FolderGroupRight</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    relations between folder, group and right (permission)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">relatedFolder</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">relatedGroup</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">relatedRights</span><span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="FolderUserRight"><a class="viewcode-back" href="../models.html#models.FolderUserRight">[docs]</a><span class="k">class</span> <span class="nc">FolderUserRight</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    relations between folder, user and right (permission)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">relatedFolder</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">relatedUser</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">relatedRights</span><span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FolderGroupRightPagination"><a class="viewcode-back" href="../models.html#models.FolderGroupRightPagination">[docs]</a><span class="k">class</span> <span class="nc">FolderGroupRightPagination</span><span class="p">(</span><span class="n">Pagination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for pagination result containing folder group rights</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">FolderGroupRight</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="FolderUserRightPagination"><a class="viewcode-back" href="../models.html#models.FolderUserRightPagination">[docs]</a><span class="k">class</span> <span class="nc">FolderUserRightPagination</span><span class="p">(</span><span class="n">Pagination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for pagination result containing folder userrights</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">FolderUserRight</span><span class="p">)</span></div>
+
+
+
+
+
+
+<span class="c1">################################################</span>
+<span class="c1">#GROUP</span>
+<span class="c1">################################################</span>
+
+<div class="viewcode-block" id="Group"><a class="viewcode-back" href="../models.html#models.Group">[docs]</a><span class="k">class</span> <span class="nc">Group</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    class for groups </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">chief</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="GroupPagination"><a class="viewcode-back" href="../models.html#models.GroupPagination">[docs]</a><span class="k">class</span> <span class="nc">GroupPagination</span><span class="p">(</span><span class="n">Pagination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    class for pagination results containing groups</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">Group</span><span class="p">)</span></div>
+
+
+
+
+
+<span class="c1">################################################</span>
+<span class="c1">#LICENSES</span>
+<span class="c1">################################################</span>
+
+<div class="viewcode-block" id="License"><a class="viewcode-back" href="../models.html#models.License">[docs]</a><span class="k">class</span> <span class="nc">License</span><span class="p">(</span><span class="n">APIBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    class for licenses</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="LicensePagination"><a class="viewcode-back" href="../models.html#models.LicensePagination">[docs]</a><span class="k">class</span> <span class="nc">LicensePagination</span><span class="p">(</span><span class="n">Pagination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    class for pagination results containing groups</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">License</span><span class="p">)</span></div>
+
+
+
+
+<span class="c1">################################################</span>
+<span class="c1">#MODALITY</span>
+<span class="c1">################################################</span>
+
+<div class="viewcode-block" id="Modality"><a class="viewcode-back" href="../models.html#models.Modality">[docs]</a><span class="k">class</span> <span class="nc">Modality</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ModalityPagination"><a class="viewcode-back" href="../models.html#models.ModalityPagination">[docs]</a><span class="k">class</span> <span class="nc">ModalityPagination</span><span class="p">(</span><span class="n">Pagination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    class for pagination results containing modalities</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">Modality</span><span class="p">)</span></div>
+
+
+
+<span class="c1">################################################</span>
+<span class="c1">#OBJECTS LINKS</span>
+<span class="c1">################################################</span>
+<div class="viewcode-block" id="ObjectLinks"><a class="viewcode-back" href="../models.html#models.ObjectLinks">[docs]</a><span class="k">class</span> <span class="nc">ObjectLinks</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    a link betwen two objects</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">object1</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">object2</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span></div>
+
+
+
+<span class="c1">################################################</span>
+<span class="c1">#OBJECTS ONTOLOGY &amp; ONTOLOGY</span>
+<span class="c1">################################################</span>
+<div class="viewcode-block" id="ObjectOntology"><a class="viewcode-back" href="../models.html#models.ObjectOntology">[docs]</a><span class="k">class</span> <span class="nc">ObjectOntology</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A relation between an object and an ontology item</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="nb">object</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">ontologyItem</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="OntologyItem"><a class="viewcode-back" href="../models.html#models.OntologyItem">[docs]</a><span class="k">class</span> <span class="nc">OntologyItem</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An ontology item</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">term</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="OntologyItemPagination"><a class="viewcode-back" href="../models.html#models.OntologyItemPagination">[docs]</a><span class="k">class</span> <span class="nc">OntologyItemPagination</span><span class="p">(</span><span class="n">Pagination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    class for pagination results containing ontology items</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">OntologyItem</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="OntologyOptions"><a class="viewcode-back" href="../models.html#models.OntologyOptions">[docs]</a><span class="k">class</span> <span class="nc">OntologyOptions</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    additional information for the ontologies resource.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">types</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span></div>
+
+<span class="c1">################################################</span>
+<span class="c1">#OBJECTS RIGHTS</span>
+<span class="c1">################################################</span>
+<div class="viewcode-block" id="ObjectRight"><a class="viewcode-back" href="../models.html#models.ObjectRight">[docs]</a><span class="k">class</span> <span class="nc">ObjectRight</span><span class="p">(</span><span class="n">APIBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Represents an object right.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">rightValue</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ObjectRightPagination"><a class="viewcode-back" href="../models.html#models.ObjectRightPagination">[docs]</a><span class="k">class</span> <span class="nc">ObjectRightPagination</span><span class="p">(</span><span class="n">Pagination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    class for pagination results containing object rights</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">ObjectRight</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ObjectRightSet"><a class="viewcode-back" href="../models.html#models.ObjectRightSet">[docs]</a><span class="k">class</span> <span class="nc">ObjectRightSet</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    object rights set </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">objectRights</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ObjectRightSetPagination"><a class="viewcode-back" href="../models.html#models.ObjectRightSetPagination">[docs]</a><span class="k">class</span> <span class="nc">ObjectRightSetPagination</span><span class="p">(</span><span class="n">Pagination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for pagination result containing object rights</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">ObjectRightSet</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ObjectGroupRight"><a class="viewcode-back" href="../models.html#models.ObjectGroupRight">[docs]</a><span class="k">class</span> <span class="nc">ObjectGroupRight</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    relations between object, group and right (permission)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">relatedObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">relatedGroup</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">relatedRights</span><span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ObjectUserRight"><a class="viewcode-back" href="../models.html#models.ObjectUserRight">[docs]</a><span class="k">class</span> <span class="nc">ObjectUserRight</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    relations between object, user and right (permission)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">relatedObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">relatedUser</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">relatedRights</span><span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ObjectGroupRightPagination"><a class="viewcode-back" href="../models.html#models.ObjectGroupRightPagination">[docs]</a><span class="k">class</span> <span class="nc">ObjectGroupRightPagination</span><span class="p">(</span><span class="n">Pagination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for pagination result containing object group rights</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">FolderGroupRight</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ObjectUserRightPagination"><a class="viewcode-back" href="../models.html#models.ObjectUserRightPagination">[docs]</a><span class="k">class</span> <span class="nc">ObjectUserRightPagination</span><span class="p">(</span><span class="n">Pagination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for pagination result containing object userrights</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">ObjectUserRight</span><span class="p">)</span></div>
+
+
+
+<span class="c1">################################################</span>
+<span class="c1">#OBJECTS</span>
+<span class="c1">################################################</span>
+
+<div class="viewcode-block" id="ObjectType"><a class="viewcode-back" href="../models.html#models.ObjectType">[docs]</a><span class="k">class</span> <span class="nc">ObjectType</span><span class="p">(</span><span class="n">APIBase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    for semantic triple storage</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">displayName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>   
+    <span class="n">displayNameShort</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="APIObject"><a class="viewcode-back" href="../models.html#models.APIObject">[docs]</a><span class="k">class</span> <span class="nc">APIObject</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    base object class</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">createdDate</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">description</span>  <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">ontologyCount</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">ObjectType</span><span class="p">)</span>
+    <span class="n">downloadUrl</span> <span class="o">=</span> <span class="n">URLField</span><span class="p">()</span>
+    <span class="n">license</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">Pagination</span><span class="p">)</span>
+    <span class="n">linkedObjects</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">Pagination</span><span class="p">)</span>
+    <span class="n">linkedObjectRelations</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">Pagination</span><span class="p">)</span>
+    <span class="n">ontologyItems</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">Pagination</span><span class="p">)</span>
+    <span class="n">ontologyItemRelations</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">Pagination</span><span class="p">)</span>
+    <span class="n">objectPreviews</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">Preview</span><span class="p">)</span>
+    <span class="n">objectGroupRights</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">ObjectGroupRight</span><span class="p">)</span>
+    <span class="n">objectUserRights</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">ObjectUserRight</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="ObjectPagination"><a class="viewcode-back" href="../models.html#models.ObjectPagination">[docs]</a><span class="k">class</span> <span class="nc">ObjectPagination</span><span class="p">(</span><span class="n">Pagination</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for Pagination results containing objects</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">APIObject</span><span class="p">)</span></div>
+
+<span class="c1">################################################</span>
+<span class="c1">#specification for Object types</span>
+<span class="c1">################################################</span>
+
+
+<div class="viewcode-block" id="RawImageData"><a class="viewcode-back" href="../models.html#models.RawImageData">[docs]</a><span class="k">class</span> <span class="nc">RawImageData</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    raw image attributes</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sliceThickness</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
+    <span class="n">kilovoltPeak</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
+    <span class="n">spaceBetweenSlices</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
+    <span class="n">modality</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">Modality</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="RawImageObject"><a class="viewcode-back" href="../models.html#models.RawImageObject">[docs]</a><span class="k">class</span> <span class="nc">RawImageObject</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for raw image view model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">rawImage</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">RawImageData</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="SegmentationImageData"><a class="viewcode-back" href="../models.html#models.SegmentationImageData">[docs]</a><span class="k">class</span> <span class="nc">SegmentationImageData</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    segmentation specific attributes</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">methodDescription</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">segmentationMethod</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span> </div>
+    <span class="c1">#{u&#39;displayName&#39;: u&#39;Manual&#39;, u&#39;id&#39;: 3, u&#39;selfUrl&#39;: u&#39;https://www.virtualskeleton.ch/api/segmentation_methods/3&#39;, u&#39;name&#39;: u&#39;Manual&#39;})</span>
+
+<div class="viewcode-block" id="SegmentationImageObject"><a class="viewcode-back" href="../models.html#models.SegmentationImageObject">[docs]</a><span class="k">class</span> <span class="nc">SegmentationImageObject</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for segmenation image view model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">segmentationImage</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">SegmentationImageData</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="StatisticalModelObject"><a class="viewcode-back" href="../models.html#models.StatisticalModelObject">[docs]</a><span class="k">class</span> <span class="nc">StatisticalModelObject</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for Statistical model view model - empty</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+
+<div class="viewcode-block" id="SurfaceModelData"><a class="viewcode-back" href="../models.html#models.SurfaceModelData">[docs]</a><span class="k">class</span> <span class="nc">SurfaceModelData</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    attributes of surface model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">vectorCount</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="n">minX</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
+    <span class="n">minY</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
+    <span class="n">minZ</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
+    <span class="n">maxX</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
+    <span class="n">maxY</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span>
+    <span class="n">maxZ</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">FloatField</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="SurfaceModelObject"><a class="viewcode-back" href="../models.html#models.SurfaceModelObject">[docs]</a><span class="k">class</span> <span class="nc">SurfaceModelObject</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for surface model view model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">surfaceModel</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">SurfaceModelData</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="SubjectData"><a class="viewcode-back" href="../models.html#models.SubjectData">[docs]</a><span class="k">class</span> <span class="nc">SubjectData</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    attributes for subject data</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">subjectKey</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="SubjectObject"><a class="viewcode-back" href="../models.html#models.SubjectObject">[docs]</a><span class="k">class</span> <span class="nc">SubjectObject</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for Subject view model</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">subject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">SubjectData</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ClinicalStudyDataObject"><a class="viewcode-back" href="../models.html#models.ClinicalStudyDataObject">[docs]</a><span class="k">class</span> <span class="nc">ClinicalStudyDataObject</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for clinical trial data view model  - empty</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">subject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">SubjectData</span><span class="p">)</span>
+    <span class="n">clinicalStudyDefinition</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ClincalStudyDefinitionData"><a class="viewcode-back" href="../models.html#models.ClincalStudyDefinitionData">[docs]</a><span class="k">class</span> <span class="nc">ClincalStudyDefinitionData</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    attributes for clinical study definition</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">studyOID</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">studyName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">studyDescription</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">protocolName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">metaDataVersionOID</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">metaDataVersionName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ClinicalStudyDefinitionObject"><a class="viewcode-back" href="../models.html#models.ClinicalStudyDefinitionObject">[docs]</a><span class="k">class</span> <span class="nc">ClinicalStudyDefinitionObject</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for clinical trail definition view model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">clincalStudyDefinition</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">ClincalStudyDefinitionData</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="GenomicPlatformObject"><a class="viewcode-back" href="../models.html#models.GenomicPlatformObject">[docs]</a><span class="k">class</span> <span class="nc">GenomicPlatformObject</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for  genomic platform view model - empty</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="GenomicSeriesObject"><a class="viewcode-back" href="../models.html#models.GenomicSeriesObject">[docs]</a><span class="k">class</span> <span class="nc">GenomicSeriesObject</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for genomic series view model - empty</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="GenomicSampleObject"><a class="viewcode-back" href="../models.html#models.GenomicSampleObject">[docs]</a><span class="k">class</span> <span class="nc">GenomicSampleObject</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for genomic sample view model - empty</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="StudyObject"><a class="viewcode-back" href="../models.html#models.StudyObject">[docs]</a><span class="k">class</span> <span class="nc">StudyObject</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for study </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="PlainObject"><a class="viewcode-back" href="../models.html#models.PlainObject">[docs]</a><span class="k">class</span> <span class="nc">PlainObject</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for plain (undefined object) model view model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="PlainSubjectObject"><a class="viewcode-back" href="../models.html#models.PlainSubjectObject">[docs]</a><span class="k">class</span> <span class="nc">PlainSubjectObject</span><span class="p">(</span><span class="n">APIObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    API class for plain subject (undefined subject object) model view model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="ObjectOptions"><a class="viewcode-back" href="../models.html#models.ObjectOptions">[docs]</a><span class="k">class</span> <span class="nc">ObjectOptions</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    class for additional information of the API objects</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">genomicPlatform</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">GenomicPlatformObject</span><span class="p">)</span>
+    <span class="n">genomicSample</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">GenomicSampleObject</span><span class="p">)</span>
+    <span class="n">genomicSeries</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">GenomicSeriesObject</span><span class="p">)</span>
+    <span class="n">rawImage</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">RawImageObject</span><span class="p">)</span>
+    <span class="n">segmentationImage</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">SegmentationImageObject</span><span class="p">)</span>
+    <span class="n">statisticalModel</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">StatisticalModelObject</span><span class="p">)</span>
+    <span class="n">clinicalStudyData</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">ClinicalStudyDataObject</span><span class="p">)</span>
+    <span class="n">clinicalStudyDefinition</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">ClinicalStudyDefinitionObject</span><span class="p">)</span>
+    <span class="n">study</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">StudyObject</span><span class="p">)</span>
+    <span class="n">subject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">StudyObject</span><span class="p">)</span>
+    <span class="n">surfaceModel</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">SurfaceModelObject</span><span class="p">)</span></div>
+
+
+<span class="c1">################################################</span>
+<span class="c1">#SEGMENTATION METHOD</span>
+<span class="c1">################################################</span>
+
+
+<div class="viewcode-block" id="SegmentationMethod"><a class="viewcode-back" href="../models.html#models.SegmentationMethod">[docs]</a><span class="k">class</span> <span class="nc">SegmentationMethod</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    segmentation methods view model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">displayName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span></div>
+
+
+
+<span class="c1">################################################</span>
+<span class="c1">#SEARCH</span>
+<span class="c1">################################################</span>
+<div class="viewcode-block" id="DynamicSearchLogicalOperator"><a class="viewcode-back" href="../models.html#models.DynamicSearchLogicalOperator">[docs]</a><span class="k">class</span> <span class="nc">DynamicSearchLogicalOperator</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    logical operator view model</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">displayName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DynamicSearchComparisonOperator"><a class="viewcode-back" href="../models.html#models.DynamicSearchComparisonOperator">[docs]</a><span class="k">class</span> <span class="nc">DynamicSearchComparisonOperator</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    docstring </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">displayName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="n">typeaheadUrl</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DynamicSearchSourceField"><a class="viewcode-back" href="../models.html#models.DynamicSearchSourceField">[docs]</a><span class="k">class</span> <span class="nc">DynamicSearchSourceField</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    fiels view model for dynamic search</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">displayName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="n">comparisonOperators</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">DynamicSearchComparisonOperator</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DynamicSearchSourceType"><a class="viewcode-back" href="../models.html#models.DynamicSearchSourceType">[docs]</a><span class="k">class</span> <span class="nc">DynamicSearchSourceType</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    source type view model for search</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">displayName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">IntField</span><span class="p">()</span>
+    <span class="n">sourceFields</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">DynamicSearchSourceField</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DynamicSearchOptions"><a class="viewcode-back" href="../models.html#models.DynamicSearchOptions">[docs]</a><span class="k">class</span> <span class="nc">DynamicSearchOptions</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; for DynamicSearchOptions&quot;&quot;&quot;</span>
+    
+    <span class="n">logicalOperators</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">DynamicSearchLogicalOperator</span><span class="p">)</span>
+    <span class="n">sourceTypes</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">DynamicSearchSourceType</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DynamicSearchInputItem"><a class="viewcode-back" href="../models.html#models.DynamicSearchInputItem">[docs]</a><span class="k">class</span> <span class="nc">DynamicSearchInputItem</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; docstring&quot;&quot;&quot;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIObject</span><span class="p">)</span>
+    <span class="n">displayName</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span>
+    <span class="n">isTypeahead</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">BoolField</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="DynamicSearchCondition"><a class="viewcode-back" href="../models.html#models.DynamicSearchCondition">[docs]</a><span class="k">class</span> <span class="nc">DynamicSearchCondition</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;docstring &quot;&quot;&quot;</span>
+    <span class="n">sourceField</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">DynamicSearchSourceField</span><span class="p">)</span>
+    <span class="n">comparisonOperator</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">DynamicSearchComparisonOperator</span><span class="p">)</span>
+    <span class="n">inputItem</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">DynamicSearchInputItem</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="DynamicSearchGroup"><a class="viewcode-back" href="../models.html#models.DynamicSearchGroup">[docs]</a><span class="k">class</span> <span class="nc">DynamicSearchGroup</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;docstring&quot;&quot;&quot;</span>
+
+    <span class="n">sourceType</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">DynamicSearchSourceType</span><span class="p">)</span>
+    <span class="n">logicalOperator</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">DynamicSearchLogicalOperator</span><span class="p">)</span>
+    <span class="n">conditions</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="n">DynamicSearchCondition</span><span class="p">)</span>
+    <span class="n">groups</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">ListField</span><span class="p">(</span><span class="nb">dict</span><span class="p">)</span> <span class="c1"># DynamicSearchGroup -&gt; recursive...</span></div>
+
+<span class="c1">################################################</span>
+<span class="c1">#UPLOAD</span>
+<span class="c1">################################################</span>
+<div class="viewcode-block" id="UploadResponse"><a class="viewcode-back" href="../models.html#models.UploadResponse">[docs]</a><span class="k">class</span> <span class="nc">UploadResponse</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Base</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    a response consisting of a combination between a file and an object after the upload</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span>
+    <span class="n">relatedObject</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">EmbeddedField</span><span class="p">(</span><span class="n">APIBase</span><span class="p">)</span></div>
+
+
+
+
+<span class="c1">################################################</span>
+<span class="c1">#USERS</span>
+<span class="c1">################################################</span>
+<div class="viewcode-block" id="User"><a class="viewcode-back" href="../models.html#models.User">[docs]</a><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">APIBaseID</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Users of the repository</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">username</span> <span class="o">=</span> <span class="n">fields</span><span class="o">.</span><span class="n">StringField</span><span class="p">()</span></div>
+
+
+
+<span class="c1">###############################</span>
+<span class="c1"># API url dictionary</span>
+<span class="c1">############################</span>
+<span class="n">resourceTypes</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;files&#39;</span><span class="p">:</span> <span class="n">File</span><span class="p">,</span>
+    <span class="s1">&#39;folders&#39;</span><span class="p">:</span> <span class="n">Folder</span><span class="p">,</span>
+    <span class="s1">&#39;objects&#39;</span><span class="p">:</span> <span class="n">APIObject</span><span class="p">,</span>
+    <span class="s1">&#39;object-links&#39;</span> <span class="p">:</span> <span class="n">ObjectLinks</span>
+<span class="p">}</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Michael Kistler.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.8.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

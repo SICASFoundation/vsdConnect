@@ -1,0 +1,18 @@
+vsdConnect package
+==================
+
+Submodules
+----------
+
+.. toctree::
+
+   connect
+   models
+
+Module contents
+---------------
+
+.. automodule:: vsdConnect
+    :members:
+    :undoc-members:
+    :show-inheritance:

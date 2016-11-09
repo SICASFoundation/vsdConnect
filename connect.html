@@ -1,0 +1,1709 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>vsdConnect.connect module &mdash; VSDConnect 0.8.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="VSDConnect 0.8.1 documentation" href="index.html"/>
+        <link rel="next" title="vsdConnect.models module" href="models.html"/>
+        <link rel="prev" title="Welcome to VSDConnect’s documentation!" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> VSDConnect
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">vsdConnect.connect module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#infos">INFOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changes">CHANGES</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">vsdConnect.models module</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">VSDConnect</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>vsdConnect.connect module</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/connect.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-connect">
+<span id="vsdconnect-connect-module"></span><h1>vsdConnect.connect module<a class="headerlink" href="#module-connect" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="infos">
+<h2>INFOS<a class="headerlink" href="#infos" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>connect 0.8.1</li>
+<li>python version: 3.5</li>
+<li>&#64;author: Michael Kistler 2015, Livia B 2016</li>
+</ul>
+</div>
+<div class="section" id="changes">
+<h2>CHANGES<a class="headerlink" href="#changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>changed / added JwT auth</li>
+<li>added models module</li>
+</ul>
+<dl class="class">
+<dt id="connect.JWTAuth">
+<em class="property">class </em><code class="descclassname">connect.</code><code class="descname">JWTAuth</code><span class="sig-paren">(</span><em>enctoken</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#JWTAuth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.JWTAuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">requests.auth.AuthBase</span></code></p>
+<p>Attaches JMT to the given Request object. extends the request package auth class</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="connect.SAMLAuth">
+<em class="property">class </em><code class="descclassname">connect.</code><code class="descname">SAMLAuth</code><span class="sig-paren">(</span><em>enctoken</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#SAMLAuth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.SAMLAuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">requests.auth.AuthBase</span></code></p>
+<p>Attaches SMAL to the given Request object. extends the request package auth class</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="connect.VSDConnecter">
+<em class="property">class </em><code class="descclassname">connect.</code><code class="descname">VSDConnecter</code><span class="sig-paren">(</span><em>authtype='jwt'</em>, <em>url='https://demo.virtualskeleton.ch/api/'</em>, <em>username='demo&#64;virtualskeleton.ch'</em>, <em>password='demo'</em>, <em>version=''</em>, <em>token=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="connect.VSDConnecter.addLink">
+<code class="descname">addLink</code><span class="sig-paren">(</span><em>obj1</em>, <em>obj2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.addLink"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.addLink" title="Permalink to this definition">¶</a></dt>
+<dd><p>add an object link</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>obj1</strong> (<a class="reference internal" href="models.html#models.APIBase" title="models.APIBase"><em>APIBase</em></a>) &#8211; a linked object with selfUrl</li>
+<li><strong>obj2</strong> (<a class="reference internal" href="models.html#models.APIBase" title="models.APIBase"><em>APIBase</em></a>) &#8211; a linked object with selfUrl</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the created object-link</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">json</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.addObjectToFolder">
+<code class="descname">addObjectToFolder</code><span class="sig-paren">(</span><em>target</em>, <em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.addObjectToFolder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.addObjectToFolder" title="Permalink to this definition">¶</a></dt>
+<dd><p>add an object to the folder</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>target</strong> (<a class="reference internal" href="models.html#models.Folder" title="models.Folder"><em>Folder</em></a>) &#8211; the target folder</li>
+<li><strong>obj</strong> (<em>Object</em>) &#8211; the object to copy</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">updated folder</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="models.html#models.Folder" title="models.Folder">Folder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.addOntologyToObject">
+<code class="descname">addOntologyToObject</code><span class="sig-paren">(</span><em>obj</em>, <em>ontology</em>, <em>pos=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.addOntologyToObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.addOntologyToObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>add an ontoly term to an object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>obj</strong> (<a class="reference internal" href="models.html#models.APIBase" title="models.APIBase"><em>APIBase</em></a>) &#8211; basic object</li>
+<li><strong>ontology</strong> (<em>Ontology</em>) &#8211; ontology object</li>
+<li><strong>pos</strong> (<em>int</em>) &#8211; position of the ontology term, default = 1</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">returns true if successfully added</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.checkFileInObject">
+<code class="descname">checkFileInObject</code><span class="sig-paren">(</span><em>obj</em>, <em>fp</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.checkFileInObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.checkFileInObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if a local file is part of an object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>obj</strong> (<a class="reference internal" href="models.html#models.APIObject" title="models.APIObject"><em>APIObject</em></a>) &#8211; API object</li>
+<li><strong>fp</strong> (<em>Path</em>) &#8211; file to test</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">if contained or not</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.chunkFileUpload">
+<code class="descname">chunkFileUpload</code><span class="sig-paren">(</span><em>fp</em>, <em>chunksize=4194304</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.chunkFileUpload"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.chunkFileUpload" title="Permalink to this definition">¶</a></dt>
+<dd><p>upload large files in chunks of max 100 MB size</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fp</strong> (<em>Path</em>) &#8211; the file to upload</li>
+<li><strong>chunksize</strong> (<em>int</em>) &#8211; size in bytes of the chunk parts, default is 4MB</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the generated object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="models.html#models.APIObject" title="models.APIObject">APIObject</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.chunkedread">
+<code class="descname">chunkedread</code><span class="sig-paren">(</span><em>fp</em>, <em>chunksize</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.chunkedread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.chunkedread" title="Permalink to this definition">¶</a></dt>
+<dd><p>breaks the file into chunks of chunksize</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fp</strong> (<em>Path</em>) &#8211; the file to chunk</li>
+<li><strong>chunksize</strong> (<em>int</em>) &#8211; size in bytes of the chunk parts</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first last">chunk</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.createFolderStructure">
+<code class="descname">createFolderStructure</code><span class="sig-paren">(</span><em>rootfolder</em>, <em>filepath</em>, <em>parents</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.createFolderStructure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.createFolderStructure" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates the folders based on the filepath if not already existing,
+starting from the rootfolder</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rootfolder</strong> (<a class="reference internal" href="models.html#models.Folder" title="models.Folder"><em>Folder</em></a>) &#8211; the root folder object</li>
+<li><strong>filepath</strong> (<em>Path</em>) &#8211; filepath of the file</li>
+<li><strong>parents</strong> (<em>int</em>) &#8211; number of partent levels to create from file folder</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the last folder in the tree</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="models.html#models.Folder" title="models.Folder">Folder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.createObject">
+<code class="descname">createObject</code><span class="sig-paren">(</span><em>response=None</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.createObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.createObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>please describe the purpose here</p>
+<p>convert  fields to response dict
+how to use it?, cant we use: json.dumps(self.to_struct())</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>response</strong> (<em>bool</em>) &#8211; <p>???</p>
+</li>
+<li><strong>**kwargs</strong> &#8211; <p>???</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.delObject">
+<code class="descname">delObject</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.delObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.delObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>delete an unvalidated object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="models.html#models.APIObject" title="models.APIObject"><em>APIObject</em></a>) &#8211; the object to delete</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">status_code</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.delRequest">
+<code class="descname">delRequest</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.delRequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.delRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>generic delete request</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resource</strong> (<em>str</em>) &#8211; resource path</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">status_code</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">int</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.deleteFolder">
+<code class="descname">deleteFolder</code><span class="sig-paren">(</span><em>folder</em>, <em>recursive=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.deleteFolder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.deleteFolder" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove a folder (Folder)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>folder</strong> (<a class="reference internal" href="models.html#models.Folder" title="models.Folder"><em>Folder</em></a>) &#8211; the folder object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if deleted, False if not</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.deleteFolderContent">
+<code class="descname">deleteFolderContent</code><span class="sig-paren">(</span><em>folder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.deleteFolderContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.deleteFolderContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>delete all content from a folder (Folder)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>folder</strong> (<a class="reference internal" href="models.html#models.Folder" title="models.Folder"><em>Folder</em></a>) &#8211; a folder object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return state:</th><td class="field-body">returns true if successful, else False</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.downloadObject">
+<code class="descname">downloadObject</code><span class="sig-paren">(</span><em>obj</em>, <em>workingDir=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.downloadObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.downloadObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>download the object into a ZIP file based on the object name and the working directory</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>obj</strong> (<a class="reference internal" href="models.html#models.APIObject" title="models.APIObject"><em>APIObject</em></a>) &#8211; object</li>
+<li><strong>workingDir</strong> (<em>Path</em>) &#8211; workpath, where to store the zip</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">None or filename</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">str</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.downloadObjectPreviewImages">
+<code class="descname">downloadObjectPreviewImages</code><span class="sig-paren">(</span><em>object</em>, <em>thumbnail=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.downloadObjectPreviewImages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.downloadObjectPreviewImages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.downloadZip">
+<code class="descname">downloadZip</code><span class="sig-paren">(</span><em>resource</em>, <em>fp</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.downloadZip"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.downloadZip" title="Permalink to this definition">¶</a></dt>
+<dd><p>download the zipfile into the given file (fp)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resource</strong> (<em>str</em>) &#8211; download URL</li>
+<li><strong>fp</strong> (<em>Path</em>) &#8211; filepath</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">None or status_code ok (200)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.fileObjectVersion">
+<code class="descname">fileObjectVersion</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.fileObjectVersion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.fileObjectVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract VSDID and selfUrl of the related Object Version of the file after file upload</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>json</em>) &#8211; file object data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Result:</th><td class="field-body">returns the id and the selfUrl of the Object Version</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.fullUrl">
+<code class="descname">fullUrl</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.fullUrl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.fullUrl" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if resource is selfUrl or relative path. a correct full path will be returned</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resource</strong> (<em>str</em>) &#8211; the api resource path</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the full resource path</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getAllPaginated">
+<code class="descname">getAllPaginated</code><span class="sig-paren">(</span><em>resource</em>, <em>itemlist=[]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getAllPaginated"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getAllPaginated" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns all items as list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resource</strong> (<em>str</em>) &#8211; resource path</li>
+<li><strong>itemlist</strong> (<em>list</em>) &#8211; list of items</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of items</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of Pagination objects</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getAllUnpublishedObjects">
+<code class="descname">getAllUnpublishedObjects</code><span class="sig-paren">(</span><em>resource='objects/unpublished'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getAllUnpublishedObjects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getAllUnpublishedObjects" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve the unpublished objects as list of APIObject</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resource</strong> (<em>str</em>) &#8211; resource path (eg nextPageUrl) or default groups</li>
+<li><strong>rpp</strong> (<em>int</em>) &#8211; results per page</li>
+<li><strong>page</strong> (<em>int</em>) &#8211; page to display</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of objects</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">APIObjects</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getContainedFolders">
+<code class="descname">getContainedFolders</code><span class="sig-paren">(</span><em>folder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getContainedFolders"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getContainedFolders" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a list of folder object contained in a folder</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>folder</strong> (<em>APIFolder</em>) &#8211; folder object</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Return folderlist:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body">a list of folder object (APIFolder) contained in the folder</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of APIFolder</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getContainedObjects">
+<code class="descname">getContainedObjects</code><span class="sig-paren">(</span><em>folder</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getContainedObjects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getContainedObjects" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a list of object contained in a folder</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>folder</strong> (<em>APIFolder</em>) &#8211; folder object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return objlist:</th><td class="field-body">a list of objects (APIFObject) contained in the folder</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of APIObject</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getFile">
+<code class="descname">getFile</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a APIFile object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resource</strong> (<em>str</em>) &#8211; resource path</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">api file object  or status code</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">APIFile</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getFolder">
+<code class="descname">getFolder</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getFolder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getFolder" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve an folder based on the folderID/selfUrl</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resource</strong> (<em>int,str</em>) &#8211; (str) selfUrl of the folder or the (int) folder ID</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the folder</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">APIFolder</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getFolderByName">
+<code class="descname">getFolderByName</code><span class="sig-paren">(</span><em>search</em>, <em>mode='default'</em>, <em>squeeze=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getFolderByName"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getFolderByName" title="Permalink to this definition">¶</a></dt>
+<dd><p>get a list of folder(s) based on a search string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>search</strong> (<em>str</em>) &#8211; term to search for</li>
+<li><strong>mode</strong> (<em>str</em>) &#8211; search for partial match (&#8216;default&#8217;) or exact match (&#8216;exact&#8217;)</li>
+<li><strong>squeeze</strong> (<em>bool</em>) &#8211; ???? what is squeeze</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of folder objects APIFolders</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of APIFolders</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getFolderContent">
+<code class="descname">getFolderContent</code><span class="sig-paren">(</span><em>folder</em>, <em>recursive=False</em>, <em>mode='d'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getFolderContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getFolderContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the objects and folder contained in the given folder. can be called recursive to travel and return all objects</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>folder</strong> (<em>APIFolder</em>) &#8211; the folder to be read</li>
+<li><strong>recursive</strong> (<em>bool</em>) &#8211; travel the folder structure recursively or not (default)</li>
+<li><strong>mode</strong> (<em>str</em>) &#8211; what to return: only objects (o), only folders (f) or default (d) folders and objects</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return content:</th><td class="field-body"><p class="first">dictionary with folders (APIBase) and object (APIBase)</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">dict of APIBase</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getGroup">
+<code class="descname">getGroup</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve a group object (Group)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resource</strong> (<em>int,str</em>) &#8211; path to the group id (int) or selfUrl (str)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">group  object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="models.html#models.Group" title="models.Group">Group</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getGroups">
+<code class="descname">getGroups</code><span class="sig-paren">(</span><em>resource='groups'</em>, <em>rpp=None</em>, <em>page=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getGroups"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getGroups" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the list of groups</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resource</strong> (<em>str</em>) &#8211; resource path (eg nextPageUrl) or default groups</li>
+<li><strong>rpp</strong> (<em>int</em>) &#8211; results per page</li>
+<li><strong>page</strong> (<em>int</em>) &#8211; page number to display</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of group objects</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference internal" href="models.html#models.Group" title="models.Group">Group</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">pagination object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="models.html#models.Pagination" title="models.Pagination">Pagination</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getJWTtoken">
+<code class="descname">getJWTtoken</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getJWTtoken"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getJWTtoken" title="Permalink to this definition">¶</a></dt>
+<dd><p>request the JWT token from the server using Basic Auth</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">token - a authentication token or None</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">Token or None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getLatestUnpublishedObject">
+<code class="descname">getLatestUnpublishedObject</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getLatestUnpublishedObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getLatestUnpublishedObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>searches the list of unpublished objects and returns the newest object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">last uploaded object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">apiObject</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getLicense">
+<code class="descname">getLicense</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getLicense"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getLicense" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve a license (License)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resource</strong> (<em>int,str</em>) &#8211; resource path to the of the license</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return license:</th><td class="field-body">the license object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="models.html#models.License" title="models.License">License</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getLicenseList">
+<code class="descname">getLicenseList</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getLicenseList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getLicenseList" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve a list of the available licenses (License)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available license objects</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of License</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getModality">
+<code class="descname">getModality</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getModality"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getModality" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve a modalities object (APIModality)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resource</strong> (<em>int,str</em>) &#8211; resource path to the of the modality</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the modality object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="models.html#models.Modality" title="models.Modality">Modality</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getModalityList">
+<code class="descname">getModalityList</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getModalityList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getModalityList" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve a list of modalities objects (APIModality)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of available modalities</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of Modality</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getOID">
+<code class="descname">getOID</code><span class="sig-paren">(</span><em>selfURL</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getOID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getOID" title="Permalink to this definition">¶</a></dt>
+<dd><p>extracts the last part of the selfURL, tests if it is a number</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>selfURL</strong> &#8211; (str) url to the object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">either None if not an ID or the object ID (int)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">ValueError</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getObject">
+<code class="descname">getObject</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve an object based on the objectID/selfUrl</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resource</strong> (<em>int,str</em>) &#8211; (str) selfUrl of the object or the (int) object ID</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="models.html#models.APIObject" title="models.APIObject">APIObject</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getObjectFiles">
+<code class="descname">getObjectFiles</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getObjectFiles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getObjectFiles" title="Permalink to this definition">¶</a></dt>
+<dd><p>return a list of file objects contained in an object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="models.html#models.APIObject" title="models.APIObject"><em>APIObject</em></a>) &#8211; object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of APIFile</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of APIFile</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getObjectFilesHash">
+<code class="descname">getObjectFilesHash</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getObjectFilesHash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getObjectFilesHash" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve the filehash and the anonymized file hash values of a file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>f</strong> (<a class="reference internal" href="models.html#models.APIObject" title="models.APIObject"><em>APIObject</em></a>) &#8211; API object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of fileHash (uppercase)</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of str</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getObjectGroupRights">
+<code class="descname">getObjectGroupRights</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getObjectGroupRights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getObjectGroupRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the list of attaced group rights of an object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="models.html#models.APIObject" title="models.APIObject"><em>APIObject</em></a>) &#8211; the object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return rights:</th><td class="field-body">a list of ObjectGroupRights</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list of APIObjectGroupRight</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getObjectRight">
+<code class="descname">getObjectRight</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getObjectRight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getObjectRight" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve a  object rights object (ObjectRight)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resource</strong> (<em>int,str</em>) &#8211; resource to the permission id (int) or selfurl (str)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">perm object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="models.html#models.ObjectRight" title="models.ObjectRight">ObjectRight</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getObjectRightList">
+<code class="descname">getObjectRightList</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getObjectRightList"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getObjectRightList" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve a list of the available base object rights (ObjectRight)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of object rights</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">list of ObjectRight</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getObjectType">
+<code class="descname">getObjectType</code><span class="sig-paren">(</span><em>response</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getObjectType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getObjectType" title="Permalink to this definition">¶</a></dt>
+<dd><p>create an APIObject depending on the type</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>response</strong> (<em>json</em>) &#8211; object data</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="models.html#models.APIObject" title="models.APIObject">APIObject</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getObjectUserRights">
+<code class="descname">getObjectUserRights</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getObjectUserRights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getObjectUserRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the list of attaced user rights of an object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="models.html#models.APIObject" title="models.APIObject"><em>APIObject</em></a>) &#8211; the object</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a list of ObjectUserRights</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list APIObjectUserRight</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getObjects">
+<code class="descname">getObjects</code><span class="sig-paren">(</span><em>idList=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getObjects"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getObjects" title="Permalink to this definition">¶</a></dt>
+<dd><p>please describe what you are doing</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>idList</strong> (<em>???</em>) &#8211; <p>???</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getOntologyItem">
+<code class="descname">getOntologyItem</code><span class="sig-paren">(</span><em>resource</em>, <em>oType=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getOntologyItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getOntologyItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve an ontology item object (APIOntology)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resource</strong> (<em>int,str</em>) &#8211; resource path to the of the ontology item</li>
+<li><strong>oType</strong> (<em>int</em>) &#8211; ontology type</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return onto:</th><td class="field-body"><p class="first">the ontology item object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Ontology</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getOntologyTermByID">
+<code class="descname">getOntologyTermByID</code><span class="sig-paren">(</span><em>oid</em>, <em>oType=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getOntologyTermByID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getOntologyTermByID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve an ontology entry based on the IRI</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>oid</strong> (<em>int</em>) &#8211; Identifier of the entry</li>
+<li><strong>oType</strong> (<em>int</em>) &#8211; Resource type, available resources can be found using the OPTIONS on /api/ontologies). Default resouce is FMA (0)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">ontology term entry</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">json</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getPaginated">
+<code class="descname">getPaginated</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getPaginated"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getPaginated" title="Permalink to this definition">¶</a></dt>
+<dd><p>get paginated object</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getPermissionSets">
+<code class="descname">getPermissionSets</code><span class="sig-paren">(</span><em>permset='default'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getPermissionSets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getPermissionSets" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the Object Rights for a permission set</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>permset</strong> (<em>str</em>) &#8211; name of the permission set: available are private, protect, default, collaborate, full or a list of permission ids (list)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return perms:</th><td class="field-body">list of object rights objects</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">OjectRight</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getRequest">
+<code class="descname">getRequest</code><span class="sig-paren">(</span><em>resource</em>, <em>rpp=None</em>, <em>page=None</em>, <em>include=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getRequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>generic get request function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resource</strong> (<em>str</em>) &#8211; resource path</li>
+<li><strong>rpp</strong> (<em>int</em>) &#8211; results per page to show</li>
+<li><strong>page</strong> (<em>int</em>) &#8211; page nr to show, starts with 0</li>
+<li><strong>include</strong> (<em>str</em>) &#8211; option to include more informations</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of objects or None</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">json or None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getResource">
+<code class="descname">getResource</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getResource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getResource" title="Permalink to this definition">¶</a></dt>
+<dd><p>please describe what you are doing</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getResourceTypeAndId">
+<code class="descname">getResourceTypeAndId</code><span class="sig-paren">(</span><em>url</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getResourceTypeAndId"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getResourceTypeAndId" title="Permalink to this definition">¶</a></dt>
+<dd><p>please describe what you are doing</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.getUser">
+<code class="descname">getUser</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.getUser"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.getUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>retrieve a user object (User)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resource</strong> (<em>int,str</em>) &#8211; path to the user resource id (int) or selfUrl (str)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">user object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="models.html#models.User" title="models.User">User</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.iterateAllPaginated">
+<code class="descname">iterateAllPaginated</code><span class="sig-paren">(</span><em>resource</em>, <em>func=&lt;class 'dict'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.iterateAllPaginated"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.iterateAllPaginated" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns all items as list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resource</strong> (<em>str</em>) &#8211; resource path</li>
+<li><strong>func</strong> &#8211; function for converting resource</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">iterator of items</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of dict or model object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.iteratePageItems">
+<code class="descname">iteratePageItems</code><span class="sig-paren">(</span><em>page</em>, <em>func=&lt;class 'dict'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.iteratePageItems"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.iteratePageItems" title="Permalink to this definition">¶</a></dt>
+<dd><p>returns all items as list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resource</strong> (<em>str</em>) &#8211; resource path</li>
+<li><strong>func</strong> &#8211; function for converting resource</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">iterator of items</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list of dict or model object</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.optionsRequest">
+<code class="descname">optionsRequest</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.optionsRequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.optionsRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>generic options request function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resource</strong> (<em>str</em>) &#8211; the api resource path</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">json data result or None</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">json or None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.parseUrl">
+<code class="descname">parseUrl</code><span class="sig-paren">(</span><em>resource</em>, <em>type</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.parseUrl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.parseUrl" title="Permalink to this definition">¶</a></dt>
+<dd><p>check if the resource is  int (ID) or the selfURL</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>resource</strong> (<em>str</em>) &#8211; url to the resource</li>
+<li><strong>type</strong> (<em>str</em>) &#8211; type of the api resource (folders, objects etc)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.postFolder">
+<code class="descname">postFolder</code><span class="sig-paren">(</span><em>parent</em>, <em>name</em>, <em>check=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.postFolder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.postFolder" title="Permalink to this definition">¶</a></dt>
+<dd><p>creates the folder with a given name (name) inside a folder (parent) if not already exists</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>parent</strong> (<a class="reference internal" href="models.html#models.Folder" title="models.Folder"><em>Folder</em></a>) &#8211; the root folder</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; name of the folder which should be created</li>
+<li><strong>check</strong> (<em>bool</em>) &#8211; it we should check if already exist, default = True</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the folder object of the generated folder or the existing folder</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="models.html#models.Folder" title="models.Folder">Folder</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.postObjectGroupRights">
+<code class="descname">postObjectGroupRights</code><span class="sig-paren">(</span><em>obj</em>, <em>group</em>, <em>perms</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.postObjectGroupRights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.postObjectGroupRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>translate a set of permissions and a group into the appropriate format and add it to the object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>obj</strong> (<em>Object</em>) &#8211; the object you want to add the permissions to</li>
+<li><strong>group</strong> (<a class="reference internal" href="models.html#models.Group" title="models.Group"><em>Group</em></a>) &#8211; group object</li>
+<li><strong>perms</strong> (<em>list</em>) &#8211; list of Object Rights (APIObjectRight), use getPermissionSet to retrive the ObjectRights based on the permission sets</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">group rights object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="models.html#models.ObjectGroupRight" title="models.ObjectGroupRight">ObjectGroupRight</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.postObjectRights">
+<code class="descname">postObjectRights</code><span class="sig-paren">(</span><em>obj</em>, <em>group</em>, <em>perms</em>, <em>isuser=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.postObjectRights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.postObjectRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>translate a set of permissions and a group into the appropriate format and add it to the object</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">DEPRECATED: use postObjectGroupRights or postObjectUserRights!</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>obj</strong> (<a class="reference internal" href="models.html#models.APIObject" title="models.APIObject"><em>APIObject</em></a>) &#8211; () the object you want to add the permissions to</li>
+<li><strong>group</strong> (<em>APIGroup/APIUser</em>) &#8211; group object or user object</li>
+<li><strong>perms</strong> (<em>list</em>) &#8211; list of Object Rights (APIObjectRight), use getPermissionSet to retrive the ObjectRights based on the permission sets</li>
+<li><strong>isuser</strong> (<em>bool</em>) &#8211; set True if the groups variable is a user. Default is False</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a group or user rights object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">APIObjectGroupRight,APIObjectUserRight</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.postObjectUserRights">
+<code class="descname">postObjectUserRights</code><span class="sig-paren">(</span><em>obj</em>, <em>user</em>, <em>perms</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.postObjectUserRights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.postObjectUserRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>translate a set of permissions and a user into the appropriate format and add it to the object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>obj</strong> (<em>Object</em>) &#8211; the object you want to add the permissions to</li>
+<li><strong>user</strong> (<a class="reference internal" href="models.html#models.User" title="models.User"><em>User</em></a>) &#8211; user object</li>
+<li><strong>perms</strong> (<em>list</em>) &#8211; list of Object Rights (APIObjectRight), use getPermissionSet to retrive the ObjectRights based on the permission sets</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">user rights object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="models.html#models.ObjectUserRight" title="models.ObjectUserRight">ObjectUserRight</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.postRequest">
+<code class="descname">postRequest</code><span class="sig-paren">(</span><em>resource</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.postRequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.postRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>add data to an object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resource</strong> (<em>str</em>) &#8211; relative path of the resource or selfUrl</li>
+<li><strong>data</strong> (<em>json</em>) &#8211; data to be added to the resource</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the resource object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">json</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last">RequestException</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.postRequestSimple">
+<code class="descname">postRequestSimple</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.postRequestSimple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.postRequestSimple" title="Permalink to this definition">¶</a></dt>
+<dd><p>post (create) a resource</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resource</strong> (<em>str</em>) &#8211; resource path</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the resource object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">json</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.publishObject">
+<code class="descname">publishObject</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.publishObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.publishObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>publisch an unvalidated object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="models.html#models.APIObject" title="models.APIObject"><em>APIObject</em></a>) &#8211; the object to publish</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">returns the object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="models.html#models.APIObject" title="models.APIObject">APIObject</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.putObject">
+<code class="descname">putObject</code><span class="sig-paren">(</span><em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.putObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.putObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>update an objects information</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="models.html#models.APIObject" title="models.APIObject"><em>APIObject</em></a>) &#8211; an APIObject</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the updated object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="models.html#models.APIObject" title="models.APIObject">APIObject</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.putRequest">
+<code class="descname">putRequest</code><span class="sig-paren">(</span><em>resource</em>, <em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.putRequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.putRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>update data of an object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resource</strong> (<em>str</em>) &#8211; defines the relative path to the api resource</li>
+<li><strong>data</strong> (<em>json</em>) &#8211; data to be added to the object</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">the updated object</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">json</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.putRequestSimple">
+<code class="descname">putRequestSimple</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.putRequestSimple"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.putRequestSimple" title="Permalink to this definition">¶</a></dt>
+<dd><p>put (update) a resource</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resource</strong> (<em>str</em>) &#8211; resource path</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the resource object</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">json</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.removeLinks">
+<code class="descname">removeLinks</code><span class="sig-paren">(</span><em>resource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.removeLinks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.removeLinks" title="Permalink to this definition">¶</a></dt>
+<dd><p>removes all related item from an object</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>resource</strong> (<em>str</em>) &#8211; resouce path url</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">True if successful or False if failed</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.removeObjectFromFolder">
+<code class="descname">removeObjectFromFolder</code><span class="sig-paren">(</span><em>target</em>, <em>obj</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.removeObjectFromFolder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.removeObjectFromFolder" title="Permalink to this definition">¶</a></dt>
+<dd><p>remove an object from the folder</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>target</strong> (<em>APIFolder</em>) &#8211; the target folder</li>
+<li><strong>obj</strong> (<a class="reference internal" href="models.html#models.APIObject" title="models.APIObject"><em>APIObject</em></a>) &#8211; the object to remove</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">updated folder</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">APIFolder</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.searchOntologyTerm">
+<code class="descname">searchOntologyTerm</code><span class="sig-paren">(</span><em>search</em>, <em>oType='0'</em>, <em>mode='default'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.searchOntologyTerm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.searchOntologyTerm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search ontology term in a single ontology resource. Two modes are available to either find the exact term or based on a partial match</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>search</strong> (<em>str</em>) &#8211; string to be searched</li>
+<li><strong>oType</strong> (<em>int</em>) &#8211; ontlogy resouce code, default is FMA (0)</li>
+<li><strong>mode</strong> (<em>str</em>) &#8211; find exact term (exact) or partial match (default)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a list of ontology objects or a single ontology item</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">APIOntolgy</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.searchTerm">
+<code class="descname">searchTerm</code><span class="sig-paren">(</span><em>resource</em>, <em>search</em>, <em>mode='default'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.searchTerm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.searchTerm" title="Permalink to this definition">¶</a></dt>
+<dd><p>search a resource using oAuths</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resouce</strong> (<em>str</em>) &#8211; resource path</li>
+<li><strong>search</strong> (<em>str</em>) &#8211; term to search for</li>
+<li><strong>mode</strong> (<em>str</em>) &#8211; search for partial match (default) or exact match (exact)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list of folder objects</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">json</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.uploadFile">
+<code class="descname">uploadFile</code><span class="sig-paren">(</span><em>filename</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.uploadFile"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.uploadFile" title="Permalink to this definition">¶</a></dt>
+<dd><p>push (post) a file to the server</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>filename</strong> (<em>Path</em>) &#8211; the file to be uploaded</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the file object containing the related object selfUrl</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="models.html#models.APIObject" title="models.APIObject">APIObject</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="connect.VSDConnecter.walkFolder">
+<code class="descname">walkFolder</code><span class="sig-paren">(</span><em>folderUrl</em>, <em>topdown=True</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#VSDConnecter.walkFolder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.VSDConnecter.walkFolder" title="Permalink to this definition">¶</a></dt>
+<dd><p>please describe here</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Param:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="connect.samltoken">
+<code class="descclassname">connect.</code><code class="descname">samltoken</code><span class="sig-paren">(</span><em>fp</em>, <em>stsurl='https://ciam-dev-chic.custodix.com/sts/services/STS'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/connect.html#samltoken"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#connect.samltoken" title="Permalink to this definition">¶</a></dt>
+<dd><p>generates the saml auth token from a credentials file</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fp</strong> (<em>Path</em>) &#8211; file with the credentials (xml file)</li>
+<li><strong>stsurl</strong> (<em>str</em>) &#8211; url to the STS authority</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">enctoken - the encoded token</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">byte</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="models.html" class="btn btn-neutral float-right" title="vsdConnect.models module" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to VSDConnect’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Michael Kistler.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.8.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,19 +1,18 @@
-.. source documentation master file, created by
-   sphinx-quickstart on Tue Dec  1 11:34:07 2015.
+.. VSDConnect documentation master file, created by
+   sphinx-quickstart on Tue Jul 26 20:25:54 2016.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to source's documentation!
-==================================
+Welcome to VSDConnect's documentation!
+======================================
 
 Contents:
 
 .. toctree::
    :maxdepth: 4
 
-   connectVSD
-   connectVSDExt
-   poster
+   connect
+   models
 
 
 Indices and tables

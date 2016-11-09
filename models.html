@@ -1,0 +1,1981 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>vsdConnect.models module &mdash; VSDConnect 0.8.1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="VSDConnect 0.8.1 documentation" href="index.html"/>
+        <link rel="prev" title="vsdConnect.connect module" href="connect.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> VSDConnect
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.8.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="connect.html">vsdConnect.connect module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">vsdConnect.models module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#infos">INFOS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changes">CHANGES</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">VSDConnect</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>vsdConnect.models module</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/models.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-models">
+<span id="vsdconnect-models-module"></span><h1>vsdConnect.models module<a class="headerlink" href="#module-models" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="infos">
+<h2>INFOS<a class="headerlink" href="#infos" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>python version: 3.5</li>
+<li>connectVSD 0.8.1</li>
+<li>module: models</li>
+<li>&#64;author: Michael Kistler 2016, Livia B.</li>
+</ul>
+</div>
+<div class="section" id="changes">
+<h2>CHANGES<a class="headerlink" href="#changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>implemented objects as jsonmodels</li>
+</ul>
+<dl class="class">
+<dt id="models.APIBase">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">APIBase</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#APIBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.APIBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>Basic for all classes with selfUrl</p>
+<dl class="method">
+<dt id="models.APIBase.get">
+<code class="descname">get</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#APIBase.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.APIBase.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the object as json readable structure (dict)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">json</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">json</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="models.APIBase.save">
+<code class="descname">save</code><span class="sig-paren">(</span><em>fp='object.json'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#APIBase.save"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.APIBase.save" title="Permalink to this definition">¶</a></dt>
+<dd><p>save the object as json to the given filepath</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Params Path fp:</th><td class="field-body">the filepath to the file</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">the path to the stored file</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Path</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIBase.selfUrl">
+<code class="descname">selfUrl</code><a class="headerlink" href="#models.APIBase.selfUrl" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="models.APIBase.set">
+<code class="descname">set</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#APIBase.set"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.APIBase.set" title="Permalink to this definition">¶</a></dt>
+<dd><p>set the object content</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>json</em>) &#8211; the data for the object in json format</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">json</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">json</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="models.APIBase.show">
+<code class="descname">show</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#APIBase.show"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.APIBase.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>show the object as json readable structure (dict), nicely formated</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.APIBaseExt">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">APIBaseExt</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#APIBaseExt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.APIBaseExt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>id, name, display name and selfUrl</p>
+<dl class="attribute">
+<dt id="models.APIBaseExt.displayName">
+<code class="descname">displayName</code><a class="headerlink" href="#models.APIBaseExt.displayName" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIBaseExt.name">
+<code class="descname">name</code><a class="headerlink" href="#models.APIBaseExt.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.APIBaseID">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">APIBaseID</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#APIBaseID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.APIBaseID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBase" title="models.APIBase"><code class="xref py py-class docutils literal"><span class="pre">models.APIBase</span></code></a></p>
+<p>id and selfUrl</p>
+<dl class="attribute">
+<dt id="models.APIBaseID.id">
+<code class="descname">id</code><a class="headerlink" href="#models.APIBaseID.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.APIBaseN3">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">APIBaseN3</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#APIBaseN3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.APIBaseN3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBase" title="models.APIBase"><code class="xref py py-class docutils literal"><span class="pre">models.APIBase</span></code></a></p>
+<p>for semantic triple storage</p>
+<dl class="attribute">
+<dt id="models.APIBaseN3.object">
+<code class="descname">object</code><a class="headerlink" href="#models.APIBaseN3.object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIBaseN3.predicate">
+<code class="descname">predicate</code><a class="headerlink" href="#models.APIBaseN3.predicate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIBaseN3.subject">
+<code class="descname">subject</code><a class="headerlink" href="#models.APIBaseN3.subject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.APIObject">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">APIObject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#APIObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.APIObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>base object class</p>
+<dl class="attribute">
+<dt id="models.APIObject.createdDate">
+<code class="descname">createdDate</code><a class="headerlink" href="#models.APIObject.createdDate" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIObject.description">
+<code class="descname">description</code><a class="headerlink" href="#models.APIObject.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIObject.downloadUrl">
+<code class="descname">downloadUrl</code><a class="headerlink" href="#models.APIObject.downloadUrl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIObject.files">
+<code class="descname">files</code><a class="headerlink" href="#models.APIObject.files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIObject.license">
+<code class="descname">license</code><a class="headerlink" href="#models.APIObject.license" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIObject.linkedObjectRelations">
+<code class="descname">linkedObjectRelations</code><a class="headerlink" href="#models.APIObject.linkedObjectRelations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIObject.linkedObjects">
+<code class="descname">linkedObjects</code><a class="headerlink" href="#models.APIObject.linkedObjects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIObject.name">
+<code class="descname">name</code><a class="headerlink" href="#models.APIObject.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIObject.objectGroupRights">
+<code class="descname">objectGroupRights</code><a class="headerlink" href="#models.APIObject.objectGroupRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIObject.objectPreviews">
+<code class="descname">objectPreviews</code><a class="headerlink" href="#models.APIObject.objectPreviews" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIObject.objectUserRights">
+<code class="descname">objectUserRights</code><a class="headerlink" href="#models.APIObject.objectUserRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIObject.ontologyCount">
+<code class="descname">ontologyCount</code><a class="headerlink" href="#models.APIObject.ontologyCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIObject.ontologyItemRelations">
+<code class="descname">ontologyItemRelations</code><a class="headerlink" href="#models.APIObject.ontologyItemRelations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIObject.ontologyItems">
+<code class="descname">ontologyItems</code><a class="headerlink" href="#models.APIObject.ontologyItems" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIObject.type">
+<code class="descname">type</code><a class="headerlink" href="#models.APIObject.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.APIVersion">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">APIVersion</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#APIVersion"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.APIVersion" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>the api version view model</p>
+<dl class="attribute">
+<dt id="models.APIVersion.build">
+<code class="descname">build</code><a class="headerlink" href="#models.APIVersion.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIVersion.major">
+<code class="descname">major</code><a class="headerlink" href="#models.APIVersion.major" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIVersion.majorRevision">
+<code class="descname">majorRevision</code><a class="headerlink" href="#models.APIVersion.majorRevision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIVersion.minor">
+<code class="descname">minor</code><a class="headerlink" href="#models.APIVersion.minor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIVersion.minorRevision">
+<code class="descname">minorRevision</code><a class="headerlink" href="#models.APIVersion.minorRevision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.APIVersion.revision">
+<code class="descname">revision</code><a class="headerlink" href="#models.APIVersion.revision" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ClincalStudyDefinitionData">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ClincalStudyDefinitionData</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ClincalStudyDefinitionData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ClincalStudyDefinitionData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>attributes for clinical study definition</p>
+<dl class="attribute">
+<dt id="models.ClincalStudyDefinitionData.metaDataVersionName">
+<code class="descname">metaDataVersionName</code><a class="headerlink" href="#models.ClincalStudyDefinitionData.metaDataVersionName" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ClincalStudyDefinitionData.metaDataVersionOID">
+<code class="descname">metaDataVersionOID</code><a class="headerlink" href="#models.ClincalStudyDefinitionData.metaDataVersionOID" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ClincalStudyDefinitionData.protocolName">
+<code class="descname">protocolName</code><a class="headerlink" href="#models.ClincalStudyDefinitionData.protocolName" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ClincalStudyDefinitionData.studyDescription">
+<code class="descname">studyDescription</code><a class="headerlink" href="#models.ClincalStudyDefinitionData.studyDescription" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ClincalStudyDefinitionData.studyName">
+<code class="descname">studyName</code><a class="headerlink" href="#models.ClincalStudyDefinitionData.studyName" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ClincalStudyDefinitionData.studyOID">
+<code class="descname">studyOID</code><a class="headerlink" href="#models.ClincalStudyDefinitionData.studyOID" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ClinicalStudyDataObject">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ClinicalStudyDataObject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ClinicalStudyDataObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ClinicalStudyDataObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>API class for clinical trial data view model  - empty</p>
+<dl class="attribute">
+<dt id="models.ClinicalStudyDataObject.clinicalStudyDefinition">
+<code class="descname">clinicalStudyDefinition</code><a class="headerlink" href="#models.ClinicalStudyDataObject.clinicalStudyDefinition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ClinicalStudyDataObject.subject">
+<code class="descname">subject</code><a class="headerlink" href="#models.ClinicalStudyDataObject.subject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ClinicalStudyDefinitionObject">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ClinicalStudyDefinitionObject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ClinicalStudyDefinitionObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ClinicalStudyDefinitionObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>API class for clinical trail definition view model</p>
+<dl class="attribute">
+<dt id="models.ClinicalStudyDefinitionObject.clincalStudyDefinition">
+<code class="descname">clincalStudyDefinition</code><a class="headerlink" href="#models.ClinicalStudyDefinitionObject.clincalStudyDefinition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.DynamicSearchComparisonOperator">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">DynamicSearchComparisonOperator</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#DynamicSearchComparisonOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.DynamicSearchComparisonOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>docstring</p>
+<dl class="attribute">
+<dt id="models.DynamicSearchComparisonOperator.displayName">
+<code class="descname">displayName</code><a class="headerlink" href="#models.DynamicSearchComparisonOperator.displayName" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchComparisonOperator.name">
+<code class="descname">name</code><a class="headerlink" href="#models.DynamicSearchComparisonOperator.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchComparisonOperator.position">
+<code class="descname">position</code><a class="headerlink" href="#models.DynamicSearchComparisonOperator.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchComparisonOperator.typeaheadUrl">
+<code class="descname">typeaheadUrl</code><a class="headerlink" href="#models.DynamicSearchComparisonOperator.typeaheadUrl" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.DynamicSearchCondition">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">DynamicSearchCondition</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#DynamicSearchCondition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.DynamicSearchCondition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>docstring</p>
+<dl class="attribute">
+<dt id="models.DynamicSearchCondition.comparisonOperator">
+<code class="descname">comparisonOperator</code><a class="headerlink" href="#models.DynamicSearchCondition.comparisonOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchCondition.inputItem">
+<code class="descname">inputItem</code><a class="headerlink" href="#models.DynamicSearchCondition.inputItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchCondition.sourceField">
+<code class="descname">sourceField</code><a class="headerlink" href="#models.DynamicSearchCondition.sourceField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.DynamicSearchGroup">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">DynamicSearchGroup</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#DynamicSearchGroup"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.DynamicSearchGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>docstring</p>
+<dl class="attribute">
+<dt id="models.DynamicSearchGroup.conditions">
+<code class="descname">conditions</code><a class="headerlink" href="#models.DynamicSearchGroup.conditions" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchGroup.groups">
+<code class="descname">groups</code><a class="headerlink" href="#models.DynamicSearchGroup.groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchGroup.logicalOperator">
+<code class="descname">logicalOperator</code><a class="headerlink" href="#models.DynamicSearchGroup.logicalOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchGroup.sourceType">
+<code class="descname">sourceType</code><a class="headerlink" href="#models.DynamicSearchGroup.sourceType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.DynamicSearchInputItem">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">DynamicSearchInputItem</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#DynamicSearchInputItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.DynamicSearchInputItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>docstring</p>
+<dl class="attribute">
+<dt id="models.DynamicSearchInputItem.data">
+<code class="descname">data</code><a class="headerlink" href="#models.DynamicSearchInputItem.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchInputItem.displayName">
+<code class="descname">displayName</code><a class="headerlink" href="#models.DynamicSearchInputItem.displayName" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchInputItem.isTypeahead">
+<code class="descname">isTypeahead</code><a class="headerlink" href="#models.DynamicSearchInputItem.isTypeahead" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bool field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.DynamicSearchLogicalOperator">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">DynamicSearchLogicalOperator</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#DynamicSearchLogicalOperator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.DynamicSearchLogicalOperator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>logical operator view model</p>
+<dl class="attribute">
+<dt id="models.DynamicSearchLogicalOperator.displayName">
+<code class="descname">displayName</code><a class="headerlink" href="#models.DynamicSearchLogicalOperator.displayName" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchLogicalOperator.name">
+<code class="descname">name</code><a class="headerlink" href="#models.DynamicSearchLogicalOperator.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchLogicalOperator.position">
+<code class="descname">position</code><a class="headerlink" href="#models.DynamicSearchLogicalOperator.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.DynamicSearchOptions">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">DynamicSearchOptions</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#DynamicSearchOptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.DynamicSearchOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>for DynamicSearchOptions</p>
+<dl class="attribute">
+<dt id="models.DynamicSearchOptions.logicalOperators">
+<code class="descname">logicalOperators</code><a class="headerlink" href="#models.DynamicSearchOptions.logicalOperators" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchOptions.sourceTypes">
+<code class="descname">sourceTypes</code><a class="headerlink" href="#models.DynamicSearchOptions.sourceTypes" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.DynamicSearchSourceField">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">DynamicSearchSourceField</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#DynamicSearchSourceField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.DynamicSearchSourceField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>fiels view model for dynamic search</p>
+<dl class="attribute">
+<dt id="models.DynamicSearchSourceField.comparisonOperators">
+<code class="descname">comparisonOperators</code><a class="headerlink" href="#models.DynamicSearchSourceField.comparisonOperators" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchSourceField.displayName">
+<code class="descname">displayName</code><a class="headerlink" href="#models.DynamicSearchSourceField.displayName" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchSourceField.name">
+<code class="descname">name</code><a class="headerlink" href="#models.DynamicSearchSourceField.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchSourceField.position">
+<code class="descname">position</code><a class="headerlink" href="#models.DynamicSearchSourceField.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.DynamicSearchSourceType">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">DynamicSearchSourceType</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#DynamicSearchSourceType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.DynamicSearchSourceType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>source type view model for search</p>
+<dl class="attribute">
+<dt id="models.DynamicSearchSourceType.displayName">
+<code class="descname">displayName</code><a class="headerlink" href="#models.DynamicSearchSourceType.displayName" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchSourceType.name">
+<code class="descname">name</code><a class="headerlink" href="#models.DynamicSearchSourceType.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchSourceType.position">
+<code class="descname">position</code><a class="headerlink" href="#models.DynamicSearchSourceType.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.DynamicSearchSourceType.sourceFields">
+<code class="descname">sourceFields</code><a class="headerlink" href="#models.DynamicSearchSourceType.sourceFields" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.File">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">File</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#File"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.File" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<dl class="attribute">
+<dt id="models.File.anonymizedFileHashCode">
+<code class="descname">anonymizedFileHashCode</code><a class="headerlink" href="#models.File.anonymizedFileHashCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.File.createdDate">
+<code class="descname">createdDate</code><a class="headerlink" href="#models.File.createdDate" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.File.downloadUrl">
+<code class="descname">downloadUrl</code><a class="headerlink" href="#models.File.downloadUrl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="models.File.fileHashCode">
+<code class="descname">fileHashCode</code><a class="headerlink" href="#models.File.fileHashCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.File.objects">
+<code class="descname">objects</code><a class="headerlink" href="#models.File.objects" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.File.originalFileName">
+<code class="descname">originalFileName</code><a class="headerlink" href="#models.File.originalFileName" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.File.size">
+<code class="descname">size</code><a class="headerlink" href="#models.File.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.Folder">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">Folder</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#Folder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.Folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<dl class="attribute">
+<dt id="models.Folder.childFolders">
+<code class="descname">childFolders</code><a class="headerlink" href="#models.Folder.childFolders" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.Folder.containedObjects">
+<code class="descname">containedObjects</code><a class="headerlink" href="#models.Folder.containedObjects" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.Folder.folderGroupRights">
+<code class="descname">folderGroupRights</code><a class="headerlink" href="#models.Folder.folderGroupRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.Folder.folderUserRights">
+<code class="descname">folderUserRights</code><a class="headerlink" href="#models.Folder.folderUserRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.Folder.level">
+<code class="descname">level</code><a class="headerlink" href="#models.Folder.level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.Folder.name">
+<code class="descname">name</code><a class="headerlink" href="#models.Folder.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.Folder.parentFolder">
+<code class="descname">parentFolder</code><a class="headerlink" href="#models.Folder.parentFolder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.FolderGroupRight">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">FolderGroupRight</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#FolderGroupRight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.FolderGroupRight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>relations between folder, group and right (permission)</p>
+<dl class="attribute">
+<dt id="models.FolderGroupRight.relatedFolder">
+<code class="descname">relatedFolder</code><a class="headerlink" href="#models.FolderGroupRight.relatedFolder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.FolderGroupRight.relatedGroup">
+<code class="descname">relatedGroup</code><a class="headerlink" href="#models.FolderGroupRight.relatedGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.FolderGroupRight.relatedRights">
+<code class="descname">relatedRights</code><a class="headerlink" href="#models.FolderGroupRight.relatedRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.FolderGroupRightPagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">FolderGroupRightPagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#FolderGroupRightPagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.FolderGroupRightPagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.Pagination" title="models.Pagination"><code class="xref py py-class docutils literal"><span class="pre">models.Pagination</span></code></a></p>
+<p>API class for pagination result containing folder group rights</p>
+<dl class="attribute">
+<dt id="models.FolderGroupRightPagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.FolderGroupRightPagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.FolderPagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">FolderPagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#FolderPagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.FolderPagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.Pagination" title="models.Pagination"><code class="xref py py-class docutils literal"><span class="pre">models.Pagination</span></code></a></p>
+<p>API class for Pagination results containing folders</p>
+<dl class="attribute">
+<dt id="models.FolderPagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.FolderPagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.FolderRight">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">FolderRight</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#FolderRight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.FolderRight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>represents a folder right</p>
+<dl class="attribute">
+<dt id="models.FolderRight.name">
+<code class="descname">name</code><a class="headerlink" href="#models.FolderRight.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.FolderRight.rightValue">
+<code class="descname">rightValue</code><a class="headerlink" href="#models.FolderRight.rightValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.FolderRightPagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">FolderRightPagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#FolderRightPagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.FolderRightPagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.Pagination" title="models.Pagination"><code class="xref py py-class docutils literal"><span class="pre">models.Pagination</span></code></a></p>
+<p>API class for pagination result containing folder rights</p>
+<dl class="attribute">
+<dt id="models.FolderRightPagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.FolderRightPagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.FolderRightSet">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">FolderRightSet</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#FolderRightSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.FolderRightSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>folder rights set</p>
+<dl class="attribute">
+<dt id="models.FolderRightSet.folderRights">
+<code class="descname">folderRights</code><a class="headerlink" href="#models.FolderRightSet.folderRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.FolderRightSet.name">
+<code class="descname">name</code><a class="headerlink" href="#models.FolderRightSet.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.FolderRightSetPagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">FolderRightSetPagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#FolderRightSetPagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.FolderRightSetPagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.Pagination" title="models.Pagination"><code class="xref py py-class docutils literal"><span class="pre">models.Pagination</span></code></a></p>
+<p>API class for pagination result containing folder rights</p>
+<dl class="attribute">
+<dt id="models.FolderRightSetPagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.FolderRightSetPagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.FolderUserRight">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">FolderUserRight</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#FolderUserRight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.FolderUserRight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>relations between folder, user and right (permission)</p>
+<dl class="attribute">
+<dt id="models.FolderUserRight.relatedFolder">
+<code class="descname">relatedFolder</code><a class="headerlink" href="#models.FolderUserRight.relatedFolder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.FolderUserRight.relatedRights">
+<code class="descname">relatedRights</code><a class="headerlink" href="#models.FolderUserRight.relatedRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.FolderUserRight.relatedUser">
+<code class="descname">relatedUser</code><a class="headerlink" href="#models.FolderUserRight.relatedUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.FolderUserRightPagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">FolderUserRightPagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#FolderUserRightPagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.FolderUserRightPagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.Pagination" title="models.Pagination"><code class="xref py py-class docutils literal"><span class="pre">models.Pagination</span></code></a></p>
+<p>API class for pagination result containing folder userrights</p>
+<dl class="attribute">
+<dt id="models.FolderUserRightPagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.FolderUserRightPagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.GenomicPlatformObject">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">GenomicPlatformObject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#GenomicPlatformObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.GenomicPlatformObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>API class for  genomic platform view model - empty</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="models.GenomicSampleObject">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">GenomicSampleObject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#GenomicSampleObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.GenomicSampleObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>API class for genomic sample view model - empty</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="models.GenomicSeriesObject">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">GenomicSeriesObject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#GenomicSeriesObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.GenomicSeriesObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>API class for genomic series view model - empty</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="models.Group">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">Group</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#Group"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.Group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>class for groups</p>
+<dl class="attribute">
+<dt id="models.Group.chief">
+<code class="descname">chief</code><a class="headerlink" href="#models.Group.chief" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.Group.name">
+<code class="descname">name</code><a class="headerlink" href="#models.Group.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.GroupPagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">GroupPagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#GroupPagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.GroupPagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.Pagination" title="models.Pagination"><code class="xref py py-class docutils literal"><span class="pre">models.Pagination</span></code></a></p>
+<p>class for pagination results containing groups</p>
+<dl class="attribute">
+<dt id="models.GroupPagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.GroupPagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.HttpContent">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">HttpContent</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#HttpContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.HttpContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>header content</p>
+<dl class="attribute">
+<dt id="models.HttpContent.headers">
+<code class="descname">headers</code><a class="headerlink" href="#models.HttpContent.headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.HttpMethod">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">HttpMethod</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#HttpMethod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.HttpMethod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>http request method</p>
+<dl class="attribute">
+<dt id="models.HttpMethod.method">
+<code class="descname">method</code><a class="headerlink" href="#models.HttpMethod.method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.HttpRequestMessage">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">HttpRequestMessage</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#HttpRequestMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.HttpRequestMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>Http request view model</p>
+<dl class="attribute">
+<dt id="models.HttpRequestMessage.content">
+<code class="descname">content</code><a class="headerlink" href="#models.HttpRequestMessage.content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.HttpRequestMessage.headers">
+<code class="descname">headers</code><a class="headerlink" href="#models.HttpRequestMessage.headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.HttpRequestMessage.method">
+<code class="descname">method</code><a class="headerlink" href="#models.HttpRequestMessage.method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.HttpRequestMessage.proertiews">
+<code class="descname">proertiews</code><a class="headerlink" href="#models.HttpRequestMessage.proertiews" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.HttpRequestMessage.requestUri">
+<code class="descname">requestUri</code><a class="headerlink" href="#models.HttpRequestMessage.requestUri" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="models.HttpRequestMessage.version">
+<code class="descname">version</code><a class="headerlink" href="#models.HttpRequestMessage.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.HttpResponseMessage">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">HttpResponseMessage</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#HttpResponseMessage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.HttpResponseMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>http response message view model</p>
+<dl class="attribute">
+<dt id="models.HttpResponseMessage.content">
+<code class="descname">content</code><a class="headerlink" href="#models.HttpResponseMessage.content" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.HttpResponseMessage.headers">
+<code class="descname">headers</code><a class="headerlink" href="#models.HttpResponseMessage.headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.HttpResponseMessage.isSuccessStatusCode">
+<code class="descname">isSuccessStatusCode</code><a class="headerlink" href="#models.HttpResponseMessage.isSuccessStatusCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bool field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.HttpResponseMessage.reasonPhrase">
+<code class="descname">reasonPhrase</code><a class="headerlink" href="#models.HttpResponseMessage.reasonPhrase" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.HttpResponseMessage.requestMessage">
+<code class="descname">requestMessage</code><a class="headerlink" href="#models.HttpResponseMessage.requestMessage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.HttpResponseMessage.statusCode">
+<code class="descname">statusCode</code><a class="headerlink" href="#models.HttpResponseMessage.statusCode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.HttpResponseMessage.version">
+<code class="descname">version</code><a class="headerlink" href="#models.HttpResponseMessage.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.License">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">License</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#License"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.License" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBase" title="models.APIBase"><code class="xref py py-class docutils literal"><span class="pre">models.APIBase</span></code></a></p>
+<p>class for licenses</p>
+<dl class="attribute">
+<dt id="models.License.description">
+<code class="descname">description</code><a class="headerlink" href="#models.License.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.License.name">
+<code class="descname">name</code><a class="headerlink" href="#models.License.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.LicensePagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">LicensePagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#LicensePagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.LicensePagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.Pagination" title="models.Pagination"><code class="xref py py-class docutils literal"><span class="pre">models.Pagination</span></code></a></p>
+<p>class for pagination results containing groups</p>
+<dl class="attribute">
+<dt id="models.LicensePagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.LicensePagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ListValidator">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ListValidator</code><span class="sig-paren">(</span><em>itemlist</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ListValidator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ListValidator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>Validator for a list.</p>
+<dl class="method">
+<dt id="models.ListValidator.modify_schema">
+<code class="descname">modify_schema</code><span class="sig-paren">(</span><em>field_schema</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ListValidator.modify_schema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ListValidator.modify_schema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modify field schema.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="models.ListValidator.validate">
+<code class="descname">validate</code><span class="sig-paren">(</span><em>value</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ListValidator.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ListValidator.validate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validate value.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.Modality">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">Modality</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#Modality"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.Modality" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<dl class="attribute">
+<dt id="models.Modality.description">
+<code class="descname">description</code><a class="headerlink" href="#models.Modality.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.Modality.name">
+<code class="descname">name</code><a class="headerlink" href="#models.Modality.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ModalityPagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ModalityPagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ModalityPagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ModalityPagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.Pagination" title="models.Pagination"><code class="xref py py-class docutils literal"><span class="pre">models.Pagination</span></code></a></p>
+<p>class for pagination results containing modalities</p>
+<dl class="attribute">
+<dt id="models.ModalityPagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.ModalityPagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ObjectGroupRight">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ObjectGroupRight</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ObjectGroupRight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ObjectGroupRight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>relations between object, group and right (permission)</p>
+<dl class="attribute">
+<dt id="models.ObjectGroupRight.relatedGroup">
+<code class="descname">relatedGroup</code><a class="headerlink" href="#models.ObjectGroupRight.relatedGroup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectGroupRight.relatedObject">
+<code class="descname">relatedObject</code><a class="headerlink" href="#models.ObjectGroupRight.relatedObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectGroupRight.relatedRights">
+<code class="descname">relatedRights</code><a class="headerlink" href="#models.ObjectGroupRight.relatedRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ObjectGroupRightPagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ObjectGroupRightPagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ObjectGroupRightPagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ObjectGroupRightPagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.Pagination" title="models.Pagination"><code class="xref py py-class docutils literal"><span class="pre">models.Pagination</span></code></a></p>
+<p>API class for pagination result containing object group rights</p>
+<dl class="attribute">
+<dt id="models.ObjectGroupRightPagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.ObjectGroupRightPagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ObjectLinks">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ObjectLinks</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ObjectLinks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ObjectLinks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>a link betwen two objects</p>
+<dl class="attribute">
+<dt id="models.ObjectLinks.description">
+<code class="descname">description</code><a class="headerlink" href="#models.ObjectLinks.description" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectLinks.object1">
+<code class="descname">object1</code><a class="headerlink" href="#models.ObjectLinks.object1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectLinks.object2">
+<code class="descname">object2</code><a class="headerlink" href="#models.ObjectLinks.object2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ObjectOntology">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ObjectOntology</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ObjectOntology"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ObjectOntology" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>A relation between an object and an ontology item</p>
+<dl class="attribute">
+<dt id="models.ObjectOntology.object">
+<code class="descname">object</code><a class="headerlink" href="#models.ObjectOntology.object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectOntology.ontologyItem">
+<code class="descname">ontologyItem</code><a class="headerlink" href="#models.ObjectOntology.ontologyItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectOntology.position">
+<code class="descname">position</code><a class="headerlink" href="#models.ObjectOntology.position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectOntology.type">
+<code class="descname">type</code><a class="headerlink" href="#models.ObjectOntology.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ObjectOptions">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ObjectOptions</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ObjectOptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ObjectOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>class for additional information of the API objects</p>
+<dl class="attribute">
+<dt id="models.ObjectOptions.clinicalStudyData">
+<code class="descname">clinicalStudyData</code><a class="headerlink" href="#models.ObjectOptions.clinicalStudyData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectOptions.clinicalStudyDefinition">
+<code class="descname">clinicalStudyDefinition</code><a class="headerlink" href="#models.ObjectOptions.clinicalStudyDefinition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectOptions.genomicPlatform">
+<code class="descname">genomicPlatform</code><a class="headerlink" href="#models.ObjectOptions.genomicPlatform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectOptions.genomicSample">
+<code class="descname">genomicSample</code><a class="headerlink" href="#models.ObjectOptions.genomicSample" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectOptions.genomicSeries">
+<code class="descname">genomicSeries</code><a class="headerlink" href="#models.ObjectOptions.genomicSeries" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectOptions.rawImage">
+<code class="descname">rawImage</code><a class="headerlink" href="#models.ObjectOptions.rawImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectOptions.segmentationImage">
+<code class="descname">segmentationImage</code><a class="headerlink" href="#models.ObjectOptions.segmentationImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectOptions.statisticalModel">
+<code class="descname">statisticalModel</code><a class="headerlink" href="#models.ObjectOptions.statisticalModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectOptions.study">
+<code class="descname">study</code><a class="headerlink" href="#models.ObjectOptions.study" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectOptions.subject">
+<code class="descname">subject</code><a class="headerlink" href="#models.ObjectOptions.subject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectOptions.surfaceModel">
+<code class="descname">surfaceModel</code><a class="headerlink" href="#models.ObjectOptions.surfaceModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ObjectPagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ObjectPagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ObjectPagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ObjectPagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.Pagination" title="models.Pagination"><code class="xref py py-class docutils literal"><span class="pre">models.Pagination</span></code></a></p>
+<p>API class for Pagination results containing objects</p>
+<dl class="attribute">
+<dt id="models.ObjectPagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.ObjectPagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ObjectRight">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ObjectRight</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ObjectRight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ObjectRight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBase" title="models.APIBase"><code class="xref py py-class docutils literal"><span class="pre">models.APIBase</span></code></a></p>
+<p>Represents an object right.</p>
+<dl class="attribute">
+<dt id="models.ObjectRight.name">
+<code class="descname">name</code><a class="headerlink" href="#models.ObjectRight.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectRight.rightValue">
+<code class="descname">rightValue</code><a class="headerlink" href="#models.ObjectRight.rightValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ObjectRightPagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ObjectRightPagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ObjectRightPagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ObjectRightPagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.Pagination" title="models.Pagination"><code class="xref py py-class docutils literal"><span class="pre">models.Pagination</span></code></a></p>
+<p>class for pagination results containing object rights</p>
+<dl class="attribute">
+<dt id="models.ObjectRightPagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.ObjectRightPagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ObjectRightSet">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ObjectRightSet</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ObjectRightSet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ObjectRightSet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>object rights set</p>
+<dl class="attribute">
+<dt id="models.ObjectRightSet.name">
+<code class="descname">name</code><a class="headerlink" href="#models.ObjectRightSet.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectRightSet.objectRights">
+<code class="descname">objectRights</code><a class="headerlink" href="#models.ObjectRightSet.objectRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ObjectRightSetPagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ObjectRightSetPagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ObjectRightSetPagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ObjectRightSetPagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.Pagination" title="models.Pagination"><code class="xref py py-class docutils literal"><span class="pre">models.Pagination</span></code></a></p>
+<p>API class for pagination result containing object rights</p>
+<dl class="attribute">
+<dt id="models.ObjectRightSetPagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.ObjectRightSetPagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ObjectType">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ObjectType</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ObjectType"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ObjectType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBase" title="models.APIBase"><code class="xref py py-class docutils literal"><span class="pre">models.APIBase</span></code></a></p>
+<p>for semantic triple storage</p>
+<dl class="attribute">
+<dt id="models.ObjectType.displayName">
+<code class="descname">displayName</code><a class="headerlink" href="#models.ObjectType.displayName" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectType.displayNameShort">
+<code class="descname">displayNameShort</code><a class="headerlink" href="#models.ObjectType.displayNameShort" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectType.name">
+<code class="descname">name</code><a class="headerlink" href="#models.ObjectType.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ObjectUserRight">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ObjectUserRight</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ObjectUserRight"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ObjectUserRight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>relations between object, user and right (permission)</p>
+<dl class="attribute">
+<dt id="models.ObjectUserRight.relatedObject">
+<code class="descname">relatedObject</code><a class="headerlink" href="#models.ObjectUserRight.relatedObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectUserRight.relatedRights">
+<code class="descname">relatedRights</code><a class="headerlink" href="#models.ObjectUserRight.relatedRights" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.ObjectUserRight.relatedUser">
+<code class="descname">relatedUser</code><a class="headerlink" href="#models.ObjectUserRight.relatedUser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.ObjectUserRightPagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">ObjectUserRightPagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#ObjectUserRightPagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.ObjectUserRightPagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.Pagination" title="models.Pagination"><code class="xref py py-class docutils literal"><span class="pre">models.Pagination</span></code></a></p>
+<p>API class for pagination result containing object userrights</p>
+<dl class="attribute">
+<dt id="models.ObjectUserRightPagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.ObjectUserRightPagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.OntologyItem">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">OntologyItem</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#OntologyItem"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.OntologyItem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>An ontology item</p>
+<dl class="attribute">
+<dt id="models.OntologyItem.term">
+<code class="descname">term</code><a class="headerlink" href="#models.OntologyItem.term" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.OntologyItem.type">
+<code class="descname">type</code><a class="headerlink" href="#models.OntologyItem.type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.OntologyItemPagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">OntologyItemPagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#OntologyItemPagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.OntologyItemPagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.Pagination" title="models.Pagination"><code class="xref py py-class docutils literal"><span class="pre">models.Pagination</span></code></a></p>
+<p>class for pagination results containing ontology items</p>
+<dl class="attribute">
+<dt id="models.OntologyItemPagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.OntologyItemPagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.OntologyOptions">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">OntologyOptions</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#OntologyOptions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.OntologyOptions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>additional information for the ontologies resource.</p>
+<dl class="attribute">
+<dt id="models.OntologyOptions.types">
+<code class="descname">types</code><a class="headerlink" href="#models.OntologyOptions.types" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.Pagination">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">Pagination</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#Pagination"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.Pagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>API class for Pagination results</p>
+<dl class="method">
+<dt id="models.Pagination.firstUrlInPage">
+<code class="descname">firstUrlInPage</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#Pagination.firstUrlInPage"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.Pagination.firstUrlInPage" title="Permalink to this definition">¶</a></dt>
+<dd><p>get the selfurl of the first item in the paginated list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">selfUrl</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.Pagination.items">
+<code class="descname">items</code><a class="headerlink" href="#models.Pagination.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.Pagination.nextPageUrl">
+<code class="descname">nextPageUrl</code><a class="headerlink" href="#models.Pagination.nextPageUrl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="models.Pagination.pagination">
+<code class="descname">pagination</code><a class="headerlink" href="#models.Pagination.pagination" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.Pagination.totalCount">
+<code class="descname">totalCount</code><a class="headerlink" href="#models.Pagination.totalCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.PaginationParameter">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">PaginationParameter</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#PaginationParameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.PaginationParameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>pagination parameters</p>
+<dl class="attribute">
+<dt id="models.PaginationParameter.page">
+<code class="descname">page</code><a class="headerlink" href="#models.PaginationParameter.page" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.PaginationParameter.rpp">
+<code class="descname">rpp</code><a class="headerlink" href="#models.PaginationParameter.rpp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.PlainObject">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">PlainObject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#PlainObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.PlainObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>API class for plain (undefined object) model view model</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="models.PlainSubjectObject">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">PlainSubjectObject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#PlainSubjectObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.PlainSubjectObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>API class for plain subject (undefined subject object) model view model</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="models.Preview">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">Preview</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#Preview"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.Preview" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<dl class="attribute">
+<dt id="models.Preview.imageUrl">
+<code class="descname">imageUrl</code><a class="headerlink" href="#models.Preview.imageUrl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="models.Preview.thumbnailUrl">
+<code class="descname">thumbnailUrl</code><a class="headerlink" href="#models.Preview.thumbnailUrl" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.RawImageData">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">RawImageData</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#RawImageData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.RawImageData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>raw image attributes</p>
+<dl class="attribute">
+<dt id="models.RawImageData.kilovoltPeak">
+<code class="descname">kilovoltPeak</code><a class="headerlink" href="#models.RawImageData.kilovoltPeak" title="Permalink to this definition">¶</a></dt>
+<dd><p>Float field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.RawImageData.modality">
+<code class="descname">modality</code><a class="headerlink" href="#models.RawImageData.modality" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.RawImageData.sliceThickness">
+<code class="descname">sliceThickness</code><a class="headerlink" href="#models.RawImageData.sliceThickness" title="Permalink to this definition">¶</a></dt>
+<dd><p>Float field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.RawImageData.spaceBetweenSlices">
+<code class="descname">spaceBetweenSlices</code><a class="headerlink" href="#models.RawImageData.spaceBetweenSlices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Float field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.RawImageObject">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">RawImageObject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#RawImageObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.RawImageObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>API class for raw image view model</p>
+<dl class="attribute">
+<dt id="models.RawImageObject.rawImage">
+<code class="descname">rawImage</code><a class="headerlink" href="#models.RawImageObject.rawImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.SegmentationImageData">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">SegmentationImageData</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#SegmentationImageData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.SegmentationImageData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>segmentation specific attributes</p>
+<dl class="attribute">
+<dt id="models.SegmentationImageData.methodDescription">
+<code class="descname">methodDescription</code><a class="headerlink" href="#models.SegmentationImageData.methodDescription" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.SegmentationImageData.segmentationMethod">
+<code class="descname">segmentationMethod</code><a class="headerlink" href="#models.SegmentationImageData.segmentationMethod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.SegmentationImageObject">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">SegmentationImageObject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#SegmentationImageObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.SegmentationImageObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>API class for segmenation image view model</p>
+<dl class="attribute">
+<dt id="models.SegmentationImageObject.segmentationImage">
+<code class="descname">segmentationImage</code><a class="headerlink" href="#models.SegmentationImageObject.segmentationImage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.SegmentationMethod">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">SegmentationMethod</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#SegmentationMethod"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.SegmentationMethod" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>segmentation methods view model</p>
+<dl class="attribute">
+<dt id="models.SegmentationMethod.displayName">
+<code class="descname">displayName</code><a class="headerlink" href="#models.SegmentationMethod.displayName" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.SegmentationMethod.name">
+<code class="descname">name</code><a class="headerlink" href="#models.SegmentationMethod.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.StatisticalModelObject">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">StatisticalModelObject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#StatisticalModelObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.StatisticalModelObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>API class for Statistical model view model - empty</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="models.StudyObject">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">StudyObject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#StudyObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.StudyObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>API class for study</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="models.SubjectData">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">SubjectData</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#SubjectData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.SubjectData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>attributes for subject data</p>
+<dl class="attribute">
+<dt id="models.SubjectData.subjectKey">
+<code class="descname">subjectKey</code><a class="headerlink" href="#models.SubjectData.subjectKey" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.SubjectObject">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">SubjectObject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#SubjectObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.SubjectObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>API class for Subject view model</p>
+<dl class="attribute">
+<dt id="models.SubjectObject.subject">
+<code class="descname">subject</code><a class="headerlink" href="#models.SubjectObject.subject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.SurfaceModelData">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">SurfaceModelData</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#SurfaceModelData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.SurfaceModelData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>attributes of surface model</p>
+<dl class="attribute">
+<dt id="models.SurfaceModelData.maxX">
+<code class="descname">maxX</code><a class="headerlink" href="#models.SurfaceModelData.maxX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Float field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.SurfaceModelData.maxY">
+<code class="descname">maxY</code><a class="headerlink" href="#models.SurfaceModelData.maxY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Float field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.SurfaceModelData.maxZ">
+<code class="descname">maxZ</code><a class="headerlink" href="#models.SurfaceModelData.maxZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Float field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.SurfaceModelData.minX">
+<code class="descname">minX</code><a class="headerlink" href="#models.SurfaceModelData.minX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Float field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.SurfaceModelData.minY">
+<code class="descname">minY</code><a class="headerlink" href="#models.SurfaceModelData.minY" title="Permalink to this definition">¶</a></dt>
+<dd><p>Float field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.SurfaceModelData.minZ">
+<code class="descname">minZ</code><a class="headerlink" href="#models.SurfaceModelData.minZ" title="Permalink to this definition">¶</a></dt>
+<dd><p>Float field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.SurfaceModelData.vectorCount">
+<code class="descname">vectorCount</code><a class="headerlink" href="#models.SurfaceModelData.vectorCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integer field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.SurfaceModelObject">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">SurfaceModelObject</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#SurfaceModelObject"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.SurfaceModelObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIObject" title="models.APIObject"><code class="xref py py-class docutils literal"><span class="pre">models.APIObject</span></code></a></p>
+<p>API class for surface model view model</p>
+<dl class="attribute">
+<dt id="models.SurfaceModelObject.surfaceModel">
+<code class="descname">surfaceModel</code><a class="headerlink" href="#models.SurfaceModelObject.surfaceModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.Token">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">Token</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#Token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.Token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>API class to work with the tokens
+Supported token: JWT</p>
+<dl class="attribute">
+<dt id="models.Token.tokenType">
+<code class="descname">tokenType</code><a class="headerlink" href="#models.Token.tokenType" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.Token.tokenValue">
+<code class="descname">tokenValue</code><a class="headerlink" href="#models.Token.tokenValue" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.URLField">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">URLField</code><span class="sig-paren">(</span><em>required=False</em>, <em>help_text=None</em>, <em>validators=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#URLField"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.URLField" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.fields.StringField</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="models.UploadResponse">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">UploadResponse</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#UploadResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.UploadResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">jsonmodels.models.Base</span></code></p>
+<p>a response consisting of a combination between a file and an object after the upload</p>
+<dl class="attribute">
+<dt id="models.UploadResponse.file">
+<code class="descname">file</code><a class="headerlink" href="#models.UploadResponse.file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="models.UploadResponse.relatedObject">
+<code class="descname">relatedObject</code><a class="headerlink" href="#models.UploadResponse.relatedObject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Field for embedded models.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="models.User">
+<em class="property">class </em><code class="descclassname">models.</code><code class="descname">User</code><span class="sig-paren">(</span><em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/models.html#User"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#models.User" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#models.APIBaseID" title="models.APIBaseID"><code class="xref py py-class docutils literal"><span class="pre">models.APIBaseID</span></code></a></p>
+<p>Users of the repository</p>
+<dl class="attribute">
+<dt id="models.User.username">
+<code class="descname">username</code><a class="headerlink" href="#models.User.username" title="Permalink to this definition">¶</a></dt>
+<dd><p>String field.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="connect.html" class="btn btn-neutral" title="vsdConnect.connect module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Michael Kistler.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.8.1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

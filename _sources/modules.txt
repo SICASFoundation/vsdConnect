@@ -1,9 +1,7 @@
-source
-======
+vsdConnect
+==========
 
 .. toctree::
    :maxdepth: 4
 
-   connectVSD
-   connectVSDExt
-   poster
+   vsdConnect
