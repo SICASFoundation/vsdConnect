@@ -1,0 +1,2 @@
+requests
+pyjwt>1.3

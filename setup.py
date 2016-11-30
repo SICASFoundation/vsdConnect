@@ -29,6 +29,7 @@ class sdist_git(sdist):
 
 install_requires = [
                     'requests',
+                    'jsonmodels'
                     'pyjwt>1.3']
 major_python_version, minor_python_version, _, _, _ = sys.version_info
 if major_python_version < 3 or (major_python_version == 3 and minor_python_version < 4):

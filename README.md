@@ -10,7 +10,7 @@ This library implements a client for the REST API of the virtualskeletondatabase
 - usage of **requests** package instead of urllib2
 - usage of **pathlib** instead of os.path
 - usage of **PyJWT** for jwt.io authentication [PyJWT](https://github.com/jpadilla/pyjwt)
-- introduction of API classes
+- introduction of API classes using **jsonmodels**
 
 ## Recent updates
 moved to jsonmodels for apiclasses
@@ -27,11 +27,14 @@ moved to jsonmodels for apiclasses
 
 2. Install the package with dependencies
 
-    pip install vsdConnect
+    `pip install vsdConnect`
+    or
+
+`python setup.py install`
 
     or, if you want to edit the source:
 
-    pip install --editable vsdConnect
+    `pip install --editable vsdConnect`
 
 ### Contribution guidelines ###
 
@@ -58,6 +61,3 @@ from vsdConnect import connectVSD
 api = connectVSD.VSDConnecter()
 obj = api.getObject(21)
 print(obj.selfUrl, obj.name)
-
-
-

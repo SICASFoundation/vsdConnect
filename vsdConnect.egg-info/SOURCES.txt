@@ -1,0 +1,9 @@
+setup.py
+vsdConnect/__init__.py
+vsdConnect/connect.py
+vsdConnect/models.py
+vsdConnect.egg-info/PKG-INFO
+vsdConnect.egg-info/SOURCES.txt
+vsdConnect.egg-info/dependency_links.txt
+vsdConnect.egg-info/requires.txt
+vsdConnect.egg-info/top_level.txt
