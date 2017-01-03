@@ -236,13 +236,27 @@ class VSDConnecter(object):
     ################################################
 
     def _download(self, url, fp, onlyHeader = False):
+        '''
+        download a file
+
+        :param Path fp: filepath of the file to created
+        :param Bool onlyHeader: get only the header information for file types with header/raw
+        :return: filename
+        :rtype: str
+        '''
         r = urlparse(url)
         res = self._requestsAttempts(self.s.get, r.geturl(), params=r.params, stream=True)
         try:
             filename = fp.name  # path object
         except:
             filename = fp  # string
-        with open(filename, 'wb') as f:
+
+        # if fp.is_dir():
+        #     fp.unlink()
+        # else:
+        #     fp.touch()
+        with fp.open('wb') as f:
+            print('file created')
             for n, chunk in enumerate(res.iter_content(1024)):
                 f.write(chunk)
                 if onlyHeader and n > 2:

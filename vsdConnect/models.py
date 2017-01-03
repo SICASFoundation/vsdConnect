@@ -170,7 +170,7 @@ class APIBase(models.Base):
         """
         return json.dumps(self.to_struct())
 
-  
+
     def show(self):
         """
         show the object as json readable structure (dict), nicely formated
@@ -562,7 +562,7 @@ class Folder(APIBaseID):
 
     def put(self,apisession):
         """
-        put (update) the folder 
+        put (update) the folder
 
         :param connectVSD apisession: the API session
         :return: the folder with the updated location
@@ -584,7 +584,7 @@ class Folder(APIBaseID):
         self.parentFolder = APIBase(selfUrl=target.selfUrl)
         res = apisession.putRequest('folders', self.to_struct())
         return Folder(**res)
-        
+
 
 class FolderPagination(Pagination):
     """
@@ -971,6 +971,23 @@ class APIObject(APIBaseID):
         """
 
         return apisession._delete(self.selfUrl)
+
+
+    def download(self, apisession, working_dir=None):
+        """
+        download the object into a ZIP file based on the object name and the working directory
+
+        :param connectVSD apisession: apisession
+        :param Path working_dir: workpath, where to store the zip
+        :return: None or filename
+        :rtype: str
+        """
+
+        fp = Path(self.name).with_suffix('.zip')
+        if working_dir:
+            fp = Path(working_dir, fp)
+
+        return apisession._download(apisession.fullUrl(self.downloadUrl), fp)
 
     def  add_object_rights(self, apisession):
         """
