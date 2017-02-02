@@ -55,9 +55,28 @@ moved to jsonmodels for apiclasses
 * The server response is very slow if you have 50+ folders. VSD-connect makes a request to the server for each folder. Therefore, I will be slow if you have a lot of folders and use the folder methods. You should then use the getRequest function and create your APIFolder object locally.
 
 ## Get Started
+This code connects to the demo server and retrieves an object
 
-from vsdConnect import connectVSD
+```python
+from vsdConnect import connect
+from vsdConnect import models
 
-api = connectVSD.VSDConnecter()
-obj = api.getObject(21)
-print(obj.selfUrl, obj.name)
+## Connect to demo.virtualskeleton.ch
+api = connect.VSDConnecter()
+
+# an available object id from the demo and define the selfurl
+vsd_id = 38
+selfUrl = 'https://demo.virtualskeleton.ch/api/objects/{0}' . format(vsd_id)
+
+# create the APIObject and get it from the server
+obj  = models.APIObject(selfUrl=selfUrl).get(api)
+
+# display the object infos (json)
+print(obj.show())
+```
+
+to download the object's file add this line
+
+```python
+obj.download(api)
+``
