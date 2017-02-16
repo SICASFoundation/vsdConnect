@@ -1,12 +1,12 @@
 # README #
 
-This library implements a client for the REST API of the virtualskeletondatabase (www.virtualskeleton.ch). It supports authentication, general queries, and specific requests such as image upload/download, object linking and right management. Examples are provided in the examples directory. Please use 'demo.virtualskeleton.ch' for testing purposes.
+This library implements a client for the REST API of the virtualskeleton framework which is used by the Sicasl Medical Image Repository (www.smir.ch). It supports authentication, general queries, and specific requests such as image upload/download, object linking and right management. Examples are provided in the examples directory. Please use 'demo.virtualskeleton.ch' for testing purposes.
 
 ## Module documentation
 -[http://sicasfoundation.github.io/vsdConnect/](http://sicasfoundation.github.io/vsdConnect/)
 
 ## What is in this Fork
-- Pyhton 3 (3.4.3)
+- Pyhton 3
 - usage of **requests** package instead of urllib2
 - usage of **pathlib** instead of os.path
 - usage of **PyJWT** for jwt.io authentication [PyJWT](https://github.com/jpadilla/pyjwt)
@@ -27,14 +27,15 @@ moved to jsonmodels for apiclasses
 
 2. Install the package with dependencies
 
-    `pip install vsdConnect`
-    or
+`pip install vsdConnect`
+
+or
 
 `python setup.py install`
 
-    or, if you want to edit the source:
+or, if you want to edit the source:
 
-    `pip install --editable vsdConnect`
+`pip install --editable vsdConnect`
 
 ### Contribution guidelines ###
 
