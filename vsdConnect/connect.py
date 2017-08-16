@@ -128,7 +128,7 @@ class VSDConnecter(object):
     def __init__(
             self,
             authtype='jwt',
-            url="https://demo.virtualskeleton.ch/api/",
+            url="https://demo.smir.ch/api/",
             username="demo@virtualskeleton.ch",
             password="demo",
             version="",
@@ -292,7 +292,8 @@ class VSDConnecter(object):
 
     def _post(self, resource, *args, **kwargs): # reimplements VSDConnect.postRequest
         # should I avoid multiplt attempts? not idempotent, no multiple  attempts
-        return self._requestsAttempts(self.s.post, resource, *args, **kwargs).json()
+        #return self._requestsAttempts(self.s.post, resource, *args, **kwargs).json()
+        return self.s.post(resource, *args, **kwargs).json()
 
     def _options(self, resource, *args, **kwargs):
         return self._requestsAttempts(self.s.options, resource, *args, **kwargs).json()
@@ -1182,6 +1183,7 @@ class VSDConnecter(object):
 #################################################
 # api objects handling (MODIFY)
 ################################################
+    # def postRequest(self, resource: object, data: object) -> object:
     def postRequest(self, resource, data):
         """add data to an object
 
@@ -1209,8 +1211,6 @@ class VSDConnecter(object):
                 self.delRequest(link.selfUrl)
         else:
             print('nothing to delete, no links available')
-
-
 
     def delRequest(self, resource):
         """

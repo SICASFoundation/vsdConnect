@@ -496,34 +496,36 @@ class Folder(APIBaseID):
         else:
             return False
 
-    def create(self, apisession):
+    def create(self, apisession, check=True):
         """
-        creates the folder if not already exists
+        creates the folder. checks if parent folder or the folder exists. Check can be disabled using check=False.
 
         :param connectVSD apisession: the API session
+        :param check bool: enables or disables checks for existing folder.
         :return: the folder
         :rtype: Folder
         """
-        # check exists
-        parent = self.get_parent(apisession)
 
         create = True
 
-        if parent.childFolders:
-            children = parent.get_child_folders(apisession)
+        if check:
+            # check exists
+            parent = self.get_parent(apisession)
 
-            child_d = dict()
-            for child in children:
-                child_d[child.name]=child
+            if parent.childFolders:
+                children = parent.get_child_folders(apisession)
 
-            if self.name in child_d:
-                print("folder exists, not created")
-                create = False
-                return child_d[self.name]
+                child_d = dict()
+                for child in children:
+                    child_d[child.name]=child
+
+                if self.name in child_d:
+                    print("folder exists, not created")
+                    create = False
+                    return child_d[self.name]
 
         if create:
             res = apisession.postRequest('folders', self.to_struct())
-            print("folder:" + self.name)
             return Folder(**res)
 
     def create_folders(self, apisession, filepath, rootpath):
@@ -566,7 +568,7 @@ class Folder(APIBaseID):
 
         :param connectVSD apisession: the API session
         :return: the folder with the updated location
-        :rytpe: Folder
+        :rtype: Folder
         """
         res = apisession.putRequest('folders', self.to_struct())
         return Folder(**res)

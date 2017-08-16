@@ -1186,7 +1186,7 @@ class VSDConnecter(object):
 #################################################
 # api objects handling (MODIFY)
 ################################################
-    def postRequest(self, resource, data):
+    def postRequest(self, resource: object, data: object) -> object:
         """add data to an object
 
         :param str resource: relative path of the resource or selfUrl
