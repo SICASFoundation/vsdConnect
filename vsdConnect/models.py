@@ -277,6 +277,36 @@ class File(APIBaseID):
     objects = fields.EmbeddedField(Pagination) #ObjectPagination
 
 
+    def get(self, apisession):
+        """
+        get the file object from the API
+
+        :param connectVSD apisession: the API session
+        :return: the file
+        :rtype: File
+        """
+        res = apisession.getRequest(self.selfUrl)
+        return File(**res)
+
+    def download(self, apisession, working_dir=None, fn=None):
+        """
+        download the file into a ZIP file based on the file name and the working directory
+
+        :param connectVSD apisession: apisession
+        :param Path working_dir: workpath, where to store the zip
+        :param str fn: filename, default File_ID.zip
+        :return: None or filename
+        :rtype: str
+        """
+
+        fp = Path('File_'+ str(self.id))
+        if fn:
+            fp = Path(fn)
+
+        if working_dir:
+            fp = Path(working_dir, fp)
+
+        return apisession._download(apisession.fullUrl(self.downloadUrl), fp)
 
 ################################################
 #FOLDER
