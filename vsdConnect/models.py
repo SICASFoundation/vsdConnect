@@ -719,37 +719,91 @@ class GroupPagination(Pagination):
 #LICENSES
 ################################################
 
-class License(APIBase):
+class Licenses(APIBase):
     """
     class for licenses
     """
     name = fields.StringField()
     description = fields.StringField()
 
-class LicensePagination(Pagination):
+    def get(self, apisession):
+        """
+        get the license object from the API
+
+        :param connectVSD apisession: the API session
+        :return: the license
+        :rtype: Licenses
+        """
+        res = apisession.getRequest(self.selfUrl)
+        return Licenses(**res)
+
+class LicensesPagination(Pagination):
     """
-    class for pagination results containing groups
+    class for pagination results containing licenses
     """
 
-    items = fields.ListField(License)
+    items = fields.ListField(Licenses)
 
 
 
 
 ################################################
-#MODALITY
-################################################
+#MODALITIES
+#################################################
 
-class Modality(APIBaseID):
+class Modalities(APIBaseID):
+    """
+    class for modalities
+    """
     description = fields.StringField()
     name = fields.StringField()
 
-class ModalityPagination(Pagination):
+    def get(self, apisession):
+        """
+        get the modalities object from the API
+
+        :param connectVSD apisession: the API session
+        :return: the modality
+        :rtype: Modalities
+        """
+        res = apisession.getRequest(self.selfUrl)
+        return Modalities(**res)
+
+class ModalitiesPagination(Pagination):
     """
     class for pagination results containing modalities
     """
 
-    items = fields.ListField(Modality)
+    items = fields.ListField(Modalities)
+
+################################################
+#GENDERS
+################################################
+
+class Genders(APIBaseID):
+    """
+    class for genders
+    """
+    description = fields.StringField()
+    name = fields.StringField()
+
+    def get(self, apisession):
+        """
+        get the gender object from the API
+
+        :param connectVSD apisession: the API session
+        :return: the gender
+        :rtype: Genders
+        """
+        res = apisession.getRequest(self.selfUrl)
+        return Genders(**res)
+
+class GendersPagination(Pagination):
+    """
+    class for pagination results containing genders
+    """
+
+    items = fields.ListField(Genders)
 
 
 
@@ -1083,7 +1137,12 @@ class ObjectPagination(Pagination):
 ################################################
 #specification for Object types
 ################################################
-
+class SubjectSnapshot(models.Base):
+    """
+    raw image subject snapshot attributes
+    """
+    ageInDays = fields.FloatField()
+    gender = fields.EmbeddedField(Genders)
 
 class RawImageData(models.Base):
     """
@@ -1092,7 +1151,7 @@ class RawImageData(models.Base):
     sliceThickness = fields.FloatField()
     kilovoltPeak = fields.FloatField()
     spaceBetweenSlices = fields.FloatField()
-    modality = fields.EmbeddedField(Modality)
+    modality = fields.EmbeddedField(Modalities)
     MRSScore = fields.StringField()
     timeToMRS = fields.StringField()
     TICIScaleGrade = fields.StringField()
@@ -1105,6 +1164,7 @@ class RawImageObject(APIObject):
     API class for raw image view model
     """
     rawImage = fields.EmbeddedField(RawImageData)
+    subjectSnapshot = fields.EmbeddedField(SubjectSnapshot)
 
 class SegmentationImageData(models.Base):
     """
