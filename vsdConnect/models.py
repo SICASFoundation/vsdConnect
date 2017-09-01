@@ -805,6 +805,35 @@ class GendersPagination(Pagination):
 
     items = fields.ListField(Genders)
 
+################################################
+#DOMINANCES
+################################################
+
+class Dominances(APIBaseID):
+    """
+    class for dominance
+    """
+    description = fields.StringField()
+    name = fields.StringField()
+
+    def get(self, apisession):
+        """
+        get the dominance object from the API
+
+        :param connectVSD apisession: the API session
+        :return: the dominance side
+        :rtype: Dominances
+        """
+        res = apisession.getRequest(self.selfUrl)
+        return Dominances(**res)
+
+class DominancesPagination(Pagination):
+    """
+    class for pagination results containing dominances
+    """
+
+    items = fields.ListField(Dominances)
+
 
 
 ################################################
@@ -1141,8 +1170,11 @@ class SubjectSnapshot(models.Base):
     """
     raw image subject snapshot attributes
     """
-    ageInDays = fields.FloatField()
+    ageInDays = fields.IntField()
     gender = fields.EmbeddedField(Genders)
+    weightInKilograms = fields.FloatField()
+    heightInMeters = fields.FloatField()
+    dominance = fields.EmbeddedField(Dominances)
 
 class RawImageData(models.Base):
     """
