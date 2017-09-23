@@ -267,7 +267,7 @@ class APIBasePagination(Pagination):
 #FILES
 ################################################
 
-class File(APIBaseID):
+class Files(APIBaseID):
     createdDate = fields.StringField()
     downloadUrl = URLField()
     originalFileName = fields.StringField()
@@ -286,7 +286,7 @@ class File(APIBaseID):
         :rtype: File
         """
         res = apisession.getRequest(self.selfUrl)
-        return File(**res)
+        return Files(**res)
 
     def download(self, apisession, working_dir=None, fn=None):
         """
@@ -787,14 +787,16 @@ class Genders(APIBaseID):
     description = fields.StringField()
     name = fields.StringField()
 
-    def get(self, apisession):
+    def get(self, apisession, name = None):
         """
         get the gender object from the API
 
         :param connectVSD apisession: the API session
+        :param name bool: search name (male, female)
         :return: the gender
         :rtype: Genders
         """
+
         res = apisession.getRequest(self.selfUrl)
         return Genders(**res)
 
@@ -875,6 +877,19 @@ class OntologyItem(APIBaseID):
 
     term = fields.StringField()
     type = fields.IntField()
+
+    def get(self, apisession):
+        """
+        get the ontologyItem object from the API
+
+        :param connectVSD apisession: the API session
+        :return: the ontology item
+        :rtype: OntologyItem
+        """
+        res = apisession.getRequest(self.selfUrl)
+        return OntologyItem(**res)
+
+
 
 class OntologyItemPagination(Pagination):
     """
@@ -1088,19 +1103,25 @@ class APIObject(APIBaseID):
         return apisession._delete(self.selfUrl)
 
 
-    def download(self, apisession, working_dir=None):
+    def download(self, apisession, working_dir=None, fn=None):
         """
-        download the object into a ZIP file based on the object name and the working directory
+        download the object into a ZIP file based on the object name or given filnename and the working directory
 
         :param connectVSD apisession: apisession
         :param Path working_dir: workpath, where to store the zip
+        :param str fn: target filename of the downloaded file
         :return: None or filename
         :rtype: str
         """
+        if fn:
+            fn = Path(fn).with_suffix('.zip')
+        else:
+            fn = Path(self.name).with_suffix('.zip')
 
-        fp = Path(self.name).with_suffix('.zip')
         if working_dir:
-            fp = Path(working_dir, fp)
+            fp = Path(working_dir, fn)
+        else:
+            fp = fn
 
         return apisession._download(apisession.fullUrl(self.downloadUrl), fp)
 
@@ -1440,7 +1461,7 @@ class User(APIBaseID):
 # API url dictionary
 ############################
 resourceTypes = {
-    'files': File,
+    'files': Files,
     'folders': Folder,
     'objects': APIObject,
     'object-links' : ObjectLinks

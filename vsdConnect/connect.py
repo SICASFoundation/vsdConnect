@@ -691,7 +691,7 @@ class VSDConnecter(object):
         resource = self.parseUrl(resource, 'files')
 
         res = self.getRequest(resource)
-        fObj = vsdModels.File(**res)
+        fObj = vsdModels.Files(**res)
         return fObj
 
     def getObjectFiles(self, obj):
@@ -847,7 +847,7 @@ class VSDConnecter(object):
 
         modalities = list()
         modalities = list(self.iterateAllPaginated('modalities'),
-                          vsdModels.Modality)
+                          vsdModels.Modalities)
         return modalities
 
     def getModality(self, resource):
@@ -862,7 +862,7 @@ class VSDConnecter(object):
         resource = self.parseUrl(resource, 'modalities')
 
         res = self.getRequest(resource)
-        return vsdModels.Modality(**res)
+        return vsdModels.Modalities(**res)
 
 
 
@@ -994,7 +994,7 @@ class VSDConnecter(object):
         licenses = list()
         if res:
             for item in iter(res['items']):
-                lic = vsdModels.License(**item)
+                lic = vsdModels.Licenses(**item)
                 licenses.append(lic)
 
         return licenses
@@ -1012,7 +1012,7 @@ class VSDConnecter(object):
 
         res = self.getRequest(resource)
         if res:
-            license = vsdModels.License(**res)
+            license = vsdModels.Licenses(**res)
 
             return license
         else:
